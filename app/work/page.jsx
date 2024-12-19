@@ -22,35 +22,57 @@ import WorkSliderBtns from "@/components/WorkSliderBtns";
 const projects = [
   {
     num: "01",
-    category: "frontend",
+    category: "Continuous ASL Translation",
     title: "project 1",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam modi.",
-    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
-    image: "/assets/work/thumb1.png",
+      "In a world where communication is integral to opportunities and relationships, the hearing-impaired face significant challenges due to communication barriers. This project tackles the lack of popularity of sign language, creating a solution that automatically translates Sign Language gestures into spoken language. Leveraging Artificial Intelligence (AI) fields like Machine Learning, Deep Learning, Computer Vision, Object Detection, Object Recognition, and Natural Language Processing, the system aims to empower mute and deaf individuals. The initiative aligns with a wealth of related studies emphasizing the importance of sign language recognition and translation. Addressing the global prevalence of hearing loss, the project employs innovative approaches, including the Transformer and Conformer architectures. The models aim to enhance robustness and versatility through extensive preprocessing and data augmentation. The article structure covers background, methodology, challenges, acquired results, and unexplored techniques. This endeavour strives to break down communication barriers, fostering inclusivity for the hearing-impaired in our communication-dependent world.",
+    stack: [{ name: "Python" },{ name: "Conformer" },{ name: "Transformers" },{ name: "Deep Learning" }],
+    image: "/assets/work/ASL.png",
     live: "",
-    github: "",
+    github: "https://github.com/yazeedmshayekh2/Continuous-American-Sign-Language-Translation/tree/main",
   },
   {
     num: "02",
-    category: "fullstack",
+    category: "Automated Attendance System",
     title: "project 2",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam modi.",
-    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }, { name: "Node.js" }],
-    image: "/assets/work/thumb2.png",
+      "Traditional methods of recording attendance suffer from various limitations, prompting the need for innovative solutions to streamline this crucial process. In this study, we explore the significance of accurate attendance records and introduce an automated attendance system leveraging facial recognition technology. We address challenges encountered in previous research within the domain and propose a novel solution to overcome them. Through a comprehensive methodology, including preprocessing steps and the implementation of state-of-the-art models, we demonstrate the effectiveness of our approach. Leveraging VGGFace2 (recognition) and Wider Face (detection) datasets, we present promising results that underscore the potential of our system to revolutionize attendance management. Additionally, we discuss related works in the field and highlight their contributions to advancing attendance monitoring technologies. By building upon existing research and leveraging cutting-edge methodologies, our project aims to empower the attendance recording process, offering enhanced accuracy and efficiency. In conclusion, our automated attendance system represents a significant step forward in attendance management, with the potential to transcend traditional methods and find application across various domains.",
+    stack: [{ name: "Python"},{ name: "Face_Recognition"},{ name: "Face_Detection"},{ name: "Feature Extraction"},],
+    image: "/assets/work/Attendify.png",
     live: "",
-    github: "",
+    github: "https://github.com/yazeedmshayekh2/Attendify/tree/main",
   },
   {
     num: "03",
-    category: "frontend",
+    category: "Visualization Project",
     title: "project 3",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam modi.",
-    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
-    image: "/assets/work/thumb3.png",
-    live: "",
+      "This dashboard displays average GPAs across various categories. It includes breakdowns by code module, age band, gender, region, and highest education level. Visualizations highlight GPA averages by region, gender distribution, and education qualifications. Additionally, it shows GPA comparisons for different final results (e.g., distinction, pass, fail) and allows filtering by these attributes to analyze trends in student performance.",
+    stack: [{ name: "Tableau" }],
+    image: "/assets/work/DB1.png",
+    live: "https://public.tableau.com/app/profile/yazeed.mshayekh/viz/StudentPopulationAndGPAsDashboard/GPAsAverage",
+    github: "",
+  },
+  {
+    num: "04",
+    category: "Visualization Project",
+    title: "project 4",
+    description:
+      "This dashboard presents an overview of Simply Music's sales performance, showing key metrics like revenue, profit, and units sold over time. It highlights trends in revenue and profit, with notable spikes in mid-2018 and late 2019. The sales data is broken down by channel, with the Website and West Palm Beach contributing the most to total sales.",
+    stack: [{ name: "Tableau" }],
+    image: "/assets/work/DB2.png",
+    live: "https://public.tableau.com/app/profile/yazeed.mshayekh/viz/SimplyMusicDashboard_17335744438420/BirdsEyeView",
+    github: "",
+  },
+  {
+    num: "05",
+    category: "Visualization Project",
+    title: "project 5",
+    description:
+      "This dashboard provides insights into the student population, with visualizations focused on various demographics. It shows the distribution of students by code module, highest education level, region, age band, final result, and gender. The data highlights the largest student groups in the \"CCC\" code module, the \"A Level or Equivalent\" category for previous education, and the \"0-35\" age band. The majority of students come from Scotland and the London region, with most students passing their courses. Filters allow for further customization based on gender, final result, code module, and region.",
+    stack: [{ name: "Tableau" }],
+    image: "/assets/work/DB3.png",
+    live: "https://public.tableau.com/app/profile/yazeed.mshayekh/viz/StudentPopulationAndGPAsDashboard/GPAsAverage",
     github: "",
   },
 ];
@@ -84,7 +106,7 @@ const Work = () => {
               </div>
               {/* project category */}
               <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize">
-                {project.category} project
+                {project.category} 
               </h2>
               {/* project description */}
               <p className="text-white/60">{project.description}</p>
@@ -105,31 +127,35 @@ const Work = () => {
               {/* buttons */}
               <div className="flex items-center gap-4">
                 {/* live project button */}
-                <Link href={project.live}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Live project</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+                {project.live && (
+                    <Link href={project.live}>
+                      <TooltipProvider delayDuration={100}>
+                        <Tooltip>
+                          <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                            <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Live project</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </Link>
+                  )}
                 {/* github project button */}
-                <Link href={project.github}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsGithub className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Github repository</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+                {project.github && (
+                      <Link href={project.github}>
+                        <TooltipProvider delayDuration={100}>
+                          <Tooltip>
+                            <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                              <BsGithub className="text-white text-3xl group-hover:text-accent" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Github repository</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </Link>
+                    )}
               </div>
             </div>
           </div>

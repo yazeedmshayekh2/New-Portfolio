@@ -7,47 +7,49 @@ import {
   FaReact,
   FaFigma,
   FaNodeJs,
+  FaPython,
+  FaDocker,
+  FaGithub,
+  FaMicrosoft,
+  FaFileExcel,
+  FaFlask,
 } from "react-icons/fa";
 
-import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
+import { SiTailwindcss, SiNextdotjs, SiTensorflow, SiGit, SiMongodb, SiGooglecolab, SiTableau, SiStreamlit, SiR, SiPycharm, SiOpencv, SiHuggingface } from "react-icons/si";
 
 // about data
 const about = {
   title: "About me",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "Fresh graduate in Data Science with a strong scientific foundation and technical expertise in machine learning, dedicated to transforming complex datasets into impactful AI-driven solutions. Equipped with skills in Python, TensorFlow, and deep learning frameworks, with a ability to apply data science techniques to drive measurable impacts.",
   info: [
     {
       fieldName: "Name",
-      fieldValue: "Luke Coleman",
+      fieldValue: "Yazeed Mshayekh",
     },
     {
       fieldName: "Phone",
-      fieldValue: "(+40) 321 654 678",
+      fieldValue: "(+962) 799 736 382",
     },
     {
       fieldName: "Experience",
-      fieldValue: "12+ Years",
+      fieldValue: "2+ Years",
     },
     {
-      fieldName: "Skype",
-      fieldValue: "luke.01",
-    },
-    {
-      fieldName: "Nationality",
-      fieldValue: "American",
-    },
-    {
-      fieldName: "Email",
-      fieldValue: "luke.01@gmail.com",
-    },
-    {
-      fieldName: "Freelance",
+      fieldName: "Freelance | Full Time | Part Time",
       fieldValue: "Available",
     },
     {
+      fieldName: "Nationality",
+      fieldValue: "Jordanian",
+    },
+    {
+      fieldName: "Email",
+      fieldValue: "yazeedmshayekh.work@gmail.com",
+    },
+    {
       fieldName: "Languages",
-      fieldValue: "English, Spanish",
+      fieldValue: "Arabic, English",
     },
   ],
 };
@@ -57,37 +59,32 @@ const experience = {
   icon: "/assets/resume/badge.svg",
   title: "My experience",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "My work, trainings, and internships experience",
   items: [
     {
-      company: "Tech Solutions Inc.",
-      position: "Full Stack Developer",
-      duration: "2022 - Present",
+      company: "Outlier AI",
+      position: "Coding Specialist For LLM Training",
+      duration: "November 2024 - Present",
     },
     {
-      company: "Web Design Studio",
-      position: "Front-End Developer Intern",
-      duration: "Summer 2021",
+      company: "Correlation One",
+      position: "Data Analytics Training Program",
+      duration: "October 2024 - Present",
     },
     {
-      company: "E-commerce Startup",
-      position: "Freelance Web Developer",
-      duration: "2020 - 2021",
+      company: "Tahaluf Al Emarat LLC",
+      position: "Data Science Training Program",
+      duration: "September 2024 - Present",
     },
     {
-      company: "Tech Academy",
-      position: "Teaching Assistant",
-      duration: "2019 - 2020",
+      company: "SMSM for AI",
+      position: "Natural Language Processing Internship",
+      duration: "March 2024 - Jun 2024",
     },
     {
-      company: "Digital Agency",
-      position: "UI/UX Designer",
-      duration: "2018 - 2019",
-    },
-    {
-      company: "Software Development Firm",
-      position: "Junior Developer",
-      duration: "2017 - 2018",
+      company: "SHAI for AI",
+      position: "Machine Learning Training",
+      duration: "January 2023 - May 2023",
     },
   ],
 };
@@ -97,37 +94,42 @@ const education = {
   icon: "/assets/resume/cap.svg",
   title: "My education",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "My academic, courses, and certifications",
   items: [
     {
-      institution: "Online Course Platform",
-      degree: "Full Stack Web Development Bootcamp",
-      duration: "2023",
+      institution: "University of Jordan",
+      degree: "Bachelor’s Degree in Data Science",
+      duration: "Oct 2020 - Jun 2024",
     },
     {
-      institution: "Codecademy",
-      degree: "Front-end Track",
-      duration: "2022",
+      institution: "DeepLearning.AI",
+      degree: "Mathematics For Machine Learning Specialization",
+      duration: "Nov 2024",
     },
     {
-      institution: "Online Course",
-      degree: "Programming Course",
-      duration: "2020 - 2021",
+      institution: "DeepLearning.AI",
+      degree: "TensorFlow Professional Certification",
+      duration: "Sep 2024",
     },
     {
-      institution: "Tech Institute",
-      degree: "Certified Web Developer",
-      duration: "2019",
+      institution: "DeepLearning.AI and Stanford University",
+      degree: "Deep Learning Specialization",
+      duration: "Feb 2024",
     },
     {
-      institution: "Design School",
-      degree: "Diploma in Graphic Design",
-      duration: "2016 - 2018",
+      institution: "DeepLearning.AI",
+      degree: "Machine Learning Specialization",
+      duration: "Jan 2024",
     },
     {
-      institution: "Community College",
-      degree: "Associate Degree in Computer Science",
-      duration: "2014 - 2016",
+      institution: "DeepLearning.AI",
+      degree: "LangChain: Chat with Your Data Short Course",
+      duration: "Mar 2024",
+    },
+    {
+      institution: "DeepLearning.AI",
+      degree: "LangChain for LLM Application Development Short Course",
+      duration: "Apr 2024",
     },
   ],
 };
@@ -136,40 +138,71 @@ const education = {
 const skills = {
   title: "My skills",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "",
   skillList: [
     {
-      icon: <FaHtml5 />,
-      name: "html 5",
+      icon: <FaPython />,
+      name: "python",
     },
     {
-      icon: <FaCss3 />,
-      name: "css 3",
+      icon: <FaDocker />,
+      name: "Docker",
     },
     {
-      icon: <FaJs />,
-      name: "javascript",
+      icon: <SiTensorflow />,
+      name: "Tensorflow",
     },
     {
-      icon: <FaReact />,
-      name: "react.js",
+      icon: <SiGit />,
+      name: "Git",
     },
     {
-      icon: <SiNextdotjs />,
-      name: "next.js",
+      icon: <FaGithub />,
+      name: "Github",
     },
     {
-      icon: <SiTailwindcss />,
-      name: "tailwind.css",
+      icon: <SiMongodb />,
+      name: "Mongodb",
     },
     {
-      icon: <FaNodeJs />,
-      name: "node.js",
+      icon: <SiGooglecolab />,
+      name: "Googlecolab",
     },
     {
-      icon: <FaFigma />,
-      name: "figma",
+      icon: <PiMicrosoftExcelLogo />,
+      name: "MicrosoftExcel",
+    },{
+      icon: <SiTableau />,
+      name: "Tableau",
     },
+    {
+      icon: <FaFlask />,
+      name: "Flask",
+    },
+    {
+      icon: <SiStreamlit />,
+      name: "Streamlit",
+    },
+    {
+      icon: <SiR />,
+      name: "R",
+    },
+    {
+      icon: <SiPycharm />,
+      name: "Pycharm",
+    },
+    { 
+      icon: <SiOpencv />,
+      name: "Opencv",
+    },
+    {
+      icon: <SiHuggingface />,
+      name: "Huggingface transformers",
+    },
+    {
+      icon: <PiNotionLogo />,
+      name: "Notion",
+    }
   ],
 };
 
@@ -184,6 +217,7 @@ import {
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
+import { PiMicrosoftExcelLogo, PiNotionLogo } from "react-icons/pi";
 
 const Resume = () => {
   return (
@@ -222,7 +256,7 @@ const Resume = () => {
                       return (
                         <li
                           key={index}
-                          className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
+                          className="bg-[#232329] h-[225px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
                         >
                           <span className="text-accent">{item.duration}</span>
                           <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">
@@ -254,7 +288,7 @@ const Resume = () => {
                       return (
                         <li
                           key={index}
-                          className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
+                          className="bg-[#232329] h-[225px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
                         >
                           <span className="text-accent">{item.duration}</span>
                           <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">
