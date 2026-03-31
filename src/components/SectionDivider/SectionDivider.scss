@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+
+.section-divider {
+  position: relative;
+  height: 1px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 $space-xl;
+
+  .divider-line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($accent-cyan, 0.15) 20%,
+      rgba($accent-violet, 0.25) 50%,
+      rgba($accent-cyan, 0.15) 80%,
+      transparent
+    );
+  }
+
+  .divider-glow {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 30px;
+    background: radial-gradient(ellipse, rgba($accent-cyan, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}

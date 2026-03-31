@@ -1,0 +1,58 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid $border-color;
+  padding: $space-2xl 0;
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $space-xl;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $space-md;
+
+    @include respond(md) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .footer-logo {
+    font-family: $font-heading;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    @include gradient-text;
+  }
+
+  .footer-text {
+    font-size: $fs-sm;
+    color: $text-muted;
+
+    .heart {
+      color: #ef4444;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    gap: $space-lg;
+
+    a {
+      color: $text-muted;
+      font-size: $fs-sm;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $accent-cyan;
+      }
+    }
+  }
+}

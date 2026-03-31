@@ -1,0 +1,108 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.skills {
+  position: relative;
+  z-index: 1;
+
+  .skills-container {
+    @include section;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: $space-xl;
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .skill-category {
+    @include glass;
+    border-radius: $radius-lg;
+    padding: $space-xl;
+    transition: all $transition-base;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: $accent-gradient;
+      transform: scaleX(0);
+      transition: transform $transition-base;
+      transform-origin: left;
+    }
+
+    &:hover {
+      border-color: $border-glow;
+      transform: translateY(-4px);
+      box-shadow: $shadow-glow;
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .category-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: $space-md;
+      margin-bottom: $space-lg;
+
+      .category-icon {
+        @include flex-center;
+        width: 44px;
+        height: 44px;
+        border-radius: $radius-md;
+        background: rgba($accent-cyan, 0.08);
+        font-size: 1.3rem;
+        transition: transform $transition-spring;
+      }
+
+      .category-name {
+        font-size: $fs-md;
+        font-weight: $fw-bold;
+        font-family: $font-heading;
+      }
+    }
+
+    .category-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-sm;
+    }
+
+    .skill-item {
+      padding: $space-xs $space-md;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: $radius-full;
+      font-size: $fs-xs;
+      color: $text-secondary;
+      font-weight: $fw-medium;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: rgba($accent-cyan, 0.08);
+        border-color: rgba($accent-cyan, 0.2);
+        color: $accent-cyan;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}

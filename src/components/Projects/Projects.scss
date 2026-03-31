@@ -1,0 +1,170 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.projects {
+  position: relative;
+  z-index: 1;
+
+  .projects-container {
+    @include section;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  // ─── Filter Tabs ──────────────────────────────────────────
+  .project-filters {
+    display: flex;
+    justify-content: center;
+    gap: $space-sm;
+    margin-bottom: $space-3xl;
+    flex-wrap: wrap;
+
+    .filter-btn {
+      padding: $space-sm $space-lg;
+      background: transparent;
+      border: 1px solid $border-color;
+      border-radius: $radius-full;
+      color: $text-secondary;
+      font-family: $font-body;
+      font-size: $fs-sm;
+      font-weight: $fw-medium;
+      cursor: pointer;
+      transition: all $transition-base;
+
+      &:hover {
+        border-color: rgba($accent-cyan, 0.3);
+        color: $text-primary;
+      }
+
+      &.active {
+        background: $accent-gradient;
+        border-color: transparent;
+        color: $bg-primary;
+        font-weight: $fw-semibold;
+      }
+    }
+  }
+
+  // ─── Project Grid ─────────────────────────────────────────
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: $space-xl;
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .project-card {
+    @include glass;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: all $transition-base;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      border-color: $border-glow;
+      box-shadow: $shadow-glow;
+      transform: translateY(-6px);
+
+      .project-header {
+        .project-icon {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .project-header {
+      padding: $space-xl $space-xl $space-md;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      .project-icon {
+        @include flex-center;
+        width: 52px;
+        height: 52px;
+        border-radius: $radius-md;
+        background: rgba($accent-cyan, 0.08);
+        font-size: 1.5rem;
+        transition: transform $transition-spring;
+      }
+
+      .project-links {
+        display: flex;
+        gap: $space-sm;
+
+        a {
+          @include flex-center;
+          width: 36px;
+          height: 36px;
+          border-radius: $radius-sm;
+          border: 1px solid $border-color;
+          color: $text-secondary;
+          font-size: $fs-base;
+          transition: all $transition-fast;
+
+          &:hover {
+            border-color: $accent-cyan;
+            color: $accent-cyan;
+          }
+        }
+      }
+    }
+
+    .project-body {
+      padding: 0 $space-xl $space-xl;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .project-category {
+        @include tag;
+        margin-bottom: $space-md;
+        width: fit-content;
+      }
+
+      .project-name {
+        font-size: $fs-lg;
+        font-weight: $fw-bold;
+        margin-bottom: 2px;
+      }
+
+      .project-subtitle {
+        font-size: $fs-sm;
+        color: $accent-cyan;
+        font-weight: $fw-medium;
+        margin-bottom: $space-md;
+        opacity: 0.8;
+      }
+
+      .project-description {
+        font-size: $fs-sm;
+        color: $text-secondary;
+        line-height: 1.7;
+        margin-bottom: $space-lg;
+        flex: 1;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-sm;
+
+        span {
+          padding: $space-xs $space-sm;
+          background: rgba(255, 255, 255, 0.04);
+          border-radius: $radius-sm;
+          font-size: $fs-xs;
+          color: $text-muted;
+          font-weight: $fw-medium;
+          border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+      }
+    }
+  }
+}

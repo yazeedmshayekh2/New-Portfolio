@@ -1,0 +1,243 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.learning {
+  position: relative;
+  z-index: 1;
+
+  .learning-container {
+    @include section;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  // ─── Currently Learning (Certs) ───────────────────────────
+  .learning-subtitle {
+    text-align: center;
+    font-family: $font-heading;
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
+    margin-bottom: $space-xl;
+    color: $text-primary;
+
+    span {
+      @include gradient-text;
+    }
+  }
+
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: $space-lg;
+    margin-bottom: $space-4xl;
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .learning-card {
+    @include glass;
+    border-radius: $radius-lg;
+    padding: $space-xl;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, $accent-cyan, $accent-violet);
+      transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: left;
+    }
+
+    &:hover {
+      border-color: $border-glow;
+      transform: translateY(-4px);
+      box-shadow: $shadow-glow;
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .learning-card-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+
+    .learning-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: $space-md;
+      margin-bottom: $space-lg;
+    }
+
+    .learning-card-icon {
+      @include flex-center;
+      min-width: 52px;
+      height: 52px;
+      border-radius: $radius-md;
+      background: rgba($accent-cyan, 0.08);
+      font-size: 1.5rem;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .learning-card-meta {
+      flex: 1;
+
+      .learning-card-name {
+        font-size: $fs-lg;
+        font-weight: $fw-bold;
+        margin-bottom: 2px;
+      }
+
+      .learning-card-full {
+        font-size: $fs-sm;
+        color: $text-secondary;
+        line-height: 1.5;
+      }
+    }
+
+    .learning-card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: $space-xs $space-md;
+      border-radius: $radius-full;
+      font-size: $fs-xs;
+      font-weight: $fw-semibold;
+      letter-spacing: 0.03em;
+      margin-bottom: $space-md;
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      &.in-progress {
+        background: rgba(#22c55e, 0.1);
+        color: #22c55e;
+        border: 1px solid rgba(#22c55e, 0.2);
+
+        .status-dot {
+          background: #22c55e;
+        }
+      }
+
+      &.upcoming {
+        background: rgba($accent-cyan, 0.08);
+        color: $accent-cyan;
+        border: 1px solid rgba($accent-cyan, 0.15);
+
+        .status-dot {
+          background: $accent-cyan;
+        }
+      }
+    }
+
+    .learning-card-desc {
+      font-size: $fs-sm;
+      color: $text-secondary;
+      line-height: 1.7;
+    }
+  }
+
+  // ─── YouTube Playlists ────────────────────────────────────
+  .playlists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: $space-lg;
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .playlist-card {
+    @include glass;
+    border-radius: $radius-lg;
+    padding: $space-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      border-color: rgba(#ff0000, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(#ff0000, 0.08);
+
+      .playlist-icon {
+        transform: scale(1.1);
+      }
+    }
+
+    .playlist-header {
+      display: flex;
+      align-items: center;
+      gap: $space-md;
+    }
+
+    .playlist-icon {
+      @include flex-center;
+      min-width: 44px;
+      height: 44px;
+      border-radius: $radius-md;
+      background: rgba(#ff0000, 0.08);
+      font-size: 1.2rem;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .playlist-info {
+      .playlist-title {
+        font-size: $fs-base;
+        font-weight: $fw-semibold;
+        line-height: 1.4;
+        color: $text-primary;
+      }
+
+      .playlist-channel {
+        font-size: $fs-xs;
+        color: $text-muted;
+        margin-top: 2px;
+      }
+    }
+
+    .playlist-desc {
+      font-size: $fs-sm;
+      color: $text-secondary;
+      line-height: 1.6;
+    }
+
+    .playlist-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: $space-xs $space-sm;
+      background: rgba(#ff0000, 0.06);
+      border: 1px solid rgba(#ff0000, 0.12);
+      border-radius: $radius-full;
+      font-size: 0.65rem;
+      font-weight: $fw-semibold;
+      color: #ff4444;
+      letter-spacing: 0.05em;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+  }
+}

@@ -1,0 +1,158 @@
+// ============================================================
+// REUSABLE MIXINS
+// ============================================================
+
+@use 'variables' as *;
+
+// ─── Responsive ─────────────────────────────────────────────
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $bp-sm) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (max-width: $bp-md) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: $bp-lg) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: $bp-xl) { @content; }
+  }
+}
+
+// ─── Glassmorphism ──────────────────────────────────────────
+@mixin glass($bg: $bg-glass, $blur: 16px) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $border-color;
+}
+
+// ─── Card ───────────────────────────────────────────────────
+@mixin card {
+  @include glass;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  transition: all $transition-base;
+  
+  &:hover {
+    border-color: $border-glow;
+    box-shadow: $shadow-glow;
+    transform: translateY(-4px);
+  }
+}
+
+// ─── Gradient Text ──────────────────────────────────────────
+@mixin gradient-text {
+  background: $accent-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ─── Section Container ──────────────────────────────────────
+@mixin section {
+  padding: $space-section 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: $space-xl;
+  padding-right: $space-xl;
+
+  @include respond(md) {
+    padding: $space-4xl $space-lg;
+  }
+}
+
+// ─── Flex helpers ───────────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ─── Button ─────────────────────────────────────────────────
+@mixin button-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-md $space-xl;
+  background: $accent-gradient;
+  color: $bg-primary;
+  font-family: $font-heading;
+  font-weight: $fw-semibold;
+  font-size: $fs-sm;
+  border: none;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+
+  &:hover {
+    background: $accent-gradient-hover;
+    box-shadow: $shadow-glow-strong;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin button-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-md $space-xl;
+  background: transparent;
+  color: $text-primary;
+  font-family: $font-heading;
+  font-weight: $fw-semibold;
+  font-size: $fs-sm;
+  border: 1px solid $border-color;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+
+  &:hover {
+    border-color: $accent-cyan;
+    color: $accent-cyan;
+    box-shadow: $shadow-glow;
+    transform: translateY(-2px);
+  }
+}
+
+// ─── Section Title ──────────────────────────────────────────
+@mixin section-title {
+  font-family: $font-heading;
+  font-size: $fs-3xl;
+  font-weight: $fw-bold;
+  text-align: center;
+  margin-bottom: $space-3xl;
+  position: relative;
+
+  span {
+    @include gradient-text;
+  }
+
+  @include respond(md) {
+    font-size: $fs-2xl;
+  }
+}
+
+// ─── Badge / Tag ────────────────────────────────────────────
+@mixin tag {
+  display: inline-block;
+  padding: $space-xs $space-md;
+  background: rgba(0, 212, 255, 0.08);
+  color: $accent-cyan;
+  font-size: $fs-xs;
+  font-weight: $fw-medium;
+  border-radius: $radius-full;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  letter-spacing: 0.02em;
+}

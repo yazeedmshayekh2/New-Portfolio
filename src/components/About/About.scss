@@ -1,0 +1,171 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.about {
+  position: relative;
+  z-index: 1;
+
+  .about-container {
+    @include section;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4xl;
+    align-items: start;
+
+    @include respond(lg) {
+      grid-template-columns: 1fr;
+      gap: $space-2xl;
+    }
+  }
+
+  .about-text {
+    .about-heading {
+      font-size: $fs-2xl;
+      font-weight: $fw-bold;
+      margin-bottom: $space-lg;
+      line-height: 1.3;
+
+      .gradient {
+        @include gradient-text;
+      }
+    }
+
+    p {
+      margin-bottom: $space-lg;
+      font-size: $fs-base;
+    }
+
+    .about-education {
+      @include glass;
+      border-radius: $radius-md;
+      padding: $space-lg;
+      margin-top: $space-xl;
+
+      .edu-label {
+        font-size: $fs-xs;
+        color: $accent-cyan;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: $fw-semibold;
+        margin-bottom: $space-sm;
+      }
+
+      .edu-degree {
+        font-weight: $fw-semibold;
+        font-size: $fs-md;
+        margin-bottom: $space-xs;
+      }
+
+      .edu-details {
+        font-size: $fs-sm;
+        color: $text-secondary;
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-sm;
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .separator {
+          color: $text-muted;
+        }
+      }
+    }
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr 1fr;
+      gap: $space-md;
+    }
+  }
+
+  .stat-card {
+    @include card;
+    text-align: center;
+    padding: $space-xl $space-lg;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: $accent-gradient;
+      opacity: 0;
+      transition: opacity $transition-base;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    .stat-number {
+      font-family: $font-heading;
+      font-size: $fs-3xl;
+      font-weight: $fw-extrabold;
+      @include gradient-text;
+      line-height: 1;
+      margin-bottom: $space-sm;
+    }
+
+    .stat-label {
+      font-size: $fs-sm;
+      color: $text-secondary;
+      font-weight: $fw-medium;
+    }
+  }
+
+  .about-languages {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: $space-lg;
+    margin-top: $space-md;
+
+    @include respond(sm) {
+      flex-direction: column;
+    }
+
+    .lang-card {
+      @include glass;
+      border-radius: $radius-md;
+      padding: $space-md $space-lg;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: $space-md;
+
+      .lang-icon {
+        font-size: $fs-xl;
+      }
+
+      .lang-info {
+        .lang-name {
+          font-weight: $fw-semibold;
+          font-size: $fs-sm;
+        }
+        .lang-level {
+          font-size: $fs-xs;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+}

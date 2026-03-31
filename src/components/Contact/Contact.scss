@@ -1,0 +1,181 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.contact {
+  position: relative;
+  z-index: 1;
+
+  .contact-container {
+    @include section;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  .contact-subtitle {
+    text-align: center;
+    color: $text-secondary;
+    max-width: 500px;
+    margin: -$space-xl auto $space-3xl;
+    font-size: $fs-base;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-3xl;
+
+    @include respond(lg) {
+      grid-template-columns: 1fr;
+      gap: $space-xl;
+    }
+  }
+
+  // ─── Contact Info Cards ───────────────────────────────────
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+  }
+
+  .contact-card {
+    @include glass;
+    border-radius: $radius-md;
+    padding: $space-xl;
+    display: flex;
+    align-items: center;
+    gap: $space-lg;
+    transition: all $transition-base;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      border-color: $border-glow;
+      transform: translateX(8px);
+      box-shadow: $shadow-glow;
+
+      .contact-card-icon {
+        background: rgba($accent-cyan, 0.15);
+        color: $accent-cyan;
+      }
+    }
+
+    .contact-card-icon {
+      @include flex-center;
+      min-width: 52px;
+      height: 52px;
+      border-radius: $radius-md;
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 1.3rem;
+      color: $text-secondary;
+      transition: all $transition-base;
+    }
+
+    .contact-card-info {
+      .contact-card-label {
+        font-size: $fs-xs;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: $fw-semibold;
+        margin-bottom: 8px;
+      }
+
+      .contact-card-value {
+        font-size: $fs-base;
+        font-weight: $fw-medium;
+        color: $text-primary;
+      }
+    }
+  }
+
+  // ─── Contact Form ─────────────────────────────────────────
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: $space-sm;
+
+      label {
+        font-size: $fs-sm;
+        font-weight: $fw-medium;
+        color: $text-secondary;
+      }
+
+      input, textarea {
+        padding: $space-md $space-lg;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        color: $text-primary;
+        font-family: $font-body;
+        font-size: $fs-sm;
+        transition: all $transition-fast;
+        outline: none;
+
+        &::placeholder {
+          color: $text-muted;
+        }
+
+        &:focus {
+          border-color: $accent-cyan;
+          box-shadow: 0 0 0 3px rgba($accent-cyan, 0.1);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 140px;
+      }
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $space-lg;
+
+      @include respond(sm) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-submit {
+      @include button-primary;
+      justify-content: center;
+      padding: $space-lg $space-2xl;
+      font-size: $fs-base;
+      width: 100%;
+      margin-top: $space-sm;
+    }
+  }
+
+  // ─── Social links ─────────────────────────────────────────
+  .contact-socials {
+    display: flex;
+    gap: $space-md;
+    margin-top: $space-md;
+
+    a {
+      @include flex-center;
+      width: 48px;
+      height: 48px;
+      border-radius: $radius-md;
+      border: 1px solid $border-color;
+      color: $text-secondary;
+      font-size: $fs-lg;
+      transition: all $transition-base;
+
+      &:hover {
+        border-color: $accent-cyan;
+        color: $accent-cyan;
+        transform: translateY(-3px);
+        box-shadow: $shadow-glow;
+      }
+    }
+  }
+}

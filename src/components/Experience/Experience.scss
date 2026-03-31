@@ -1,0 +1,154 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.experience {
+  position: relative;
+  z-index: 1;
+
+  .experience-container {
+    @include section;
+  }
+
+  .section-title {
+    @include section-title;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, $accent-cyan, $accent-violet, transparent);
+
+      @include respond(sm) {
+        left: 14px;
+      }
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 60px;
+    padding-bottom: $space-3xl;
+
+    @include respond(sm) {
+      padding-left: 44px;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 12px;
+      top: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: $bg-primary;
+      border: 3px solid $accent-cyan;
+      z-index: 2;
+      transition: all $transition-base;
+
+      @include respond(sm) {
+        left: 6px;
+        width: 18px;
+        height: 18px;
+      }
+
+      &.training {
+        border-color: $accent-violet;
+      }
+    }
+
+    &:hover .timeline-dot {
+      box-shadow: 0 0 16px rgba($accent-cyan, 0.5);
+      transform: scale(1.3);
+    }
+
+    .timeline-type {
+      @include tag;
+      margin-bottom: $space-md;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+
+      &.training {
+        background: rgba($accent-violet, 0.08);
+        color: $accent-violet;
+        border-color: rgba($accent-violet, 0.15);
+      }
+    }
+
+    .timeline-card {
+      @include card;
+      padding: $space-xl;
+
+      .timeline-header {
+        @include flex-between;
+        flex-wrap: wrap;
+        gap: $space-sm;
+        margin-bottom: $space-md;
+
+        .timeline-title {
+          font-size: $fs-lg;
+          font-weight: $fw-bold;
+          color: $text-primary;
+        }
+
+        .timeline-date {
+          font-size: $fs-xs;
+          color: $accent-cyan;
+          font-weight: $fw-medium;
+          @include glass;
+          padding: $space-xs $space-md;
+          border-radius: $radius-full;
+        }
+      }
+
+      .timeline-company {
+        font-size: $fs-sm;
+        color: $text-secondary;
+        margin-bottom: $space-md;
+        display: flex;
+        align-items: center;
+        gap: $space-sm;
+        flex-wrap: wrap;
+
+        .location {
+          @include tag;
+          font-size: 0.65rem;
+        }
+      }
+
+      .timeline-description {
+        list-style: none;
+
+        li {
+          font-size: $fs-sm;
+          color: $text-secondary;
+          line-height: 1.7;
+          padding-left: $space-lg;
+          position: relative;
+          margin-bottom: $space-sm;
+
+          &::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: $accent-cyan;
+            font-weight: $fw-bold;
+          }
+        }
+      }
+    }
+  }
+}

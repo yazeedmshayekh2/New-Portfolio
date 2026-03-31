@@ -1,0 +1,255 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+
+  .hero-container {
+    @include section;
+    padding-top: $space-3xl;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4xl;
+    align-items: center;
+
+    @include respond(lg) {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: $space-2xl;
+    }
+  }
+
+  .hero-content {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .hero-greeting {
+    font-size: $fs-md;
+    color: $accent-cyan;
+    font-weight: $fw-medium;
+    margin-bottom: $space-md;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+
+    @include respond(lg) {
+      justify-content: center;
+    }
+
+    &::before {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: $accent-gradient;
+      display: inline-block;
+
+      @include respond(lg) {
+        display: none;
+      }
+    }
+  }
+
+  .hero-name {
+    font-size: $fs-hero;
+    font-weight: $fw-extrabold;
+    line-height: 1.05;
+    margin-bottom: $space-md;
+    letter-spacing: -0.03em;
+
+    .gradient {
+      @include gradient-text;
+    }
+  }
+
+  .hero-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    margin-bottom: $space-xl;
+    font-size: $fs-xl;
+    color: $text-secondary;
+
+    @include respond(lg) {
+      justify-content: center;
+    }
+  }
+
+  .hero-title-static {
+    font-weight: $fw-medium;
+  }
+
+  .hero-title-dynamic {
+    color: $accent-cyan;
+    font-weight: $fw-semibold;
+    position: relative;
+
+    &::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      margin-left: 2px;
+    }
+  }
+
+  .hero-description {
+    font-size: $fs-base;
+    color: $text-secondary;
+    line-height: 1.8;
+    max-width: 540px;
+    margin-bottom: $space-2xl;
+
+    @include respond(lg) {
+      max-width: 100%;
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: $space-lg;
+    flex-wrap: wrap;
+
+    @include respond(lg) {
+      justify-content: center;
+    }
+  }
+
+  .btn-primary {
+    @include button-primary;
+  }
+
+  .btn-outline {
+    @include button-outline;
+  }
+
+  .hero-socials {
+    display: flex;
+    gap: $space-lg;
+    margin-top: $space-2xl;
+
+    @include respond(lg) {
+      justify-content: center;
+    }
+
+    a {
+      @include flex-center;
+      width: 44px;
+      height: 44px;
+      border-radius: $radius-md;
+      border: 1px solid $border-color;
+      color: $text-secondary;
+      font-size: $fs-lg;
+      transition: all $transition-base;
+
+      &:hover {
+        border-color: $accent-cyan;
+        color: $accent-cyan;
+        transform: translateY(-3px);
+        box-shadow: $shadow-glow;
+      }
+    }
+  }
+
+  // ─── Right side visual ────────────────────────────────────
+  .hero-visual {
+    @include flex-center;
+    animation: fadeInUp 0.8s ease 0.3s both;
+
+    @include respond(lg) {
+      order: -1;
+    }
+  }
+
+  .hero-avatar {
+    position: relative;
+    width: 350px;
+    height: 350px;
+
+    @include respond(md) {
+      width: 260px;
+      height: 260px;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: $accent-gradient border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: spin 8s linear infinite;
+    }
+
+    .avatar-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: $bg-card;
+      @include flex-center;
+      font-size: 6rem;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .avatar-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      @include glass;
+      border-radius: $radius-md;
+      padding: $space-sm $space-md;
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+      font-size: $fs-xs;
+      font-weight: $fw-semibold;
+      animation: scaleIn 0.5s ease 1s both;
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+    }
+  }
+
+  // ─── Scroll indicator ─────────────────────────────────────
+  .scroll-indicator {
+    position: absolute;
+    bottom: $space-2xl;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-sm;
+    color: $text-muted;
+    font-size: $fs-xs;
+    letter-spacing: 0.1em;
+    animation: float 3s ease-in-out infinite;
+
+    .scroll-line {
+      width: 1px;
+      height: 30px;
+      background: linear-gradient(to bottom, $accent-cyan, transparent);
+    }
+
+    @include respond(md) {
+      display: none;
+    }
+  }
+}
