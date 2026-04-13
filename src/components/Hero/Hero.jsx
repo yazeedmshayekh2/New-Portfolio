@@ -1,12 +1,19 @@
-import { useState, useEffect } from 'react';
-import { FiGithub, FiLinkedin, FiMail, FiDownload, FiArrowRight } from 'react-icons/fi';
-import { portfolioData } from '../../data/portfolioData';
-import './Hero.scss';
+import { useState, useEffect } from "react";
+import {
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+  FiDownload,
+  FiArrowRight,
+} from "react-icons/fi";
+import { portfolioData } from "../../data/portfolioData";
+import "./Hero.scss";
+import HeroMorphScene from "./HeroMorphScene";
 
 export default function Hero() {
   const { hero } = portfolioData;
   const [currentTagline, setCurrentTagline] = useState(0);
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -18,7 +25,7 @@ export default function Hero() {
       return;
     }
 
-    if (isDeleting && displayText === '') {
+    if (isDeleting && displayText === "") {
       setIsDeleting(false);
       setCurrentTagline((prev) => (prev + 1) % hero.taglines.length);
       return;
@@ -28,7 +35,7 @@ export default function Hero() {
       setDisplayText((prev) =>
         isDeleting
           ? tagline.substring(0, prev.length - 1)
-          : tagline.substring(0, prev.length + 1)
+          : tagline.substring(0, prev.length + 1),
       );
     }, speed);
 
@@ -41,8 +48,10 @@ export default function Hero() {
         <div className="hero-content">
           <span className="hero-greeting">Hello, I'm</span>
           <h1 className="hero-name">
-            {hero.name.split(' ')[0]}{' '}
-            <span className="gradient">{hero.name.split(' ').slice(1).join(' ')}</span>
+            {hero.name.split(" ")[0]}{" "}
+            <span className="gradient">
+              {hero.name.split(" ").slice(1).join(" ")}
+            </span>
           </h1>
           <div className="hero-title-wrapper">
             <span className="hero-title-static">I'm a</span>
@@ -58,10 +67,20 @@ export default function Hero() {
             </a>
           </div>
           <div className="hero-socials">
-            <a href={hero.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a
+              href={hero.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
               <FiGithub />
             </a>
-            <a href={hero.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a
+              href={hero.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
               <FiLinkedin />
             </a>
             <a href={`mailto:${hero.socials.email}`} aria-label="Email">
@@ -71,16 +90,7 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual">
-          <div className="hero-avatar">
-            <div className="avatar-ring" />
-            <div className="avatar-image">
-              <span>👨‍💻</span>
-            </div>
-            <div className="avatar-badge">
-              <span className="status-dot" />
-              Available for work
-            </div>
-          </div>
+          <HeroMorphScene />
         </div>
       </div>
 

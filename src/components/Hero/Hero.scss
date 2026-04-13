@@ -1,5 +1,5 @@
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .hero {
   min-height: 100vh;
@@ -44,7 +44,7 @@
     }
 
     &::before {
-      content: '';
+      content: "";
       width: 30px;
       height: 2px;
       background: $accent-gradient;
@@ -91,7 +91,7 @@
     position: relative;
 
     &::after {
-      content: '|';
+      content: "|";
       animation: blink 1s step-end infinite;
       margin-left: 2px;
     }
@@ -157,12 +157,12 @@
 
   // ─── Right side visual ────────────────────────────────────
   .hero-visual {
-    @include flex-center;
-    animation: fadeInUp 0.8s ease 0.3s both;
-
-    @include respond(lg) {
-      order: -1;
-    }
+    width: min(760px, 70vw);
+    height: min(760px, 70vw);
+    min-width: 480px;
+    min-height: 480px;
+    justify-self: center;
+    align-self: center;
   }
 
   .hero-avatar {
@@ -171,6 +171,13 @@
     height: 350px;
 
     @include respond(md) {
+      .hero-avatar {
+        width: min(420px, 85vw);
+        height: min(420px, 85vw);
+        min-width: 260px;
+        min-height: 260px;
+      }
+
       width: 260px;
       height: 260px;
     }
@@ -181,7 +188,9 @@
       border-radius: 50%;
       border: 2px solid transparent;
       background: $accent-gradient border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       animation: spin 8s linear infinite;
