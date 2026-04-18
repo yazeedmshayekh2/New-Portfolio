@@ -44,6 +44,8 @@
   .footer-links {
     display: flex;
     gap: $space-lg;
+    flex-wrap: wrap;
+    justify-content: center;
 
     a {
       color: $text-muted;
@@ -53,6 +55,18 @@
       &:hover {
         color: $accent-cyan;
       }
+    }
+  }
+
+  @include respond(sm) {
+    padding: $space-xl 0;
+
+    .footer-container {
+      padding: 0 $space-md;
+    }
+
+    .footer-links {
+      gap: $space-md;
     }
   }
 }

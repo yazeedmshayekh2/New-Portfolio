@@ -1,16 +1,45 @@
-import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import About from './components/About/About';
-import Experience from './components/Experience/Experience';
-import Projects from './components/Projects/Projects';
-import Skills from './components/Skills/Skills';
-import Certifications from './components/Certifications/Certifications';
-import Learning from './components/Learning/Learning';
-import Contact from './components/Contact/Contact';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import Footer from './components/Footer/Footer';
-import SectionDivider from './components/SectionDivider/SectionDivider';
+import Navbar from './components/Navbar/Navbar';
+import ThreeBackground from './components/ThreeBackground/ThreeBackground';
+import HomePage from './pages/HomePage';
+import CertificatesPage from './pages/CertificatesPage';
+import ProjectsPage from './pages/ProjectsPage';
+import SkillsPage from './pages/SkillsPage';
+import ContactPage from './pages/ContactPage';
+import CodingNotesPage from './pages/CodingNotesPage';
+import CodingNoteArticlePage from './pages/CodingNoteArticlePage';
 
 import './styles/_base.scss';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -16 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/certificates" element={<CertificatesPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/coding-notes" element={<CodingNotesPage />} />
+          <Route path="/coding-notes/:slug" element={<CodingNoteArticlePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
 export default function App() {
   return (
@@ -18,24 +47,11 @@ export default function App() {
       {/* Ambient glow effects */}
       <div className="glow-blob glow-blob--cyan" />
       <div className="glow-blob glow-blob--violet" />
+      <ThreeBackground />
 
       <Navbar />
       <main>
-        <Hero />
-        <SectionDivider />
-        <About />
-        <SectionDivider />
-        <Learning />
-        <SectionDivider />
-        <Experience />
-        <SectionDivider />
-        <Projects />
-        <SectionDivider />
-        <Skills />
-        <SectionDivider />
-        <Certifications />
-        <SectionDivider />
-        <Contact />
+        <AnimatedRoutes />
       </main>
       <Footer />
     </div>

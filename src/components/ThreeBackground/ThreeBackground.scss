@@ -1,0 +1,15 @@
+@use '../../styles/variables' as *;
+
+.three-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+@media (max-width: $bp-md) {
+  .three-background {
+    opacity: 0.45;
+  }
+}

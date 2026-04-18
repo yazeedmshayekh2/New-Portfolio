@@ -15,7 +15,7 @@
 
   .certs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: $space-lg;
     margin-bottom: $space-3xl;
 
@@ -32,6 +32,8 @@
     align-items: flex-start;
     gap: $space-md;
     transition: all $transition-base;
+    position: relative;
+    overflow: hidden;
 
     &:hover {
       border-color: $border-glow;
@@ -48,6 +50,21 @@
       font-size: 1.2rem;
     }
 
+    .cert-image {
+      width: 88px;
+      min-width: 88px;
+      height: 88px;
+      border-radius: $radius-md;
+      overflow: hidden;
+      border: 1px solid $border-color;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
     .cert-info {
       .cert-name {
         font-size: $fs-sm;
@@ -58,8 +75,50 @@
       .cert-issuer {
         font-size: $fs-xs;
         color: $text-secondary;
+        margin-bottom: $space-xs;
+      }
+
+      .cert-meta {
+        color: $text-muted;
+        font-size: $fs-xs;
+        margin-bottom: $space-sm;
+      }
+
+      .cert-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-xs;
+        margin-bottom: $space-sm;
+
+        span {
+          @include tag;
+          padding: 0.15rem 0.5rem;
+        }
+      }
+
+      .cert-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: $fs-xs;
       }
     }
+  }
+
+  .cert-card.no-image {
+    .cert-info {
+      padding-top: $space-xs;
+    }
+  }
+
+  .cert-card--ai,
+  .cert-card--ml,
+  .cert-card--engineering {
+    border-image: linear-gradient(120deg, rgba($accent-cyan, 0.45), rgba($accent-violet, 0.45)) 1;
+  }
+
+  .cert-card--math {
+    border-color: rgba($accent-violet, 0.4);
   }
 
   // ─── Achievements ───────────────────────────────────────
@@ -78,7 +137,7 @@
 
   .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: $space-lg;
 
     @include respond(md) {
@@ -103,8 +162,28 @@
     }
 
     .achievement-icon {
-      font-size: 1.5rem;
+      @include flex-center;
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-sm;
+      background: rgba($accent-violet, 0.12);
+      font-size: 1.2rem;
       min-width: 32px;
+    }
+
+    .achievement-image {
+      width: 84px;
+      min-width: 84px;
+      height: 84px;
+      border-radius: $radius-md;
+      overflow: hidden;
+      border: 1px solid $border-color;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .achievement-info {
@@ -120,6 +199,50 @@
         color: $text-secondary;
         line-height: 1.6;
       }
+
+      .achievement-event {
+        font-size: $fs-xs;
+        color: $text-muted;
+        margin-bottom: 2px;
+      }
+
+      .achievement-date {
+        display: inline-block;
+        margin-top: $space-xs;
+        margin-right: $space-sm;
+        color: $accent-cyan;
+        font-size: $fs-xs;
+      }
+
+      .achievement-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: $fs-xs;
+      }
+    }
+  }
+
+  .achievement-card--gold {
+    border-left-color: #f59e0b;
+  }
+
+  .achievement-card--winner {
+    border-left-color: #22d3ee;
+  }
+
+  @include respond(sm) {
+    .cert-card,
+    .achievement-card {
+      padding: $space-md;
+      gap: $space-sm;
+    }
+
+    .cert-card .cert-image,
+    .achievement-card .achievement-image {
+      width: 68px;
+      min-width: 68px;
+      height: 68px;
     }
   }
 }

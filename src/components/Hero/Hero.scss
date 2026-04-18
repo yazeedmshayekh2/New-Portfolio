@@ -71,6 +71,7 @@
   .hero-title-wrapper {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: $space-sm;
     margin-bottom: $space-xl;
     font-size: $fs-xl;
@@ -117,14 +118,30 @@
     @include respond(lg) {
       justify-content: center;
     }
+
+    @include respond(sm) {
+      flex-direction: column;
+      width: 100%;
+      align-items: stretch;
+    }
   }
 
   .btn-primary {
     @include button-primary;
+
+    @include respond(sm) {
+      justify-content: center;
+      width: 100%;
+    }
   }
 
   .btn-outline {
     @include button-outline;
+
+    @include respond(sm) {
+      justify-content: center;
+      width: 100%;
+    }
   }
 
   .hero-socials {
@@ -159,10 +176,15 @@
   .hero-visual {
     width: min(760px, 70vw);
     height: min(760px, 70vw);
-    min-width: 480px;
-    min-height: 480px;
+    min-width: 0;
+    min-height: 0;
     justify-self: center;
     align-self: center;
+
+    @include respond(md) {
+      width: min(92vw, 520px);
+      height: min(92vw, 520px);
+    }
   }
 
   .hero-avatar {
@@ -259,6 +281,17 @@
 
     @include respond(md) {
       display: none;
+    }
+  }
+
+  @include respond(sm) {
+    .hero-container {
+      padding-top: $space-xl;
+    }
+
+    .hero-title-wrapper {
+      font-size: $fs-lg;
+      justify-content: center;
     }
   }
 }

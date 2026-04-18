@@ -178,4 +178,22 @@
       }
     }
   }
+
+  @include respond(md) {
+    .contact-card:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @include respond(sm) {
+    .contact-card {
+      padding: $space-md;
+      gap: $space-md;
+    }
+
+    .contact-card .contact-card-info .contact-card-value {
+      font-size: $fs-sm;
+      word-break: break-word;
+    }
+  }
 }

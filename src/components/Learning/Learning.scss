@@ -29,7 +29,7 @@
 
   .learning-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: $space-lg;
     margin-bottom: $space-4xl;
 
@@ -155,7 +155,7 @@
   // ─── YouTube Playlists ────────────────────────────────────
   .playlists-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: $space-lg;
 
     @include respond(md) {
@@ -238,6 +238,13 @@
       letter-spacing: 0.05em;
       width: fit-content;
       text-transform: uppercase;
+    }
+  }
+
+  @include respond(sm) {
+    .learning-card,
+    .playlist-card {
+      padding: $space-lg;
     }
   }
 }

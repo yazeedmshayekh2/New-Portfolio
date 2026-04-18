@@ -10,6 +10,7 @@ export default function Learning() {
   return (
     <section className="learning" id="learning">
       <div className="learning-container" ref={ref}>
+        <span id="currently-learning" className="home-anchor" aria-hidden="true" />
         <h2 className={`section-title animate-blur ${isVisible ? 'visible' : ''}`}>
           Currently <span>Learning</span>
         </h2>
@@ -42,6 +43,7 @@ export default function Learning() {
         </div>
 
         {/* YouTube Playlists */}
+        <span id="watching" className="home-anchor" aria-hidden="true" />
         <h3 className={`learning-subtitle animate-blur delay-3 ${isVisible ? 'visible' : ''}`}>
           📺 What I'm <span>Watching</span>
         </h3>

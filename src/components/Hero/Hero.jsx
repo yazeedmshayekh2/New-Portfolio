@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   FiGithub,
   FiLinkedin,
@@ -54,14 +55,14 @@ export default function Hero() {
             </span>
           </h1>
           <div className="hero-title-wrapper">
-            <span className="hero-title-static">I'm a</span>
+            <span className="hero-title-static">I'm an</span>
             <span className="hero-title-dynamic">{displayText}</span>
           </div>
           <p className="hero-description">{hero.summary}</p>
           <div className="hero-actions">
-            <a href="#contact" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               <FiArrowRight /> Let's Talk
-            </a>
+            </Link>
             <a href={hero.cvLink} className="btn-outline" download>
               <FiDownload /> Download CV
             </a>

@@ -6,12 +6,10 @@ export const portfolioData = {
   // ─── HERO SECTION ───────────────────────────────────────────
   hero: {
     name: "Yazeed Mshayekh",
-    title: "AI Developer",
+    title: "AI Engineer",
     taglines: [
-      "Machine Learning Engineer",
-      "NLP Specialist",
-      "Computer Vision Expert",
-      "AI Solutions Architect",
+      "AI Developer",
+      "AI Engineer"
     ],
     summary:
       "AI Developer with hands-on experience developing end-to-end machine learning applications. Specialized in Natural Language Processing (RAG and AI Agents) and Computer Vision, leveraging Python, web frameworks, and a set of other Python frameworks to build intelligent systems. Committed to deploying cutting-edge AI models as scalable, real-world solutions.",
@@ -89,6 +87,11 @@ export const portfolioData = {
         "Achieved 99.7% facial recognition accuracy using YOLOv9 and ResNet-50, deployed via Flask with a responsive web frontend.",
       tech: ["YOLOv9", "ResNet-50", "Flask", "Python"],
       github: "https://github.com/yazeedmshayekh2",
+      demo: "",
+      caseStudyUrl: "",
+      image:
+        "https://images.unsplash.com/photo-1526378722445-4b2f9f6d5f66?auto=format&fit=crop&w=1200&q=80",
+      theme: "vision",
       icon: "camera",
     },
     {
@@ -99,6 +102,9 @@ export const portfolioData = {
         "Automated dynamic reporting AI-powered system using CrewAI and Chart.js to replace manual Tableau workflows, optimizing performance with LangCache and Grafana.",
       tech: ["CrewAI", "Chart.js", "LangCache", "Grafana"],
       github: "https://github.com/yazeedmshayekh2",
+      image:
+        "https://images.unsplash.com/photo-1551281044-8b1d3f3f5f4b?auto=format&fit=crop&w=1200&q=80",
+      theme: "analytics",
       icon: "chart",
     },
     {
@@ -109,6 +115,7 @@ export const portfolioData = {
         "Built real-time ASL-to-text translation using Transformer and Conformer architectures, deployed via Gradio for live gesture recognition.",
       tech: ["Transformer", "Conformer", "Gradio", "MediaPipe"],
       github: "https://github.com/yazeedmshayekh2/Continuous-American-Sign-Language-Translation",
+      theme: "nlp",
       icon: "hand",
     },
     {
@@ -251,18 +258,38 @@ export const portfolioData = {
     {
       name: "Deep Learning Specialization",
       issuer: "DeepLearning.AI & Stanford University",
+      issuedOn: "2024",
+      credentialUrl: "https://www.coursera.org/specializations/deep-learning",
+      image:
+        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
+      highlights: ["Neural Networks", "CNNs", "Sequence Models"],
+      theme: "ai",
     },
     {
       name: "Machine Learning Specialization",
       issuer: "DeepLearning.AI",
+      issuedOn: "2024",
+      credentialUrl: "https://www.coursera.org/specializations/machine-learning-introduction",
+      highlights: ["Supervised Learning", "Unsupervised Learning", "Best Practices"],
+      theme: "ml",
     },
     {
       name: "Mathematics for Machine Learning",
       issuer: "Imperial College London",
+      issuedOn: "2023",
+      credentialUrl: "https://www.coursera.org/specializations/mathematics-machine-learning",
+      highlights: ["Linear Algebra", "Multivariate Calculus"],
+      theme: "math",
     },
     {
       name: "TensorFlow Professional Certification",
       issuer: "DeepLearning.AI",
+      issuedOn: "2025",
+      credentialUrl: "https://www.tensorflow.org/certificate",
+      image:
+        "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80",
+      highlights: ["Model Deployment", "Computer Vision"],
+      theme: "engineering",
     },
   ],
 
@@ -272,10 +299,20 @@ export const portfolioData = {
       title: "First Place",
       description:
         "Organized by the STEAM Center in collaboration with Arab Robotics Association",
+      event: "Innovation Competition",
+      date: "2024",
+      awardUrl: "",
+      image:
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+      theme: "gold",
     },
     {
       title: "First Place",
       description: "The 11th National Technology Parade 2024",
+      event: "National Technology Parade",
+      date: "2024",
+      awardUrl: "",
+      theme: "winner",
     },
   ],
 
