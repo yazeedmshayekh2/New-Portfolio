@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Workflow note section image">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1f" />
+      <stop offset="50%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#0a0f1f" />
+    </linearGradient>
+    <linearGradient id="arrow3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg3)" />
+  <g fill="none" stroke="url(#arrow3)" stroke-width="4" opacity="0.8">
+    <rect x="180" y="350" width="250" height="140" rx="14" />
+    <rect x="540" y="350" width="250" height="140" rx="14" />
+    <rect x="900" y="350" width="250" height="140" rx="14" />
+    <rect x="1260" y="350" width="250" height="140" rx="14" />
+    <path d="M430 420h90M790 420h90M1150 420h90" />
+    <path d="M505 410l15 10-15 10M865 410l15 10-15 10M1225 410l15 10-15 10" />
+  </g>
+  <text x="120" y="815" fill="#e2e8f0" font-family="Fira Code, monospace" font-size="58">Delivery Workflow</text>
+</svg>

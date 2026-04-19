@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import About from '../components/About/About';
 import Learning from '../components/Learning/Learning';
 import Experience from '../components/Experience/Experience';
 import SectionDivider from '../components/SectionDivider/SectionDivider';
+import { codingNotes } from '../data/codingNotesData';
 import './Pages.scss';
 
 const homeAnchors = [
@@ -15,6 +17,7 @@ const homeAnchors = [
 
 export default function HomePage() {
   const [activeAnchor, setActiveAnchor] = useState(homeAnchors[0].id);
+  const latestNote = codingNotes[codingNotes.length - 1];
 
   useEffect(() => {
     const updateActiveAnchor = () => {
@@ -61,6 +64,13 @@ export default function HomePage() {
           <p>
             This page gives a quick overview about who you are, what you build, and why your work matters.
           </p>
+          {latestNote && (
+            <Link to={`/coding-notes/${latestNote.slug}`} className="home-new-note-banner">
+              <span className="new-pill">NEW NOTE</span>
+              <span>{latestNote.title}</span>
+              <span className="new-note-date">{latestNote.publishedAt}</span>
+            </Link>
+          )}
         </div>
       </section>
       <div className="home-quick-nav-wrap">

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Observability note section image">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="50%" stop-color="#0f3d56" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="stroke2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg2)" />
+  <g fill="none" stroke="url(#stroke2)" stroke-width="5" stroke-linecap="round" opacity="0.8">
+    <path d="M90 660 C 240 460, 370 740, 530 540 C 660 390, 820 700, 960 520 C 1130 300, 1290 680, 1510 420" />
+    <path d="M90 560 C 210 430, 330 630, 470 500 C 620 360, 800 600, 940 450 C 1130 280, 1290 560, 1510 360" opacity="0.45" />
+  </g>
+  <g fill="#93c5fd">
+    <circle cx="530" cy="540" r="10" />
+    <circle cx="960" cy="520" r="10" />
+    <circle cx="1290" cy="680" r="10" />
+  </g>
+  <text x="120" y="815" fill="#e2e8f0" font-family="Fira Code, monospace" font-size="58">Monitoring & Metrics</text>
+</svg>
