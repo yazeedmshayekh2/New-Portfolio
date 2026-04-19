@@ -7,10 +7,10 @@ import SectionDivider from '../components/SectionDivider/SectionDivider';
 import './Pages.scss';
 
 const homeAnchors = [
-  { id: 'about', label: 'About Me' },
-  { id: 'currently-learning', label: 'Currently Learning' },
-  { id: 'watching', label: "What I'm Watching" },
-  { id: 'experience', label: 'My Experience' },
+  { id: 'about', label: 'About' },
+  { id: 'currently-learning', label: 'Learning' },
+  { id: 'watching', label: 'Watching' },
+  { id: 'experience', label: 'Experience' },
 ];
 
 export default function HomePage() {
@@ -53,10 +53,13 @@ export default function HomePage() {
       <SectionDivider />
       <section className="page-intro">
         <div className="page-intro-container">
-          <h2>Main Page Focus</h2>
+          <h2>
+            <span className="code-comment">{'// '}</span>
+            Main<span className="code-dot">.</span>focus
+            <span className="code-parens">()</span>
+          </h2>
           <p>
             This page gives a quick overview about who you are, what you build, and why your work matters.
-            You can add a short timeline, client testimonials, or a "currently building" block next.
           </p>
         </div>
       </section>
@@ -64,7 +67,9 @@ export default function HomePage() {
         <nav className="home-quick-nav container" aria-label="Home section navigation">
           {homeAnchors.map(({ id, label }) => (
             <a key={id} href={`#${id}`} className={activeAnchor === id ? 'active' : ''}>
+              <span className="qnav-bracket">{'<'}</span>
               {label}
+              <span className="qnav-bracket">{' />'}</span>
             </a>
           ))}
         </nav>

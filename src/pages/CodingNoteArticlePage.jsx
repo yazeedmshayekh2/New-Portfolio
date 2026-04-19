@@ -14,9 +14,9 @@ export default function CodingNoteArticlePage() {
   return (
     <section className="coding-note-article">
       <div className="container">
-        <Link to="/coding-notes" className="note-back-link">
+        <Link to="/coding-notes" className="note-back-link" style={{ fontFamily: "'Fira Code', monospace" }}>
           <FiArrowLeft />
-          Back to Notes
+          <span style={{ color: "#7c3aed", fontWeight: "bold" }}>cd</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>../coding-notes</span>
         </Link>
 
         <article className="article-card">
@@ -29,8 +29,16 @@ export default function CodingNoteArticlePage() {
             <span>{note.publishedAt}</span>
           </div>
 
-          <h1>{note.title}</h1>
-          <p className="article-excerpt">{note.excerpt}</p>
+          <h1 className="hero-name" style={{ marginBottom: "1.5rem", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", lineHeight: 1.2 }}>
+            <span className="code-punctuation" style={{ color: "rgba(255,255,255,0.2)" }}>{'<'}</span>
+            <span className="gradient">{note.title}</span>
+            <span className="code-punctuation" style={{ color: "rgba(255,255,255,0.2)" }}>{' />'}</span>
+          </h1>
+          <p className="article-excerpt" style={{ fontFamily: "'Fira Code', monospace", color: "rgba(0, 212, 255, 0.8)", fontSize: "0.95rem" }}>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>{'/**'}</span><br/>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>{' * '}</span>{note.excerpt}<br/>
+            <span style={{ color: "rgba(255,255,255,0.2)" }}>{' */'}</span>
+          </p>
 
           {note.tags?.length > 0 && (
             <div className="article-tags">

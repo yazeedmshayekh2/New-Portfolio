@@ -1,4 +1,4 @@
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiSend, FiArrowUpRight } from 'react-icons/fi';
 import { portfolioData } from '../../data/portfolioData';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import './Contact.scss';
@@ -27,24 +27,30 @@ export default function Contact() {
         </p>
 
         <div className="contact-grid">
+          {/* Left Side — Info Cards */}
           <div className={`contact-info animate-slide-left delay-2 ${isVisible ? 'visible' : ''}`}>
-            <a href={`mailto:${contact.email}`} className="contact-card">
+            <a href={`mailto:${contact.email}`} className="contact-card contact-card--email">
+              <div className="contact-card-glow"></div>
               <div className="contact-card-icon"><FiMail /></div>
               <div className="contact-card-info">
                 <span className="contact-card-label">Email</span>
                 <span className="contact-card-value">{contact.email}</span>
               </div>
+              <FiArrowUpRight className="contact-card-arrow" />
             </a>
 
-            <a href={`tel:${contact.phone}`} className="contact-card">
+            <a href={`tel:${contact.phone}`} className="contact-card contact-card--phone">
+              <div className="contact-card-glow"></div>
               <div className="contact-card-icon"><FiPhone /></div>
               <div className="contact-card-info">
                 <span className="contact-card-label">Phone</span>
                 <span className="contact-card-value">{contact.phone}</span>
               </div>
+              <FiArrowUpRight className="contact-card-arrow" />
             </a>
 
-            <div className="contact-card">
+            <div className="contact-card contact-card--location">
+              <div className="contact-card-glow"></div>
               <div className="contact-card-icon"><FiMapPin /></div>
               <div className="contact-card-info">
                 <span className="contact-card-label">Location</span>
@@ -53,37 +59,56 @@ export default function Contact() {
             </div>
 
             <div className="contact-socials">
-              <a href={hero.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a href={hero.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="social-btn">
                 <FiGithub />
+                <span>GitHub</span>
               </a>
-              <a href={hero.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href={hero.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-btn">
                 <FiLinkedin />
+                <span>LinkedIn</span>
               </a>
             </div>
           </div>
 
+          {/* Right Side — Form */}
           <form className={`contact-form animate-slide-right delay-3 ${isVisible ? 'visible' : ''}`} onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="contact-name">Your Name</label>
-                <input type="text" id="contact-name" name="name" placeholder="John Doe" required />
+            <div className="form-header">
+              <span className="form-header-dot"></span>
+              <span className="form-header-dot"></span>
+              <span className="form-header-dot"></span>
+              <span className="form-header-title">new_message.js</span>
+            </div>
+            <div className="form-body">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="contact-name">
+                    <span className="label-syntax">const</span> name <span className="label-syntax">=</span>
+                  </label>
+                  <input type="text" id="contact-name" name="name" placeholder='"John Doe"' required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="contact-email">
+                    <span className="label-syntax">const</span> email <span className="label-syntax">=</span>
+                  </label>
+                  <input type="email" id="contact-email" name="email" placeholder='"john@example.com"' required />
+                </div>
               </div>
               <div className="form-group">
-                <label htmlFor="contact-email">Your Email</label>
-                <input type="email" id="contact-email" name="email" placeholder="john@example.com" required />
+                <label htmlFor="contact-subject">
+                  <span className="label-syntax">const</span> subject <span className="label-syntax">=</span>
+                </label>
+                <input type="text" id="contact-subject" name="subject" placeholder='"Project Inquiry"' />
               </div>
+              <div className="form-group">
+                <label htmlFor="contact-message">
+                  <span className="label-syntax">const</span> message <span className="label-syntax">=</span>
+                </label>
+                <textarea id="contact-message" name="message" placeholder='"Tell me about your project..."' required />
+              </div>
+              <button type="submit" className="form-submit">
+                <FiSend /> <span>sendMessage<span className="submit-parens">()</span></span>
+              </button>
             </div>
-            <div className="form-group">
-              <label htmlFor="contact-subject">Subject</label>
-              <input type="text" id="contact-subject" name="subject" placeholder="Project Inquiry" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="contact-message">Message</label>
-              <textarea id="contact-message" name="message" placeholder="Tell me about your project..." required />
-            </div>
-            <button type="submit" className="form-submit">
-              <FiSend /> Send Message
-            </button>
           </form>
         </div>
       </div>

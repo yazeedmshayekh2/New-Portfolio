@@ -82,51 +82,59 @@ export default function Projects() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeProject.name}
+                  className="project-inner"
                   initial={{ opacity: 0, y: 18, scale: 0.985 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -12, scale: 0.985 }}
                   transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {activeProject.image && (
-                    <div className="project-cover">
-                      <img src={activeProject.image} alt={activeProject.name} loading="lazy" />
-                    </div>
-                  )}
-                  <div className="project-header">
-                    <div className="project-title-block">
-                      <div className="project-icon">
-                        {iconMap[activeProject.icon] || '🤖'}
-                      </div>
-                      <div>
-                        <span className="project-category">{activeProject.category}</span>
-                        <h3 className="project-name">{activeProject.name}</h3>
-                        <p className="project-subtitle">{activeProject.subtitle}</p>
-                      </div>
-                    </div>
-                    <div className="project-links">
-                      {activeProject.github && (
-                        <a href={activeProject.github} target="_blank" rel="noopener noreferrer" aria-label={`${activeProject.name} GitHub`}>
-                          <FiGithub />
-                        </a>
-                      )}
-                      {activeProject.demo && (
-                        <a href={activeProject.demo} target="_blank" rel="noopener noreferrer" aria-label={`${activeProject.name} Demo`}>
-                          <FiExternalLink />
-                        </a>
-                      )}
-                      {activeProject.caseStudyUrl && (
-                        <a href={activeProject.caseStudyUrl} target="_blank" rel="noopener noreferrer" className="case-link" aria-label={`${activeProject.name} Case Study`}>
-                          Case Study
-                        </a>
-                      )}
+                  <div className={`project-hero ${activeProject.image ? 'has-image' : 'no-image'} project-hero--${activeProject.theme || 'default'}`}>
+                    {activeProject.image ? (
+                      <img src={activeProject.image} alt={activeProject.name} className="project-cover-img" loading="lazy" />
+                    ) : (
+                      <div className="project-hero-icon">{iconMap[activeProject.icon] || '🤖'}</div>
+                    )}
+                    <div className="project-hero-overlay"></div>
+                    
+                    <div className="project-hero-content">
+                      <span className="project-category">{activeProject.category}</span>
+                      <h3 className="project-name">{activeProject.name}</h3>
+                      <p className="project-subtitle">{activeProject.subtitle}</p>
                     </div>
                   </div>
-                  <div className={`project-body project-body--${activeProject.theme || 'default'} ${activeProject.image ? 'with-image' : 'text-only'}`}>
-                    <p className="project-description">{activeProject.description}</p>
-                    <div className="project-tech">
-                      {activeProject.tech.map((t) => (
-                        <span key={t}>{t}</span>
-                      ))}
+
+                  <div className="project-details">
+                    <div className="project-actions">
+                      <div className="project-tech">
+                        {activeProject.tech.map((t) => (
+                          <span key={t} className="tech-tag">{t}</span>
+                        ))}
+                      </div>
+                      <div className="project-links">
+                        {activeProject.github && (
+                          <a href={activeProject.github} target="_blank" rel="noopener noreferrer" className="action-btn" aria-label={`${activeProject.name} GitHub`}>
+                            <FiGithub /> <span>Code</span>
+                          </a>
+                        )}
+                        {activeProject.demo && (
+                          <a href={activeProject.demo} target="_blank" rel="noopener noreferrer" className="action-btn" aria-label={`${activeProject.name} Demo`}>
+                            <FiExternalLink /> <span>Live Demo</span>
+                          </a>
+                        )}
+                        {activeProject.caseStudyUrl && (
+                          <a href={activeProject.caseStudyUrl} target="_blank" rel="noopener noreferrer" className="action-btn case-link" aria-label={`${activeProject.name} Case Study`}>
+                            <span>Case Study</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="project-description-block">
+                      <h4>About the Project</h4>
+                      <p className="project-description">{activeProject.description}</p>
+                      {activeProject.longDescription && (
+                        <p className="project-long-description">{activeProject.longDescription}</p>
+                      )}
                     </div>
                   </div>
                 </motion.div>

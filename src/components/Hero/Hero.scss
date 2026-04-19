@@ -28,54 +28,107 @@
     animation: fadeInUp 0.8s ease forwards;
   }
 
+  // ─── Code Comment Line ─────────────────────────────────────
+  .hero-code-comment {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-size: $fs-sm;
+    color: rgba(255, 255, 255, 0.25);
+    font-style: italic;
+    margin-bottom: $space-lg;
+    letter-spacing: 0.03em;
+
+    .code-slashes {
+      color: rgba($accent-cyan, 0.4);
+      margin-right: 6px;
+    }
+
+    @include respond(lg) {
+      justify-content: center;
+      display: flex;
+    }
+  }
+
+  // ─── Greeting as const declaration ─────────────────────────
   .hero-greeting {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-md;
-    color: $accent-cyan;
-    font-weight: $fw-medium;
     margin-bottom: $space-md;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    letter-spacing: 0.03em;
     display: flex;
     align-items: center;
-    gap: $space-sm;
+    gap: 0.4em;
+    flex-wrap: wrap;
 
     @include respond(lg) {
       justify-content: center;
     }
 
-    &::before {
-      content: "";
-      width: 30px;
-      height: 2px;
-      background: $accent-gradient;
-      display: inline-block;
+    .code-keyword {
+      color: $accent-violet;
+      font-weight: $fw-bold;
+    }
 
-      @include respond(lg) {
-        display: none;
-      }
+    .code-var {
+      color: $accent-cyan;
+      font-weight: $fw-semibold;
+    }
+
+    .code-operator {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .code-string {
+      color: #00d4ff;
+    }
+
+    .code-semi {
+      color: rgba(255, 255, 255, 0.2);
     }
   }
 
+  // ─── Name ──────────────────────────────────────────────────
   .hero-name {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-hero;
     font-weight: $fw-extrabold;
     line-height: 1.05;
     margin-bottom: $space-md;
     letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.1em;
+
+    @include respond(lg) {
+      justify-content: center;
+    }
+
+    .code-keyword {
+      color: $accent-violet;
+      font-weight: $fw-bold;
+      font-size: 0.7em;
+      margin-right: 0.1em;
+    }
+
+    .code-operator {
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: $fw-regular;
+    }
 
     .gradient {
       @include gradient-text;
     }
   }
 
+  // ─── Role: "typing..." ─────────────────────────────────────
   .hero-title-wrapper {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: $space-sm;
     margin-bottom: $space-xl;
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-xl;
-    color: $text-secondary;
 
     @include respond(lg) {
       justify-content: center;
@@ -84,32 +137,68 @@
 
   .hero-title-static {
     font-weight: $fw-medium;
+
+    .code-keyword {
+      color: $accent-violet;
+      font-weight: $fw-bold;
+    }
+
+    .code-operator {
+      color: rgba(255, 255, 255, 0.4);
+      margin-left: 2px;
+    }
   }
 
   .hero-title-dynamic {
-    color: $accent-cyan;
+    color: #00d4ff;
     font-weight: $fw-semibold;
     position: relative;
 
     &::after {
       content: "|";
-      animation: blink 1s step-end infinite;
+      animation: cursorBlink 1s step-end infinite;
       margin-left: 2px;
+      color: $accent-cyan;
     }
   }
 
-  .hero-description {
-    font-size: $fs-base;
-    color: $text-secondary;
-    line-height: 1.8;
-    max-width: 540px;
+  // ─── Description as JSDoc block ────────────────────────────
+  .hero-description-block {
     margin-bottom: $space-2xl;
+  }
 
-    @include respond(lg) {
-      max-width: 100%;
+  .code-comment-block {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    padding: $space-lg $space-xl;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid rgba($accent-cyan, 0.3);
+    border-radius: 0 $radius-md $radius-md 0;
+
+    .code-comment-open,
+    .code-comment-close {
+      display: block;
+      color: rgba(255, 255, 255, 0.2);
+      font-size: $fs-sm;
+    }
+
+    .code-star {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-description {
+      font-size: $fs-sm;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.9;
+      font-style: italic;
+      max-width: 540px;
+
+      @include respond(lg) {
+        max-width: 100%;
+      }
     }
   }
 
+  // ─── Action Buttons (function calls) ───────────────────────
   .hero-actions {
     display: flex;
     gap: $space-lg;
@@ -123,6 +212,20 @@
       flex-direction: column;
       width: 100%;
       align-items: stretch;
+    }
+  }
+
+  .btn-primary,
+  .btn-outline {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    letter-spacing: 0.03em;
+
+    .btn-code {
+      font-weight: $fw-bold;
+    }
+
+    .btn-parens {
+      opacity: 0.5;
     }
   }
 
@@ -144,6 +247,7 @@
     }
   }
 
+  // ─── Social Icons ──────────────────────────────────────────
   .hero-socials {
     display: flex;
     gap: $space-lg;
@@ -158,16 +262,17 @@
       width: 44px;
       height: 44px;
       border-radius: $radius-md;
-      border: 1px solid $border-color;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(15, 15, 20, 0.4);
       color: $text-secondary;
       font-size: $fs-lg;
-      transition: all $transition-base;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
       &:hover {
-        border-color: $accent-cyan;
+        border-color: rgba($accent-cyan, 0.4);
         color: $accent-cyan;
         transform: translateY(-3px);
-        box-shadow: $shadow-glow;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba($accent-cyan, 0.15);
       }
     }
   }
@@ -268,10 +373,23 @@
     flex-direction: column;
     align-items: center;
     gap: $space-sm;
-    color: $text-muted;
-    font-size: $fs-xs;
-    letter-spacing: 0.1em;
     animation: float 3s ease-in-out infinite;
+
+    .scroll-code {
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      font-size: $fs-xs;
+      color: $text-muted;
+      letter-spacing: 0.06em;
+
+      .code-keyword {
+        color: $accent-violet;
+        font-weight: $fw-bold;
+      }
+
+      .code-operator {
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
 
     .scroll-line {
       width: 1px;
@@ -293,5 +411,17 @@
       font-size: $fs-lg;
       justify-content: center;
     }
+  }
+}
+
+@keyframes cursorBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 }

@@ -24,20 +24,25 @@ export default function Navbar() {
 
         <ul className="nav-links">
           {navLinks.map(({ label, href }) => (
-            <li key={href}>
+            <li key={href} className="code-nav-item">
               <NavLink to={href} onClick={handleLinkClick}>
-                {label}
+                <span className="syntax-bracket">{'<'}</span>
+                <span className="nav-label">{label}</span>
+                <span className="syntax-bracket">{' />'}</span>
               </NavLink>
             </li>
           ))}
-          <li>
+          <li className="code-nav-item">
             <NavLink to="/coding-notes" onClick={handleLinkClick} className="coding-notes-link">
-              Coding Notes
+              <span className="syntax-keyword">import </span>
+              <span className="nav-label">Notes</span>
             </NavLink>
           </li>
         </ul>
 
-        <NavLink to="/contact" className="nav-cta">Get In Touch</NavLink>
+        <NavLink to="/contact" className="nav-cta">
+          <span className="syntax-prompt">{'>_'}</span> initContact<span className="syntax-parens">()</span>
+        </NavLink>
 
         <button
           className={`hamburger ${menuOpen ? 'open' : ''}`}
@@ -51,13 +56,18 @@ export default function Navbar() {
 
         <ul className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
           {navLinks.map(({ label, href }) => (
-            <li key={href}>
-              <NavLink to={href} onClick={handleLinkClick}>{label}</NavLink>
+            <li key={href} className="code-nav-item">
+              <NavLink to={href} onClick={handleLinkClick}>
+                <span className="syntax-bracket">{'<'}</span>
+                <span className="nav-label">{label}</span>
+                <span className="syntax-bracket">{' />'}</span>
+              </NavLink>
             </li>
           ))}
-          <li>
+          <li className="code-nav-item">
             <NavLink to="/coding-notes" onClick={handleLinkClick} className="coding-notes-link">
-              Coding Notes
+              <span className="syntax-keyword">import </span>
+              <span className="nav-label">Notes</span>
             </NavLink>
           </li>
         </ul>

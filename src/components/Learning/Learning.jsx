@@ -12,7 +12,7 @@ export default function Learning() {
       <div className="learning-container" ref={ref}>
         <span id="currently-learning" className="home-anchor" aria-hidden="true" />
         <h2 className={`section-title animate-blur ${isVisible ? 'visible' : ''}`}>
-          Currently <span>Learning</span>
+          <span className="code-comment">{'// '}</span>Currently <span>Learning</span>
         </h2>
 
         {/* Azure Certifications */}
@@ -35,7 +35,7 @@ export default function Learning() {
                 }`}
               >
                 <span className="status-dot" />
-                {item.status}
+                <span className="status-keyword">status</span>: {item.status}
               </span>
               <p className="learning-card-desc">{item.description}</p>
             </div>
@@ -45,7 +45,7 @@ export default function Learning() {
         {/* YouTube Playlists */}
         <span id="watching" className="home-anchor" aria-hidden="true" />
         <h3 className={`learning-subtitle animate-blur delay-3 ${isVisible ? 'visible' : ''}`}>
-          📺 What I'm <span>Watching</span>
+          <span className="code-comment">{'// '}</span>📺 What I'm <span>Watching</span>
         </h3>
 
         <div className="playlists-grid">
@@ -65,7 +65,7 @@ export default function Learning() {
                 </div>
               </div>
               <p className="playlist-desc">{playlist.description}</p>
-              <span className="playlist-badge">▶ YouTube Playlist</span>
+              <span className="playlist-badge">▶ stream<span className="badge-parens">()</span></span>
             </a>
           ))}
         </div>

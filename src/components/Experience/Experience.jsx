@@ -10,7 +10,7 @@ export default function Experience() {
     <section className="experience" id="experience">
       <div className="experience-container" ref={ref}>
         <h2 className={`section-title animate-blur ${isVisible ? 'visible' : ''}`}>
-          My <span>Experience</span>
+          <span className="code-comment">{'// '}</span>My <span>Experience</span>
         </h2>
 
         <div className="timeline">
@@ -21,7 +21,11 @@ export default function Experience() {
             >
               <div className={`timeline-dot ${item.type}`} />
               <span className={`timeline-type ${item.type}`}>
-                {item.type === 'work' ? '💼 Work' : '📚 Training'}
+                {item.type === 'work' ? (
+                  <><span className="type-keyword">async</span> work<span className="type-parens">()</span></>
+                ) : (
+                  <><span className="type-keyword">import</span> training</>
+                )}
               </span>
               <div className="timeline-card">
                 <div className="timeline-header">

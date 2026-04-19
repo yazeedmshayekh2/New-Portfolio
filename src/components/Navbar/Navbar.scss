@@ -1,5 +1,6 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
+@use 'sass:color';
 
 .navbar {
   position: fixed;
@@ -7,20 +8,32 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  transition: all $transition-base;
-  padding: $space-md 0;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: $space-lg 0;
+  pointer-events: none;
 
   &.scrolled {
-    @include glass(rgba(6, 8, 13, 0.85), 20px);
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
     padding: $space-sm 0;
+
+    .nav-container {
+      @include glass(rgba(10, 12, 16, 0.85), 24px);
+      box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.5),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      padding: 0.6rem $space-xl;
+      max-width: 1100px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+    }
   }
 
   .nav-container {
+    pointer-events: auto;
     @include flex-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 $space-xl;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: $radius-full;
 
     @include respond(md) {
       padding: 0 $space-lg;
@@ -31,83 +44,203 @@
     }
   }
 
+  // ─── Logo ──────────────────────────────────────────────────
   .logo {
-    font-family: $font-heading;
-    font-size: $fs-xl;
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-size: $fs-lg;
     font-weight: $fw-bold;
     @include gradient-text;
     letter-spacing: -0.02em;
     cursor: pointer;
-    transition: opacity $transition-fast;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-right: $space-md;
 
     &:hover {
       opacity: 0.8;
+      transform: scale(1.05);
     }
   }
 
+  // ─── Nav Links ─────────────────────────────────────────────
   .nav-links {
     display: flex;
     align-items: center;
-    gap: $space-2xl;
+    gap: $space-md;
     list-style: none;
+    flex: 1;
+    justify-content: center;
 
     @include respond(md) {
       display: none;
     }
 
-    li a {
-      color: $text-secondary;
-      font-size: $fs-sm;
-      font-weight: $fw-medium;
-      letter-spacing: 0.02em;
-      transition: color $transition-fast;
-      position: relative;
+    .code-nav-item {
+      a {
+        color: $text-secondary;
+        font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+        font-size: 0.8rem;
+        font-weight: $fw-medium;
+        letter-spacing: 0.04em;
+        transition: all 0.25s ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        padding: $space-xs $space-sm;
+        border-radius: $radius-md;
+        white-space: nowrap;
 
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: $accent-gradient;
-        transition: width $transition-base;
-        border-radius: 1px;
-      }
+        .syntax-bracket {
+          color: rgba($accent-cyan, 0.35);
+          transition: all 0.25s ease;
+          font-size: 0.75rem;
+        }
 
-      &:hover,
-      &.active {
-        color: $text-primary;
+        .syntax-keyword {
+          color: rgba($accent-violet, 0.5);
+          transition: all 0.25s ease;
+          margin-right: 4px;
+          font-weight: $fw-bold;
+        }
+
+        .nav-label {
+          color: $text-secondary;
+          transition: color 0.25s ease;
+        }
 
         &::after {
-          width: 100%;
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 2px;
+          background: $accent-gradient;
+          transition: width 0.3s ease;
+          border-radius: 1px;
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.03);
+
+          .syntax-bracket {
+            color: $accent-cyan;
+          }
+
+          .syntax-keyword {
+            color: $accent-violet;
+          }
+
+          .nav-label {
+            color: $text-primary;
+          }
+
+          &::after {
+            width: 60%;
+          }
+        }
+
+        &.active {
+          .syntax-bracket {
+            color: $accent-cyan;
+          }
+
+          .nav-label {
+            color: $text-primary;
+          }
+
+          &::after {
+            width: 60%;
+          }
         }
       }
     }
 
     .coding-notes-link {
-      padding: $space-xs $space-md;
-      border: 1px solid rgba($accent-cyan, 0.35);
+      animation: notesPulse 3s ease-in-out infinite;
+      display: inline-flex;
+      align-items: center;
+      background: rgba($accent-violet, 0.06);
+      border: 1px solid rgba($accent-violet, 0.15);
       border-radius: $radius-full;
-      background: linear-gradient(120deg, rgba($accent-cyan, 0.1), rgba($accent-violet, 0.16));
-      animation: notesPulse 2.4s ease-in-out infinite;
+      padding: $space-xs $space-md !important;
 
       &::after {
-        display: none;
+        display: none !important;
       }
 
       &:hover,
       &.active {
-        border-color: rgba($accent-cyan, 0.6);
-        box-shadow: 0 0 18px rgba($accent-cyan, 0.2);
+        background: rgba($accent-violet, 0.12);
+        border-color: rgba($accent-violet, 0.3);
+        transform: translateY(-1px);
       }
     }
   }
 
+  // ─── CTA Button ────────────────────────────────────────────
   .nav-cta {
-    @include button-primary;
-    padding: $space-sm $space-lg;
-    font-size: $fs-xs;
+    @include flex-center;
+    gap: 0.35rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-weight: $fw-bold;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: linear-gradient(120deg, $accent-cyan, $accent-violet);
+    border-radius: $radius-full;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    flex-shrink: 0;
+    margin-left: $space-md;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba($accent-cyan, 0.25);
+
+    .syntax-prompt {
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: $fw-extrabold;
+      animation: blink 1.2s step-end infinite;
+    }
+
+    .syntax-parens {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, color.adjust($accent-cyan, $lightness: 8%), color.adjust($accent-violet, $lightness: 8%));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba($accent-cyan, 0.35),
+                  0 0 30px rgba($accent-violet, 0.15);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba($accent-cyan, 0.3);
+    }
+
+    // Keep text above the ::before overlay
+    .syntax-prompt,
+    .syntax-parens {
+      position: relative;
+      z-index: 1;
+    }
 
     @include respond(md) {
       display: none;
@@ -179,22 +312,43 @@
         visibility: visible;
       }
 
-      li a {
+      .code-nav-item a {
         color: $text-secondary;
-        font-family: $font-heading;
+        font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
         font-size: $fs-xl;
         font-weight: $fw-semibold;
         transition: color $transition-fast;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .syntax-bracket {
+          color: rgba($accent-cyan, 0.5);
+        }
+
+        .syntax-keyword {
+          color: rgba($accent-violet, 0.8);
+          margin-right: 8px;
+        }
+
+        .nav-label {
+          transition: color $transition-fast;
+        }
 
         &:hover {
-          color: $accent-cyan;
+          .nav-label {
+            color: $text-primary;
+          }
+
+          .syntax-bracket {
+            color: $accent-cyan;
+          }
         }
       }
 
       .coding-notes-link {
-        border: 1px solid rgba($accent-cyan, 0.35);
-        border-radius: $radius-full;
-        padding: $space-sm $space-lg;
+        font-size: $fs-lg;
+        margin-top: $space-md;
       }
     }
   }
@@ -208,6 +362,18 @@
   }
 
   50% {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 }

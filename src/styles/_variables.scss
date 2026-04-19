@@ -2,6 +2,8 @@
 // DESIGN TOKENS & VARIABLES
 // ============================================================
 
+@use "sass:color";
+
 // ─── Colors ─────────────────────────────────────────────────
 $bg-primary: #06080d;
 $bg-secondary: #0d1117;
@@ -18,8 +20,8 @@ $accent-violet: #7c3aed;
 $accent-gradient: linear-gradient(135deg, $accent-cyan, $accent-violet);
 $accent-gradient-hover: linear-gradient(
   135deg,
-  lighten($accent-cyan, 8%),
-  lighten($accent-violet, 8%)
+  color.adjust($accent-cyan, $lightness: 8%),
+  color.adjust($accent-violet, $lightness: 8%)
 );
 
 $border-color: rgba(255, 255, 255, 0.06);

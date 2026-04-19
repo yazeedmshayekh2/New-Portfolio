@@ -11,6 +11,13 @@
 
   .section-title {
     @include section-title;
+
+    .code-comment {
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      color: rgba($accent-cyan, 0.3);
+      font-weight: $fw-regular;
+      font-size: 0.6em;
+    }
   }
 
   .timeline {
@@ -75,22 +82,49 @@
     }
 
     .timeline-type {
-      @include tag;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      font-size: $fs-xs;
+      font-weight: $fw-medium;
+      letter-spacing: 0.04em;
       margin-bottom: $space-md;
-      text-transform: uppercase;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
+      padding: $space-xs $space-md;
+      border-radius: $radius-full;
+      background: rgba($accent-cyan, 0.06);
+      color: $accent-cyan;
+      border: 1px solid rgba($accent-cyan, 0.12);
+
+      .type-keyword {
+        color: $accent-violet;
+        font-weight: $fw-bold;
+        margin-right: 4px;
+      }
+
+      .type-parens {
+        opacity: 0.5;
+      }
 
       &.training {
-        background: rgba($accent-violet, 0.08);
+        background: rgba($accent-violet, 0.06);
         color: $accent-violet;
-        border-color: rgba($accent-violet, 0.15);
+        border-color: rgba($accent-violet, 0.12);
       }
     }
 
     .timeline-card {
-      @include card;
+      background: rgba(15, 15, 20, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: $radius-xl;
       padding: $space-xl;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: rgba($accent-cyan, 0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
 
       .timeline-header {
         @include flex-between;
@@ -99,16 +133,19 @@
         margin-bottom: $space-md;
 
         .timeline-title {
-          font-size: $fs-lg;
+          font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+          font-size: $fs-base;
           font-weight: $fw-bold;
           color: $text-primary;
         }
 
         .timeline-date {
+          font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
           font-size: $fs-xs;
           color: $accent-cyan;
           font-weight: $fw-medium;
-          @include glass;
+          background: rgba($accent-cyan, 0.06);
+          border: 1px solid rgba($accent-cyan, 0.1);
           padding: $space-xs $space-md;
           border-radius: $radius-full;
         }
@@ -124,8 +161,13 @@
         flex-wrap: wrap;
 
         .location {
-          @include tag;
-          font-size: 0.65rem;
+          font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+          font-size: 0.7rem;
+          padding: 2px $space-sm;
+          border-radius: $radius-full;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          color: $text-muted;
         }
       }
 
@@ -141,11 +183,13 @@
           margin-bottom: $space-sm;
 
           &::before {
-            content: '▹';
+            content: '>';
             position: absolute;
             left: 0;
             color: $accent-cyan;
+            font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
             font-weight: $fw-bold;
+            font-size: $fs-xs;
           }
         }
       }

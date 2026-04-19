@@ -11,6 +11,13 @@
 
   .section-title {
     @include section-title;
+
+    .code-comment {
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      color: rgba($accent-cyan, 0.3);
+      font-weight: $fw-regular;
+      font-size: 0.6em;
+    }
   }
 
   // ─── Currently Learning (Certs) ───────────────────────────
@@ -21,6 +28,13 @@
     font-weight: $fw-bold;
     margin-bottom: $space-xl;
     color: $text-primary;
+
+    .code-comment {
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      color: rgba($accent-cyan, 0.3);
+      font-weight: $fw-regular;
+      font-size: 0.75em;
+    }
 
     span {
       @include gradient-text;
@@ -39,12 +53,14 @@
   }
 
   .learning-card {
-    @include glass;
-    border-radius: $radius-lg;
+    background: rgba(15, 15, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: $radius-xl;
     padding: $space-xl;
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
 
     &::before {
       content: '';
@@ -60,9 +76,9 @@
     }
 
     &:hover {
-      border-color: $border-glow;
+      border-color: rgba($accent-cyan, 0.2);
       transform: translateY(-4px);
-      box-shadow: $shadow-glow;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
       &::before {
         transform: scaleX(1);
@@ -84,8 +100,9 @@
       @include flex-center;
       min-width: 52px;
       height: 52px;
-      border-radius: $radius-md;
+      border-radius: $radius-lg;
       background: rgba($accent-cyan, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 1.5rem;
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -94,9 +111,10 @@
       flex: 1;
 
       .learning-card-name {
-        font-size: $fs-lg;
+        font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+        font-size: $fs-base;
         font-weight: $fw-bold;
-        margin-bottom: 2px;
+        margin-bottom: 4px;
       }
 
       .learning-card-full {
@@ -112,10 +130,16 @@
       gap: 6px;
       padding: $space-xs $space-md;
       border-radius: $radius-full;
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
       font-size: $fs-xs;
-      font-weight: $fw-semibold;
+      font-weight: $fw-medium;
       letter-spacing: 0.03em;
       margin-bottom: $space-md;
+
+      .status-keyword {
+        color: $accent-violet;
+        font-weight: $fw-bold;
+      }
 
       .status-dot {
         width: 6px;
@@ -125,9 +149,9 @@
       }
 
       &.in-progress {
-        background: rgba(#22c55e, 0.1);
+        background: rgba(#22c55e, 0.08);
         color: #22c55e;
-        border: 1px solid rgba(#22c55e, 0.2);
+        border: 1px solid rgba(#22c55e, 0.15);
 
         .status-dot {
           background: #22c55e;
@@ -135,9 +159,9 @@
       }
 
       &.upcoming {
-        background: rgba($accent-cyan, 0.08);
+        background: rgba($accent-cyan, 0.06);
         color: $accent-cyan;
-        border: 1px solid rgba($accent-cyan, 0.15);
+        border: 1px solid rgba($accent-cyan, 0.12);
 
         .status-dot {
           background: $accent-cyan;
@@ -164,8 +188,9 @@
   }
 
   .playlist-card {
-    @include glass;
-    border-radius: $radius-lg;
+    background: rgba(15, 15, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: $radius-xl;
     padding: $space-xl;
     display: flex;
     flex-direction: column;
@@ -176,11 +201,12 @@
     color: inherit;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(8px);
 
     &:hover {
-      border-color: rgba(#ff0000, 0.3);
+      border-color: rgba(#ff0000, 0.25);
       transform: translateY(-4px);
-      box-shadow: 0 0 30px rgba(#ff0000, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(#ff0000, 0.06);
 
       .playlist-icon {
         transform: scale(1.1);
@@ -197,16 +223,18 @@
       @include flex-center;
       min-width: 44px;
       height: 44px;
-      border-radius: $radius-md;
+      border-radius: $radius-lg;
       background: rgba(#ff0000, 0.08);
+      border: 1px solid rgba(#ff0000, 0.1);
       font-size: 1.2rem;
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .playlist-info {
       .playlist-title {
-        font-size: $fs-base;
-        font-weight: $fw-semibold;
+        font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+        font-size: $fs-sm;
+        font-weight: $fw-bold;
         line-height: 1.4;
         color: $text-primary;
       }
@@ -230,14 +258,18 @@
       gap: 4px;
       padding: $space-xs $space-sm;
       background: rgba(#ff0000, 0.06);
-      border: 1px solid rgba(#ff0000, 0.12);
+      border: 1px solid rgba(#ff0000, 0.1);
       border-radius: $radius-full;
-      font-size: 0.65rem;
-      font-weight: $fw-semibold;
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      font-weight: $fw-bold;
       color: #ff4444;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       width: fit-content;
-      text-transform: uppercase;
+
+      .badge-parens {
+        opacity: 0.5;
+      }
     }
   }
 

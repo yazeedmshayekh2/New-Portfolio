@@ -1,33 +1,29 @@
 @use '../../styles/variables' as *;
 
 .section-divider {
-  position: relative;
-  height: 1px;
   max-width: 600px;
   margin: 0 auto;
-  padding: 0 $space-xl;
+  padding: $space-sm $space-xl;
+  text-align: center;
 
-  .divider-line {
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba($accent-cyan, 0.15) 20%,
-      rgba($accent-violet, 0.25) 50%,
-      rgba($accent-cyan, 0.15) 80%,
-      transparent
-    );
+  .divider-code {
+    .divider-comment {
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.08);
+      letter-spacing: 0.1em;
+      user-select: none;
+    }
   }
 
   .divider-glow {
     position: absolute;
-    top: -15px;
+    top: -10px;
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
     height: 30px;
-    background: radial-gradient(ellipse, rgba($accent-cyan, 0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba($accent-cyan, 0.04) 0%, transparent 70%);
     pointer-events: none;
   }
 }

@@ -2,7 +2,7 @@
 @use '../styles/mixins' as *;
 
 .page-intro {
-  padding-top: 8rem;
+  padding-top: 2rem;
   position: relative;
   z-index: 1;
 
@@ -23,14 +23,31 @@
 
   h1,
   h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     margin-bottom: $space-md;
-    font-family: $font-heading;
+    color: $text-primary;
+
+    .code-comment {
+      color: rgba($accent-cyan, 0.3);
+      font-weight: $fw-regular;
+    }
+
+    .code-dot {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .code-parens {
+      color: rgba($accent-violet, 0.5);
+    }
   }
 
   p {
     max-width: 760px;
     margin: 0 auto;
+    color: $text-secondary;
+    font-size: $fs-sm;
+    padding-bottom: 2rem;
   }
 }
 
@@ -50,36 +67,59 @@
   position: sticky;
   top: 74px;
   z-index: 12;
-  padding: $space-sm 0;
-  backdrop-filter: blur(6px);
+  padding: 1.5rem 0;
+  backdrop-filter: blur(1px);
 }
 
 .home-quick-nav {
   display: flex;
-  gap: $space-sm;
+  gap: $space-md;
   justify-content: center;
   flex-wrap: wrap;
 
   a {
-    border: 1px solid $border-color;
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     color: $text-secondary;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(15, 15, 20, 0.4);
     border-radius: $radius-full;
-    padding: 0.4rem 0.8rem;
+    padding: 0.4rem 0.9rem;
     font-size: $fs-xs;
     font-weight: $fw-medium;
-    transition: all $transition-base;
+    letter-spacing: 0.04em;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    backdrop-filter: blur(8px);
+
+    .qnav-bracket {
+      color: rgba($accent-cyan, 0.3);
+      font-size: 0.7rem;
+      transition: color 0.2s ease;
+    }
 
     &:hover {
       color: $text-primary;
-      border-color: rgba($accent-cyan, 0.35);
+      border-color: rgba($accent-cyan, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-2px);
+
+      .qnav-bracket {
+        color: $accent-cyan;
+      }
     }
 
     &.active {
-      color: $bg-primary;
+      color: #fff;
       border-color: transparent;
-      background: $accent-gradient;
-      box-shadow: 0 8px 20px rgba($accent-cyan, 0.15);
+      background: linear-gradient(120deg, rgba($accent-cyan, 0.7), rgba($accent-violet, 0.7));
+      box-shadow: 0 4px 15px rgba($accent-cyan, 0.25);
+      transform: translateY(-2px);
+
+      .qnav-bracket {
+        color: rgba(255, 255, 255, 0.6);
+      }
     }
   }
 }
@@ -91,11 +131,11 @@
 }
 
 .notes-layout {
-  margin-top: $space-3xl;
+  margin-top: $space-xl;
   margin-bottom: $space-4xl;
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: $space-xl;
+  gap: $space-2xl;
 }
 
 .note-featured {
@@ -108,11 +148,14 @@
 
   h2 {
     font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-    margin-bottom: $space-sm;
+    margin-bottom: $space-md;
+    line-height: 1.3;
   }
 
   p {
-    margin-bottom: $space-md;
+    margin-bottom: $space-xl;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -123,8 +166,8 @@
   gap: $space-xs;
   border-radius: $radius-full;
   border: 1px solid rgba($accent-cyan, 0.3);
-  padding: 0.2rem 0.65rem;
-  margin-bottom: $space-md;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: $space-lg;
   font-size: $fs-xs;
   color: $accent-cyan;
 }
@@ -132,7 +175,7 @@
 .notes-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-md;
+  gap: $space-lg;
 }
 
 .note-card {
@@ -155,6 +198,13 @@
   h3 {
     margin-bottom: $space-sm;
     font-size: $fs-lg;
+    line-height: 1.3;
+  }
+
+  p {
+    margin-bottom: $space-lg;
+    line-height: 1.6;
+    color: $text-secondary;
   }
 }
 
@@ -162,9 +212,11 @@
   margin-top: auto;
   display: flex;
   flex-wrap: wrap;
-  gap: $space-sm;
+  gap: $space-md;
   color: $text-muted;
   font-size: $fs-xs;
+  padding-top: $space-md;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 
   span {
     display: inline-flex;
@@ -185,11 +237,11 @@
 .coding-note-article {
   position: relative;
   z-index: 1;
-  padding-top: 8rem;
+  padding-top: 9rem;
   padding-bottom: $space-4xl;
 
   @include respond(sm) {
-    padding-top: 6.4rem;
+    padding-top: 7rem;
   }
 }
 
@@ -209,11 +261,13 @@
   @include card;
   max-width: 900px;
   margin: 0 auto;
+  padding: clamp($space-xl, 5vw, $space-3xl);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
 
   h1 {
     font-size: clamp(2rem, 3.5vw, 2.8rem);
-    margin-bottom: $space-sm;
+    margin-bottom: $space-md;
+    line-height: 1.2;
   }
 }
 
@@ -251,11 +305,12 @@
 .article-body {
   display: flex;
   flex-direction: column;
-  gap: $space-md;
+  gap: $space-lg;
 
   p {
     font-size: $fs-base;
     line-height: 1.9;
+    color: rgba(255, 255, 255, 0.85);
   }
 }
 
@@ -287,6 +342,7 @@
   }
 
   .page-intro-container {
+
     h1,
     h2 {
       font-size: clamp(1.65rem, 8vw, 2rem);

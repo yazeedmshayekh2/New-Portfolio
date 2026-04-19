@@ -85,6 +85,7 @@ export const portfolioData = {
       subtitle: "Automated Attendance System",
       description:
         "Achieved 99.7% facial recognition accuracy using YOLOv9 and ResNet-50, deployed via Flask with a responsive web frontend.",
+      longDescription: "This project addresses the inefficiencies in manual attendance tracking by providing a real-time, highly accurate facial recognition system. By integrating YOLOv9 for robust face detection and ResNet-50 for precise identification, the system performs reliably under various lighting conditions. You can add more paragraphs like this to detail your architecture, challenges faced, and the ultimate impact of your work.",
       tech: ["YOLOv9", "ResNet-50", "Flask", "Python"],
       github: "https://github.com/yazeedmshayekh2",
       demo: "",

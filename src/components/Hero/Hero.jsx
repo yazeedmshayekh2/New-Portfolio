@@ -47,26 +47,54 @@ export default function Hero() {
     <section className="hero" id="hero">
       <div className="hero-container">
         <div className="hero-content">
-          <span className="hero-greeting">Hello, I'm</span>
+          <div className="hero-code-comment">
+            <span className="code-slashes">{'//'}</span> introducing the developer
+          </div>
+
+          <span className="hero-greeting">
+            <span className="code-keyword">const</span>{' '}
+            <span className="code-var">greeting</span>{' '}
+            <span className="code-operator">=</span>{' '}
+            <span className="code-string">"Hello, I'm"</span>
+            <span className="code-semi">;</span>
+          </span>
+
           <h1 className="hero-name">
-            {hero.name.split(" ")[0]}{" "}
+            <span className="code-keyword">class</span>{" "}
+            {hero.name.split(" ")[0]}
+            <span className="code-operator">_</span>
             <span className="gradient">
-              {hero.name.split(" ").slice(1).join(" ")}
+              {hero.name.split(" ").slice(1).join("_")}
             </span>
           </h1>
+
           <div className="hero-title-wrapper">
-            <span className="hero-title-static">I'm an</span>
-            <span className="hero-title-dynamic">{displayText}</span>
+            <span className="hero-title-static">
+              <span className="code-keyword">role</span>
+              <span className="code-operator">:</span>
+            </span>
+            <span className="hero-title-dynamic">"{displayText}"</span>
           </div>
-          <p className="hero-description">{hero.summary}</p>
+
+          <div className="hero-description-block">
+            <div className="code-comment-block">
+              <span className="code-comment-open">{'/**'}</span>
+              <p className="hero-description">
+                <span className="code-star">{' * '}</span>{hero.summary}
+              </p>
+              <span className="code-comment-close">{' */'}</span>
+            </div>
+          </div>
+
           <div className="hero-actions">
             <Link to="/contact" className="btn-primary">
-              <FiArrowRight /> Let's Talk
+              <FiArrowRight /> <span className="btn-code">startCollab<span className="btn-parens">()</span></span>
             </Link>
             <a href={hero.cvLink} className="btn-outline" download>
-              <FiDownload /> Download CV
+              <FiDownload /> <span className="btn-code">downloadCV<span className="btn-parens">()</span></span>
             </a>
           </div>
+
           <div className="hero-socials">
             <a
               href={hero.socials.github}
@@ -95,10 +123,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="scroll-indicator">
-        <span>SCROLL</span>
-        <div className="scroll-line" />
-      </div>
     </section>
   );
 }

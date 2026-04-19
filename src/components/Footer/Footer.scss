@@ -4,8 +4,23 @@
 .footer {
   position: relative;
   z-index: 1;
-  border-top: 1px solid $border-color;
-  padding: $space-2xl 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: $space-3xl 0 $space-2xl;
+  overflow: hidden;
+  background: linear-gradient(to bottom, transparent, rgba(15, 15, 20, 0.8));
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 200px;
+    background: radial-gradient(ellipse at center, rgba($accent-cyan, 0.12) 0%, rgba($accent-violet, 0.04) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
 
   .footer-container {
     max-width: 1200px;
@@ -15,7 +30,7 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: $space-md;
+    gap: $space-lg;
 
     @include respond(md) {
       flex-direction: column;
@@ -23,50 +38,118 @@
     }
   }
 
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+  }
+
   .footer-logo {
     font-family: $font-heading;
-    font-size: $fs-lg;
+    font-size: $fs-2xl;
     font-weight: $fw-bold;
     @include gradient-text;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+    cursor: pointer;
+
+    .logo-dot {
+      opacity: 0.4;
+    }
+
+    &:hover {
+      transform: scale(1.1) rotateZ(-2deg);
+    }
   }
 
   .footer-text {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-size: $fs-xs;
+    color: $text-muted;
+    letter-spacing: 0.03em;
+
+    .code-comment {
+      color: rgba($accent-cyan, 0.3);
+    }
+  }
+
+  .footer-code-block {
+    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-sm;
     color: $text-muted;
+    letter-spacing: 0.04em;
+    padding: $space-sm $space-lg;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: $radius-lg;
 
-    .heart {
-      color: #ef4444;
-      display: inline-block;
-      animation: pulse 2s ease-in-out infinite;
+    .code-keyword {
+      color: $accent-violet;
+      font-weight: $fw-bold;
+    }
+
+    .code-func {
+      color: $accent-cyan;
+      font-weight: $fw-semibold;
+    }
+
+    .code-parens {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    @include respond(md) {
+      order: 3;
     }
   }
 
   .footer-links {
     display: flex;
-    gap: $space-lg;
+    gap: $space-md;
     flex-wrap: wrap;
     justify-content: center;
+    perspective: 1000px;
 
     a {
+      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
       color: $text-muted;
       font-size: $fs-sm;
-      transition: color $transition-fast;
+      font-weight: $fw-medium;
+      padding: $space-xs $space-sm;
+      border-radius: $radius-sm;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      transform-style: preserve-3d;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+
+      .link-bracket {
+        color: rgba($accent-cyan, 0.3);
+        transition: color 0.2s ease;
+      }
 
       &:hover {
-        color: $accent-cyan;
+        color: $text-primary;
+        transform: translateZ(10px) translateY(-2px);
+        text-shadow: 0 0 10px rgba($accent-cyan, 0.3);
+
+        .link-bracket {
+          color: $accent-cyan;
+        }
       }
     }
   }
 
   @include respond(sm) {
-    padding: $space-xl 0;
+    padding: $space-2xl 0 $space-xl;
 
     .footer-container {
       padding: 0 $space-md;
     }
 
     .footer-links {
-      gap: $space-md;
+      gap: $space-sm;
     }
   }
 }
