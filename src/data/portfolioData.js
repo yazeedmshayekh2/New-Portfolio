@@ -18,7 +18,7 @@ export const portfolioData = {
       linkedin: "https://www.linkedin.com/in/yazeedmshayekh/",
       email: "yazeedmshayekh.work@gmail.com",
     },
-    cvLink: "/New-Portfolio/Yazeed_Mshayekh_CV.pdf", // CV file in /public folder
+    cvLink: "/Yazeed_Mshayekh_CV.pdf", // CV file in /public folder
   },
 
   // ─── ABOUT / STATS SECTION ─────────────────────────────────
