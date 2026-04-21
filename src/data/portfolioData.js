@@ -90,8 +90,7 @@ export const portfolioData = {
       github: "https://github.com/yazeedmshayekh2/Attendify",
       demo: "",
       caseStudyUrl: "https://github.com/yazeedmshayekh2/Attendify/blob/main/Paper/Attendify__Automated_Attendance_System_Using_Tri_Architecture_Fusion_for_Facial_Recognition_ARXIV.pdf",
-      image:
-        "src/assets/Screenshot from 2026-04-21 08-42-25.png",
+      image: "/images/projects/screenshot-2026-04-21.png",
       theme: "vision",
       icon: "camera",
     },
@@ -263,8 +262,7 @@ export const portfolioData = {
       issuer: "DeepLearning.AI & Stanford University",
       issuedOn: "2024",
       credentialUrl: "https://coursera.org/share/99018ab69b3a2fc2365d55f32e18c542",
-      image:
-        "src/assets/certifications/DeepLearning_page-0001.jpg",
+      image: "/images/certifications/deep-learning.jpg",
       highlights: ["Neural Networks", "CNNs", "Sequence Models", "Transfer Learning", "Natural Language Processing"],
       theme: "ai",
     },
@@ -273,8 +271,7 @@ export const portfolioData = {
       issuer: "DeepLearning.AI",
       issuedOn: "2024",
       credentialUrl: "https://coursera.org/share/5654efead2d7a35cd0b64a017ea30d56",
-      image:
-        "src/assets/certifications/MachineLearning_page-0001.jpg",
+      image: "/images/certifications/machine-learning.jpg",
       highlights: ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Predictive Modeling", "Feature Engineering"],
       theme: "ml",
     },
@@ -291,8 +288,7 @@ export const portfolioData = {
       issuer: "DeepLearning.AI",
       issuedOn: "2025",
       credentialUrl: "https://coursera.org/share/a3d7c3dfa5bcf2a76c25c44363de29a2",
-      image:
-        "src/assets/certifications/TensorFlowDeveloper_page-0001.jpg",
+      image: "/images/certifications/tensorflow-developer.jpg",
       highlights: ["Model Evaluation", "Computer Vision", "Keras & Tensorflow", "Time Series & Forcasting"],
       theme: "engineering",
     },
@@ -317,7 +313,7 @@ export const portfolioData = {
       issuer: "Correlation One",
       issuedOn: "2025",
       highlights: ["Data Analysis", "Excel", "SQL", "Data Visualiztion", "Tableau"],
-      image: "src/assets/trainings/Correlation One Data Science Training Program.jpg",
+      image: "/images/trainings/correlation-one-data-science.jpg",
       theme: "engineering",
     },
     {
@@ -325,7 +321,7 @@ export const portfolioData = {
       issuer: "British Council",
       issuedOn: "2025",
       highlights: ["English"],
-      image: "src/assets/trainings/IETLS British Council.jpeg",
+      image: "/images/trainings/ielts-british-council.jpeg",
       theme: "engineering",
     },
     {
@@ -333,7 +329,7 @@ export const portfolioData = {
       issuer: "Tahaluf Al Emarat Technical Solutions",
       issuedOn: "2025",
       highlights: ["Linear Algebra", "Bagging & Boosting", "Data Proprocessing", "Statistics & Probabilities", "Machine Learning"],
-      image: "src/assets/trainings/Tahaluf Al Emarat Technical Solutions Machine Leaning Training.png",
+      image: "/images/trainings/tahaluf-ml-training.png",
       theme: "engineering",
     },
 
@@ -342,7 +338,7 @@ export const portfolioData = {
       issuer: "SHAI Club",
       issuedOn: "2023",
       highlights: ["Machine Learning Basics"],
-      image: "src/assets/trainings/ShAi.jpg",
+      image: "/images/trainings/shai.jpg",
       theme: "engineering",
     },
   ],
@@ -355,8 +351,7 @@ export const portfolioData = {
       event: "Innovation Competition",
       date: "2024",
       awardUrl: "",
-      image:
-        "src/assets/awards/StemCenter.jpg",
+      image: "/images/awards/stem-center.jpg",
       theme: "gold",
     },
     {
@@ -365,7 +360,7 @@ export const portfolioData = {
       event: "National Technology Parade",
       date: "2024",
       awardUrl: "",
-      image: "src/assets/awards/Parade.jpeg",
+      image: "/images/awards/parade.jpeg",
       theme: "winner",
     },
   ],
