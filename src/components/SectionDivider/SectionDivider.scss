@@ -10,7 +10,7 @@
     .divider-comment {
       font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
       font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.08);
+      color: rgba(var(--text-primary-rgb), 0.08);
       letter-spacing: 0.1em;
       user-select: none;
     }
@@ -23,7 +23,7 @@
     transform: translateX(-50%);
     width: 200px;
     height: 30px;
-    background: radial-gradient(ellipse, rgba($accent-cyan, 0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(var(--accent-cyan-rgb), 0.04) 0%, transparent 70%);
     pointer-events: none;
   }
 }

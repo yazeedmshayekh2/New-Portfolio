@@ -16,7 +16,7 @@
 
   .contact-subtitle {
     text-align: center;
-    color: $text-secondary;
+    color: var(--text-secondary);
     max-width: 500px;
     margin: -$space-xl auto $space-3xl;
     font-size: $fs-base;
@@ -43,8 +43,9 @@
 
   .contact-card {
     position: relative;
-    background: rgba(15, 15, 20, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(var(--bg-card-rgb), 0.6);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
     border-radius: $radius-xl;
     padding: $space-xl;
     display: flex;
@@ -65,35 +66,35 @@
     }
 
     &:hover {
-      border-color: rgba($accent-cyan, 0.3);
+      border-color: rgba(var(--accent-cyan-rgb), 0.3);
       transform: translateX(8px) translateY(-2px);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--shadow-card-hover);
 
       .contact-card-glow {
         opacity: 1;
       }
 
       .contact-card-icon {
-        background: rgba($accent-cyan, 0.15);
-        color: $accent-cyan;
+        background: rgba(var(--accent-cyan-rgb), 0.15);
+        color: var(--accent-cyan);
         transform: scale(1.1) rotateZ(-5deg);
-        box-shadow: 0 0 20px rgba($accent-cyan, 0.2);
+        box-shadow: 0 0 20px rgba(var(--accent-cyan-rgb), 0.2);
       }
 
       .contact-card-arrow {
         opacity: 1;
         transform: translate(0, 0);
-        color: $accent-cyan;
+        color: var(--accent-cyan);
       }
     }
 
     // Themed glow backgrounds
     &--email .contact-card-glow {
-      background: radial-gradient(circle at 20% 50%, rgba($accent-cyan, 0.08) 0%, transparent 60%);
+      background: radial-gradient(circle at 20% 50%, rgba(var(--accent-cyan-rgb), 0.08) 0%, transparent 60%);
     }
 
     &--phone .contact-card-glow {
-      background: radial-gradient(circle at 20% 50%, rgba($accent-violet, 0.08) 0%, transparent 60%);
+      background: radial-gradient(circle at 20% 50%, rgba(var(--accent-violet-rgb), 0.08) 0%, transparent 60%);
     }
 
     &--location .contact-card-glow {
@@ -101,16 +102,16 @@
     }
 
     &--phone:hover {
-      border-color: rgba($accent-violet, 0.3);
+      border-color: rgba(var(--accent-violet-rgb), 0.3);
 
       .contact-card-icon {
-        background: rgba($accent-violet, 0.15);
-        color: $accent-violet;
-        box-shadow: 0 0 20px rgba($accent-violet, 0.2);
+        background: rgba(var(--accent-violet-rgb), 0.15);
+        color: var(--accent-violet);
+        box-shadow: 0 0 20px rgba(var(--accent-violet-rgb), 0.2);
       }
 
       .contact-card-arrow {
-        color: $accent-violet;
+        color: var(--accent-violet);
       }
     }
 
@@ -129,11 +130,12 @@
       min-width: 56px;
       height: 56px;
       border-radius: $radius-lg;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(var(--text-primary-rgb), 0.03);
       font-size: 1.4rem;
-      color: $text-secondary;
+      color: var(--text-secondary);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
       position: relative;
       z-index: 1;
     }
@@ -147,7 +149,7 @@
 
       .contact-card-label {
         font-size: $fs-xs;
-        color: $text-muted;
+        color: var(--text-muted);
         text-transform: uppercase;
         letter-spacing: 0.12em;
         font-weight: $fw-semibold;
@@ -156,14 +158,14 @@
       .contact-card-value {
         font-size: $fs-base;
         font-weight: $fw-medium;
-        color: $text-primary;
+        color: var(--text-primary);
       }
     }
 
     .contact-card-arrow {
       margin-left: auto;
       font-size: 1.2rem;
-      color: $text-muted;
+      color: var(--text-muted);
       opacity: 0;
       transform: translate(-5px, 5px);
       transition: all 0.3s ease;
@@ -184,9 +186,10 @@
       flex: 1;
       padding: $space-md $space-lg;
       border-radius: $radius-lg;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(15, 15, 20, 0.5);
-      color: $text-secondary;
+      border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
+      background: rgba(var(--bg-card-rgb), 0.5);
+      color: var(--text-secondary);
       font-size: $fs-sm;
       font-weight: $fw-medium;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -199,15 +202,15 @@
       }
 
       &:hover {
-        border-color: rgba($accent-cyan, 0.4);
-        color: $text-primary;
-        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(var(--accent-cyan-rgb), 0.4);
+        color: var(--text-primary);
+        background: var(--bg-secondary);
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow-card-hover);
 
         svg {
           transform: scale(1.15);
-          color: $accent-cyan;
+          color: var(--accent-cyan);
         }
       }
     }
@@ -217,26 +220,27 @@
   .contact-form {
     display: flex;
     flex-direction: column;
-    background: rgba(15, 15, 20, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(var(--bg-card-rgb), 0.7);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
     border-radius: $radius-xl;
     overflow: hidden;
     backdrop-filter: blur(12px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-card-hover);
 
     .form-header {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: $space-md $space-xl;
-      background: rgba(0, 0, 0, 0.3);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(var(--text-primary-rgb), 0.08);
+      border-bottom: 1px solid var(--border-color);
 
       .form-header-dot {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(var(--text-primary-rgb), 0.1);
 
         &:nth-child(1) { background: #ff5f57; }
         &:nth-child(2) { background: #febc2e; }
@@ -247,7 +251,7 @@
         margin-left: auto;
         font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
         font-size: $fs-xs;
-        color: $text-muted;
+        color: var(--text-muted);
         letter-spacing: 0.05em;
       }
     }
@@ -268,18 +272,19 @@
         font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
         font-size: $fs-sm;
         font-weight: $fw-medium;
-        color: $text-primary;
+        color: var(--text-primary);
 
         .label-syntax {
-          color: $accent-violet;
+          color: var(--accent-violet);
           opacity: 0.8;
         }
       }
 
       input, textarea {
         padding: $space-md $space-lg;
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
         border-radius: $radius-md;
         color: rgba(16, 185, 129, 0.9);
         font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
@@ -288,14 +293,14 @@
         outline: none;
 
         &::placeholder {
-          color: rgba(255, 255, 255, 0.15);
+          color: var(--text-muted);
           font-style: italic;
         }
 
         &:focus {
-          border-color: rgba($accent-cyan, 0.4);
-          box-shadow: 0 0 0 3px rgba($accent-cyan, 0.08), inset 0 0 20px rgba($accent-cyan, 0.03);
-          background: rgba(0, 0, 0, 0.3);
+          border-color: rgba(var(--accent-cyan-rgb), 0.4);
+          box-shadow: 0 0 0 3px rgba(var(--accent-cyan-rgb), 0.08), inset 0 0 20px rgba(var(--accent-cyan-rgb), 0.03);
+          background: rgba(var(--text-primary-rgb), 0.08);
         }
       }
 
@@ -325,7 +330,7 @@
       font-size: $fs-base;
       font-weight: $fw-bold;
       color: #fff;
-      background: linear-gradient(120deg, $accent-cyan, $accent-violet);
+      background: linear-gradient(120deg, var(--accent-cyan), var(--accent-violet));
       border: none;
       border-radius: $radius-md;
       cursor: pointer;
@@ -335,21 +340,21 @@
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
       .submit-parens {
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(var(--text-primary-rgb), 0.6);
       }
 
       &::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(120deg, color.adjust($accent-cyan, $lightness: 10%), color.adjust($accent-violet, $lightness: 10%));
+        background: linear-gradient(120deg, var(--accent-cyan-hover), var(--accent-violet-hover));
         opacity: 0;
         transition: opacity 0.3s ease;
       }
 
       &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba($accent-cyan, 0.3), 0 0 40px rgba($accent-violet, 0.15);
+        box-shadow: 0 10px 25px rgba(var(--accent-cyan-rgb), 0.3), 0 0 40px rgba(var(--accent-violet-rgb), 0.15);
 
         &::before {
           opacity: 1;
@@ -358,7 +363,7 @@
 
       &:active {
         transform: translateY(0);
-        box-shadow: 0 4px 10px rgba($accent-cyan, 0.2);
+        box-shadow: 0 4px 10px rgba(var(--accent-cyan-rgb), 0.2);
       }
 
       svg, span {

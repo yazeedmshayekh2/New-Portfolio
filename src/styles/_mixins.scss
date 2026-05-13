@@ -21,11 +21,12 @@
 }
 
 // ─── Glassmorphism ──────────────────────────────────────────
-@mixin glass($bg: $bg-glass, $blur: 16px) {
+@mixin glass($bg: var(--bg-glass), $blur: 16px) {
   background: $bg;
   backdrop-filter: blur($blur);
   -webkit-backdrop-filter: blur($blur);
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
 }
 
 // ─── Card ───────────────────────────────────────────────────
@@ -36,7 +37,7 @@
   transition: all $transition-base;
   
   &:hover {
-    border-color: $border-glow;
+    border-color: var(--border-glow);
     box-shadow: $shadow-glow;
     transform: translateY(-4px);
   }
@@ -44,7 +45,7 @@
 
 // ─── Gradient Text ──────────────────────────────────────────
 @mixin gradient-text {
-  background: $accent-gradient;
+  background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,8 +83,8 @@
   align-items: center;
   gap: $space-sm;
   padding: $space-md $space-xl;
-  background: $accent-gradient;
-  color: $bg-primary;
+  background: var(--accent-gradient);
+  color: var(--bg-primary);
   font-family: $font-heading;
   font-weight: $fw-semibold;
   font-size: $fs-sm;
@@ -95,7 +96,7 @@
   letter-spacing: 0.02em;
 
   &:hover {
-    background: $accent-gradient-hover;
+    background: var(--accent-gradient)-hover;
     box-shadow: $shadow-glow-strong;
     transform: translateY(-2px);
   }
@@ -107,11 +108,12 @@
   gap: $space-sm;
   padding: $space-md $space-xl;
   background: transparent;
-  color: $text-primary;
+  color: var(--text-primary);
   font-family: $font-heading;
   font-weight: $fw-semibold;
   font-size: $fs-sm;
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
   border-radius: $radius-full;
   cursor: pointer;
   transition: all $transition-base;
@@ -119,8 +121,8 @@
   letter-spacing: 0.02em;
 
   &:hover {
-    border-color: $accent-cyan;
-    color: $accent-cyan;
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
     box-shadow: $shadow-glow;
     transform: translateY(-2px);
   }
@@ -148,11 +150,11 @@
 @mixin tag {
   display: inline-block;
   padding: $space-xs $space-md;
-  background: rgba(0, 212, 255, 0.08);
-  color: $accent-cyan;
+  background: rgba(var(--accent-cyan-rgb), 0.08);
+  color: var(--accent-cyan);
   font-size: $fs-xs;
   font-weight: $fw-medium;
   border-radius: $radius-full;
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  border: 1px solid rgba(var(--accent-cyan-rgb), 0.15);
   letter-spacing: 0.02em;
 }

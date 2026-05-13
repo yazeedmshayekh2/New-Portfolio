@@ -4,10 +4,10 @@
 .footer {
   position: relative;
   z-index: 1;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-color);
   padding: $space-3xl 0 $space-2xl;
   overflow: hidden;
-  background: linear-gradient(to bottom, transparent, rgba(15, 15, 20, 0.8));
+  background: linear-gradient(to bottom, transparent, rgba(var(--bg-card-rgb), 0.8));
 
   &::before {
     content: '';
@@ -17,7 +17,7 @@
     transform: translateX(-50%);
     width: 60%;
     height: 200px;
-    background: radial-gradient(ellipse at center, rgba($accent-cyan, 0.12) 0%, rgba($accent-violet, 0.04) 40%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(var(--accent-cyan-rgb), 0.12) 0%, rgba(var(--accent-violet-rgb), 0.04) 40%, transparent 70%);
     pointer-events: none;
     z-index: -1;
   }
@@ -65,36 +65,37 @@
   .footer-text {
     font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-xs;
-    color: $text-muted;
+    color: var(--text-muted);
     letter-spacing: 0.03em;
 
     .code-comment {
-      color: rgba($accent-cyan, 0.3);
+      color: rgba(var(--accent-cyan-rgb), 0.3);
     }
   }
 
   .footer-code-block {
     font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-sm;
-    color: $text-muted;
+    color: var(--text-muted);
     letter-spacing: 0.04em;
     padding: $space-sm $space-lg;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(var(--text-primary-rgb), 0.05);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
     border-radius: $radius-lg;
 
     .code-keyword {
-      color: $accent-violet;
+      color: var(--accent-violet);
       font-weight: $fw-bold;
     }
 
     .code-func {
-      color: $accent-cyan;
+      color: var(--accent-cyan);
       font-weight: $fw-semibold;
     }
 
     .code-parens {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(var(--text-primary-rgb), 0.6);
     }
 
     @include respond(md) {
@@ -111,7 +112,7 @@
 
     a {
       font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
-      color: $text-muted;
+      color: var(--text-muted);
       font-size: $fs-sm;
       font-weight: $fw-medium;
       padding: $space-xs $space-sm;
@@ -125,17 +126,17 @@
       gap: 2px;
 
       .link-bracket {
-        color: rgba($accent-cyan, 0.3);
+        color: rgba(var(--accent-cyan-rgb), 0.3);
         transition: color 0.2s ease;
       }
 
       &:hover {
-        color: $text-primary;
+        color: var(--text-primary);
         transform: translateZ(10px) translateY(-2px);
-        text-shadow: 0 0 10px rgba($accent-cyan, 0.3);
+        text-shadow: 0 0 10px rgba(var(--accent-cyan-rgb), 0.3);
 
         .link-bracket {
-          color: $accent-cyan;
+          color: var(--accent-cyan);
         }
       }
     }

@@ -16,12 +16,13 @@
     padding: $space-sm 0;
 
     .nav-container {
-      @include glass(rgba(10, 12, 16, 0.85), 24px);
+      @include glass(rgba(var(--bg-card-rgb), 0.85), 24px);
       box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.5),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.06);
+                  inset 0 1px 0 rgba(var(--text-primary-rgb), 0.06);
       padding: 0.6rem $space-xl;
       max-width: 1100px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
       border-radius: 100px;
     }
   }
@@ -77,7 +78,7 @@
 
     .code-nav-item {
       a {
-        color: $text-secondary;
+        color: var(--text-secondary);
         font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
         font-size: 0.8rem;
         font-weight: $fw-medium;
@@ -92,20 +93,20 @@
         white-space: nowrap;
 
         .syntax-bracket {
-          color: rgba($accent-cyan, 0.35);
+          color: rgba(var(--accent-cyan-rgb), 0.35);
           transition: all 0.25s ease;
           font-size: 0.75rem;
         }
 
         .syntax-keyword {
-          color: rgba($accent-violet, 0.5);
+          color: rgba(var(--accent-violet-rgb), 0.5);
           transition: all 0.25s ease;
           margin-right: 4px;
           font-weight: $fw-bold;
         }
 
         .nav-label {
-          color: $text-secondary;
+          color: var(--text-secondary);
           transition: color 0.25s ease;
         }
 
@@ -117,24 +118,24 @@
           transform: translateX(-50%);
           width: 0;
           height: 2px;
-          background: $accent-gradient;
+          background: var(--accent-gradient);
           transition: width 0.3s ease;
           border-radius: 1px;
         }
 
         &:hover {
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(var(--text-primary-rgb), 0.03);
 
           .syntax-bracket {
-            color: $accent-cyan;
+            color: var(--accent-cyan);
           }
 
           .syntax-keyword {
-            color: $accent-violet;
+            color: var(--accent-violet);
           }
 
           .nav-label {
-            color: $text-primary;
+            color: var(--text-primary);
           }
 
           &::after {
@@ -144,11 +145,11 @@
 
         &.active {
           .syntax-bracket {
-            color: $accent-cyan;
+            color: var(--accent-cyan);
           }
 
           .nav-label {
-            color: $text-primary;
+            color: var(--text-primary);
           }
 
           &::after {
@@ -162,8 +163,8 @@
       animation: notesPulse 3s ease-in-out infinite;
       display: inline-flex;
       align-items: center;
-      background: rgba($accent-violet, 0.06);
-      border: 1px solid rgba($accent-violet, 0.15);
+      background: rgba(var(--accent-violet-rgb), 0.06);
+      border: 1px solid rgba(var(--accent-violet-rgb), 0.15);
       border-radius: $radius-full;
       padding: $space-xs $space-md !important;
 
@@ -173,8 +174,8 @@
 
       &:hover,
       &.active {
-        background: rgba($accent-violet, 0.12);
-        border-color: rgba($accent-violet, 0.3);
+        background: rgba(var(--accent-violet-rgb), 0.12);
+        border-color: rgba(var(--accent-violet-rgb), 0.3);
         transform: translateY(-1px);
       }
     }
@@ -190,7 +191,7 @@
     font-weight: $fw-bold;
     letter-spacing: 0.04em;
     color: #fff;
-    background: linear-gradient(120deg, $accent-cyan, $accent-violet);
+    background: linear-gradient(120deg, var(--accent-cyan), var(--accent-violet));
     border-radius: $radius-full;
     position: relative;
     overflow: hidden;
@@ -199,31 +200,31 @@
     flex-shrink: 0;
     margin-left: $space-md;
     white-space: nowrap;
-    box-shadow: 0 4px 15px rgba($accent-cyan, 0.25);
+    box-shadow: 0 4px 15px rgba(var(--accent-cyan-rgb), 0.25);
 
     .syntax-prompt {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(var(--text-primary-rgb), 0.7);
       font-weight: $fw-extrabold;
       animation: blink 1.2s step-end infinite;
     }
 
     .syntax-parens {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(var(--text-primary-rgb), 0.8);
     }
 
     &::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, color.adjust($accent-cyan, $lightness: 8%), color.adjust($accent-violet, $lightness: 8%));
+      background: linear-gradient(120deg, var(--accent-cyan-hover), var(--accent-violet-hover));
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba($accent-cyan, 0.35),
-                  0 0 30px rgba($accent-violet, 0.15);
+      box-shadow: 0 8px 25px rgba(var(--accent-cyan-rgb), 0.35),
+                  0 0 30px rgba(var(--accent-violet-rgb), 0.15);
 
       &::before {
         opacity: 1;
@@ -232,7 +233,7 @@
 
     &:active {
       transform: translateY(0);
-      box-shadow: 0 2px 8px rgba($accent-cyan, 0.3);
+      box-shadow: 0 2px 8px rgba(var(--accent-cyan-rgb), 0.3);
     }
 
     // Keep text above the ::before overlay
@@ -265,7 +266,7 @@
     span {
       width: 24px;
       height: 2px;
-      background: $text-primary;
+      background: var(--text-primary);
       transition: all $transition-base;
       border-radius: 2px;
     }
@@ -295,7 +296,7 @@
       left: 0;
       width: 100%;
       height: 100dvh;
-      background: rgba(6, 8, 13, 0.97);
+      background: rgba(var(--bg-primary-rgb), 0.97);
       backdrop-filter: blur(24px);
       flex-direction: column;
       align-items: center;
@@ -313,7 +314,7 @@
       }
 
       .code-nav-item a {
-        color: $text-secondary;
+        color: var(--text-secondary);
         font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
         font-size: $fs-xl;
         font-weight: $fw-semibold;
@@ -323,11 +324,11 @@
         gap: 6px;
 
         .syntax-bracket {
-          color: rgba($accent-cyan, 0.5);
+          color: rgba(var(--accent-cyan-rgb), 0.5);
         }
 
         .syntax-keyword {
-          color: rgba($accent-violet, 0.8);
+          color: rgba(var(--accent-violet-rgb), 0.8);
           margin-right: 8px;
         }
 
@@ -337,11 +338,11 @@
 
         &:hover {
           .nav-label {
-            color: $text-primary;
+            color: var(--text-primary);
           }
 
           .syntax-bracket {
-            color: $accent-cyan;
+            color: var(--accent-cyan);
           }
         }
       }

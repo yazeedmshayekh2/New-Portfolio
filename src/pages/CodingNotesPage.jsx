@@ -115,14 +115,14 @@ export default function CodingNotesPage() {
     <section className="coding-notes-page">
       <div className="page-intro page-intro--compact">
         <div className="page-intro-container">
-          <div className="page-header-code" style={{ fontFamily: "'Fira Code', monospace", fontSize: "0.85rem", color: "rgba(255,255,255,0.4)", marginBottom: "1rem" }}>
+          <div className="page-header-code" style={{ fontFamily: "'Fira Code', monospace", fontSize: "0.85rem", color: "rgba(var(--text-primary-rgb), 0.4)", marginBottom: "1rem" }}>
             <span style={{ color: "#7c3aed", fontWeight: "bold" }}>import</span>{' '}
-            <span style={{ color: "rgba(255,255,255,0.3)" }}>{'{'}</span>{' '}
+            <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{'{'}</span>{' '}
             <span style={{ color: "#00d4ff", fontWeight: "500" }}>notes</span>{' '}
-            <span style={{ color: "rgba(255,255,255,0.3)" }}>{'}'}</span>{' '}
+            <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{'}'}</span>{' '}
             <span style={{ color: "#7c3aed", fontWeight: "bold" }}>from</span>{' '}
             <span style={{ color: "#10b981" }}>'@brain/knowledge'</span>
-            <span style={{ color: "rgba(255,255,255,0.3)" }}>;</span>
+            <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>;</span>
           </div>
           <h1 className="hero-name" style={{ display: 'inline-block', fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
             <span className="code-keyword" style={{ color: "#7c3aed", fontWeight: "bold" }}>export default class</span>{" "}
@@ -204,7 +204,7 @@ export default function CodingNotesPage() {
                   </span>
                 </div>
                 <Link to={`/coding-notes/${note.slug}`} className="note-read-link" style={{ fontFamily: "'Fira Code', monospace" }}>
-                  <span style={{ color: "#7c3aed" }}>await</span> <span style={{ color: "#00d4ff" }}>open</span><span style={{ color: "rgba(255,255,255,0.3)" }}>()</span>
+                  <span style={{ color: "#7c3aed" }}>await</span> <span style={{ color: "#00d4ff" }}>open</span><span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>()</span>
                   <FiArrowRight />
                 </Link>
               </article>

@@ -213,7 +213,7 @@ export default function CodingNoteArticlePage() {
           {!isFocusMode && (
             <Link to="/coding-notes" className="note-back-link" style={{ fontFamily: "'Fira Code', monospace" }}>
               <FiArrowLeft />
-              <span style={{ color: "#7c3aed", fontWeight: "bold" }}>cd</span> <span style={{ color: "rgba(255,255,255,0.6)" }}>../coding-notes</span>
+              <span style={{ color: "#7c3aed", fontWeight: "bold" }}>cd</span> <span style={{ color: "rgba(var(--text-primary-rgb), 0.6)" }}>../coding-notes</span>
             </Link>
           )}
           {!isFocusMode && (
@@ -250,14 +250,14 @@ export default function CodingNoteArticlePage() {
             </div>}
 
             <h1 className="hero-name" style={{ marginBottom: "1.5rem", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", lineHeight: 1.2 }}>
-              <span className="code-punctuation" style={{ color: "rgba(255,255,255,0.2)" }}>{'<'}</span>
+              <span className="code-punctuation" style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{'<'}</span>
               <span className="gradient">{note.title}</span>
-              <span className="code-punctuation" style={{ color: "rgba(255,255,255,0.2)" }}>{' />'}</span>
+              <span className="code-punctuation" style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{' />'}</span>
             </h1>
             <p className="article-excerpt" style={{ fontFamily: "'Fira Code', monospace", color: "rgba(0, 212, 255, 0.8)", fontSize: "0.95rem" }}>
-              <span style={{ color: "rgba(255,255,255,0.2)" }}>{'/*'}</span>
-              <span style={{ color: "rgba(255,255,255,0.2)" }}>{' '}</span>{note.excerpt}
-              <span style={{ color: "rgba(255,255,255,0.2)" }}>{' */'}</span>
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{'/*'}</span>
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{' '}</span>{note.excerpt}
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{' */'}</span>
             </p>
 
             {note.tags?.length > 0 && (

@@ -38,14 +38,14 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: $accent-gradient;
+      background: var(--accent-gradient);
       transform: scaleX(0);
       transition: transform $transition-base;
       transform-origin: left;
     }
 
     &:hover {
-      border-color: $border-glow;
+      border-color: var(--border-glow);
       transform: translateY(-4px);
       box-shadow: $shadow-glow;
 
@@ -69,7 +69,7 @@
         width: 44px;
         height: 44px;
         border-radius: $radius-md;
-        background: rgba($accent-cyan, 0.08);
+        background: rgba(var(--accent-cyan-rgb), 0.08);
         font-size: 1.3rem;
         transition: transform $transition-spring;
       }
@@ -89,18 +89,19 @@
 
     .skill-item {
       padding: $space-xs $space-md;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(var(--text-primary-rgb), 0.03);
+      border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
       border-radius: $radius-full;
       font-size: $fs-xs;
-      color: $text-secondary;
+      color: var(--text-secondary);
       font-weight: $fw-medium;
       transition: all $transition-fast;
 
       &:hover {
-        background: rgba($accent-cyan, 0.08);
-        border-color: rgba($accent-cyan, 0.2);
-        color: $accent-cyan;
+        background: rgba(var(--accent-cyan-rgb), 0.08);
+        border-color: rgba(var(--accent-cyan-rgb), 0.2);
+        color: var(--accent-cyan);
         transform: translateY(-1px);
       }
     }

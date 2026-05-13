@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
+import { useTheme } from '../../context/ThemeContext';
 import './ThreeBackground.scss';
 
 function FloatingShape({ position, color, speed = 0.2, scale = 1 }) {
@@ -22,7 +23,7 @@ function FloatingShape({ position, color, speed = 0.2, scale = 1 }) {
   );
 }
 
-function Stars() {
+function Stars({ color }) {
   const pointsRef = useRef(null);
   const starCount = 800;
   const positions = new Float32Array(starCount * 3);
@@ -43,21 +44,25 @@ function Stars() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={starCount} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial color={new THREE.Color('#00d4ff')} size={0.035} sizeAttenuation transparent opacity={0.55} />
+      <pointsMaterial color={new THREE.Color(color)} size={0.035} sizeAttenuation transparent opacity={0.55} />
     </points>
   );
 }
 
 export default function ThreeBackground() {
+  const { theme } = useTheme();
+  const cyanColor = theme === 'light' ? '#0284c7' : '#00d4ff';
+  const violetColor = theme === 'light' ? '#6d28d9' : '#7c3aed';
+
   return (
     <div className="three-background" aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 8], fov: 56 }} dpr={[1, 1.6]}>
         <ambientLight intensity={0.5} />
-        <pointLight position={[6, 5, 6]} color="#00d4ff" intensity={1} />
-        <pointLight position={[-6, -5, 3]} color="#7c3aed" intensity={0.75} />
-        <FloatingShape position={[-4, 1, -2]} color="#00d4ff" speed={0.18} scale={0.95} />
-        <FloatingShape position={[4, -1.5, -1]} color="#7c3aed" speed={0.25} scale={1.2} />
-        <Stars />
+        <pointLight position={[6, 5, 6]} color={cyanColor} intensity={1} />
+        <pointLight position={[-6, -5, 3]} color={violetColor} intensity={0.75} />
+        <FloatingShape position={[-4, 1, -2]} color={cyanColor} speed={0.18} scale={0.95} />
+        <FloatingShape position={[4, -1.5, -1]} color={violetColor} speed={0.25} scale={1.2} />
+        <Stars color={cyanColor} />
       </Canvas>
     </div>
   );

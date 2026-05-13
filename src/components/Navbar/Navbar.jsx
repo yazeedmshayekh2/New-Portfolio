@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FaSun, FaMoon } from 'react-icons/fa';
+import { useTheme } from '../../context/ThemeContext';
 import './Navbar.scss';
 
 const navLinks = [
@@ -12,6 +14,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handleLinkClick = () => setMenuOpen(false);
 
@@ -43,6 +46,27 @@ export default function Navbar() {
         <NavLink to="/contact" className="nav-cta">
           <span className="syntax-prompt">{'>_'}</span> initContact<span className="syntax-parens">()</span>
         </NavLink>
+
+        <button 
+          className="theme-toggle" 
+          onClick={toggleTheme} 
+          aria-label="Toggle theme"
+          style={{
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--text-primary)',
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: '1rem',
+            padding: '0.5rem',
+            transition: 'color 0.3s ease'
+          }}
+        >
+          {theme === 'dark' ? <FaSun /> : <FaMoon />}
+        </button>
 
         <button
           className={`hamburger ${menuOpen ? 'open' : ''}`}

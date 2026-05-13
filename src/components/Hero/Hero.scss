@@ -32,13 +32,13 @@
   .hero-code-comment {
     font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     font-size: $fs-sm;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(var(--text-primary-rgb), 0.8);
     font-style: italic;
     margin-bottom: $space-lg;
     letter-spacing: 0.03em;
 
     .code-slashes {
-      color: rgba($accent-cyan, 0.4);
+      color: rgba(var(--accent-cyan-rgb), 0.4);
       margin-right: 6px;
     }
 
@@ -64,25 +64,25 @@
     }
 
     .code-keyword {
-      color: $accent-violet;
+      color: var(--accent-violet);
       font-weight: $fw-bold;
     }
 
     .code-var {
-      color: $accent-cyan;
+      color: var(--accent-cyan);
       font-weight: $fw-semibold;
     }
 
     .code-operator {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(var(--text-primary-rgb), 0.75);
     }
 
     .code-string {
-      color: #00d4ff;
+      color: var(--accent-cyan);
     }
 
     .code-semi {
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(var(--text-primary-rgb), 0.8);
     }
   }
 
@@ -104,14 +104,14 @@
     }
 
     .code-keyword {
-      color: $accent-violet;
+      color: var(--accent-violet);
       font-weight: $fw-bold;
       font-size: 0.7em;
       margin-right: 0.1em;
     }
 
     .code-operator {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(var(--text-primary-rgb), 0.75);
       font-weight: $fw-regular;
     }
 
@@ -139,18 +139,18 @@
     font-weight: $fw-medium;
 
     .code-keyword {
-      color: $accent-violet;
+      color: var(--accent-violet);
       font-weight: $fw-bold;
     }
 
     .code-operator {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(var(--text-primary-rgb), 0.75);
       margin-left: 2px;
     }
   }
 
   .hero-title-dynamic {
-    color: #00d4ff;
+    color: var(--accent-cyan);
     font-weight: $fw-semibold;
     position: relative;
 
@@ -158,7 +158,7 @@
       content: "|";
       animation: cursorBlink 1s step-end infinite;
       margin-left: 2px;
-      color: $accent-cyan;
+      color: var(--accent-cyan);
     }
   }
 
@@ -170,24 +170,24 @@
   .code-comment-block {
     font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
     padding: $space-lg $space-xl;
-    background: rgba(0, 0, 0, 0.2);
-    border-left: 3px solid rgba($accent-cyan, 0.3);
+    background: rgba(var(--text-primary-rgb), 0.05);
+    border-left: 3px solid rgba(var(--accent-cyan-rgb), 0.3);
     border-radius: 0 $radius-md $radius-md 0;
 
     .code-comment-open,
     .code-comment-close {
       display: block;
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(var(--text-primary-rgb), 0.8);
       font-size: $fs-sm;
     }
 
     .code-star {
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(var(--text-primary-rgb), 0.8);
     }
 
     .hero-description {
       font-size: $fs-sm;
-      color: rgba(255, 255, 255, 0.45);
+      color: rgba(var(--text-primary-rgb), 0.75);
       line-height: 1.9;
       font-style: italic;
       max-width: 540px;
@@ -262,17 +262,18 @@
       width: 44px;
       height: 44px;
       border-radius: $radius-md;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(15, 15, 20, 0.4);
-      color: $text-secondary;
+      border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card-hover);
+      background: rgba(var(--bg-card-rgb), 0.4);
+      color: var(--text-secondary);
       font-size: $fs-lg;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
       &:hover {
-        border-color: rgba($accent-cyan, 0.4);
-        color: $accent-cyan;
+        border-color: rgba(var(--accent-cyan-rgb), 0.4);
+        color: var(--accent-cyan);
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba($accent-cyan, 0.15);
+        box-shadow: var(--shadow-card), 0 0 15px rgba(var(--accent-cyan-rgb), 0.15);
       }
     }
   }
@@ -314,7 +315,7 @@
       inset: -8px;
       border-radius: 50%;
       border: 2px solid transparent;
-      background: $accent-gradient border-box;
+      background: var(--accent-gradient) border-box;
       -webkit-mask:
         linear-gradient(#fff 0 0) padding-box,
         linear-gradient(#fff 0 0);
@@ -327,7 +328,7 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: $bg-card;
+      background: var(--bg-card);
       @include flex-center;
       font-size: 6rem;
       overflow: hidden;
@@ -378,23 +379,23 @@
     .scroll-code {
       font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
       font-size: $fs-xs;
-      color: $text-muted;
+      color: var(--text-muted);
       letter-spacing: 0.06em;
 
       .code-keyword {
-        color: $accent-violet;
+        color: var(--accent-violet);
         font-weight: $fw-bold;
       }
 
       .code-operator {
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(var(--text-primary-rgb), 0.6);
       }
     }
 
     .scroll-line {
       width: 1px;
       height: 30px;
-      background: linear-gradient(to bottom, $accent-cyan, transparent);
+      background: linear-gradient(to bottom, var(--accent-cyan), transparent);
     }
 
     @include respond(md) {

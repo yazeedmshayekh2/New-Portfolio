@@ -2,30 +2,77 @@
 // DESIGN TOKENS & VARIABLES
 // ============================================================
 
-@use "sass:color";
+:root {
+  // ─── Dark Mode Colors (Default) ─────────────────────────────
+  --bg-primary: #06080d;
+  --bg-primary-rgb: 6, 8, 13;
+  --bg-secondary: #0d1117;
+  --bg-secondary-rgb: 13, 17, 23;
+  --bg-card: #111827;
+  --bg-card-rgb: 17, 24, 39;
+  --bg-card-hover: #1a2332;
+  --bg-glass: rgba(17, 24, 39, 0.6);
 
-// ─── Colors ─────────────────────────────────────────────────
-$bg-primary: #06080d;
-$bg-secondary: #0d1117;
-$bg-card: #111827;
-$bg-card-hover: #1a2332;
-$bg-glass: rgba(17, 24, 39, 0.6);
+  --text-primary: #f0f6fc;
+  --text-primary-rgb: 240, 246, 252;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
 
-$text-primary: #f0f6fc;
-$text-secondary: #8b949e;
-$text-muted: #6e7681;
+  --accent-cyan: #00d4ff;
+  --accent-cyan-rgb: 0, 212, 255;
+  --accent-violet: #7c3aed;
+  --accent-violet-rgb: 124, 58, 237;
 
-$accent-cyan: #00d4ff;
-$accent-violet: #7c3aed;
-$accent-gradient: linear-gradient(135deg, $accent-cyan, $accent-violet);
-$accent-gradient-hover: linear-gradient(
-  135deg,
-  color.adjust($accent-cyan, $lightness: 8%),
-  color.adjust($accent-violet, $lightness: 8%)
-);
+  --accent-cyan-hover: #1ad9ff; // approx color.adjust 8% lightness
+  --accent-violet-hover: #8f53ef; // approx color.adjust 8% lightness
+  --accent-cyan-hover-link: #33e0ff; // approx color.adjust 15% lightness
 
-$border-color: rgba(255, 255, 255, 0.06);
-$border-glow: rgba(0, 212, 255, 0.15);
+  --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  --accent-gradient-hover: linear-gradient(135deg, var(--accent-cyan-hover), var(--accent-violet-hover));
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-rgb: 255, 255, 255;
+  --border-glow: rgba(0, 212, 255, 0.15);
+  
+  --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.15);
+  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='light'] {
+  // ─── Light Mode Colors ──────────────────────────────────────
+  --bg-primary: #f1f5f9; // slightly darker background to make white cards pop
+  --bg-primary-rgb: 241, 245, 249;
+  --bg-secondary: #e2e8f0;
+  --bg-secondary-rgb: 226, 232, 240;
+  --bg-card: #ffffff;
+  --bg-card-rgb: 255, 255, 255;
+  --bg-card-hover: #f8fafc;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+
+  --text-primary: #0f172a;
+  --text-primary-rgb: 15, 23, 42;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --accent-cyan: #0284c7; // A bit deeper blue for light mode contrast
+  --accent-cyan-rgb: 2, 132, 199;
+  --accent-violet: #6d28d9;
+  --accent-violet-rgb: 109, 40, 217;
+
+  --accent-cyan-hover: #0369a1;
+  --accent-violet-hover: #5b21b6;
+  --accent-cyan-hover-link: #0284c7;
+
+  --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  --accent-gradient-hover: linear-gradient(135deg, var(--accent-cyan-hover), var(--accent-violet-hover));
+
+  --border-color: rgba(15, 23, 42, 0.15); // increased contrast for borders
+  --border-color-rgb: 15, 23, 42;
+  --border-glow: rgba(2, 132, 199, 0.15);
+  
+  --shadow-card: 0 4px 15px rgba(15, 23, 42, 0.05); // soft visible shadow for light cards
+  --shadow-card-hover: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
 
 // ─── Typography ─────────────────────────────────────────────
 $font-heading: "Space Grotesk", sans-serif;
@@ -66,7 +113,7 @@ $bp-lg: 1024px;
 $bp-xl: 1280px;
 
 // ─── Effects ────────────────────────────────────────────────
-$shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+$shadow-card: 0 4px 24px rgba(0, 0, 0, 0.1);
 $shadow-glow: 0 0 30px rgba(0, 212, 255, 0.1);
 $shadow-glow-strong: 0 0 60px rgba(0, 212, 255, 0.2);
 

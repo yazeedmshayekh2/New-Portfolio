@@ -1,17 +1,18 @@
 import { Canvas, useFrame } from "@react-three/fiber";
+import { useTheme } from "../../context/ThemeContext";
 import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import * as THREE from "three";
 
 // ── GPU Geometry (ROG Astral RTX 5090 Dhahab) ────────────────────────
-function createGPUGeometry() {
+function createGPUGeometry(isLight) {
   const positions = [];
   const colors = [];
   const width = 2.8;
   const height = 1.1;
   const depth = 0.4;
 
-  const cGold = new THREE.Color("#FFD700"); // Dhahab Gold
-  const cTurq = new THREE.Color("#40E0D0"); // Turquoise accents
+  const cGold = new THREE.Color(isLight ? "#d97706" : "#FFD700"); // Dhahab Gold
+  const cTurq = new THREE.Color(isLight ? "#0284c7" : "#40E0D0"); // Turquoise accents
   const cDark = new THREE.Color("#222222"); // Dark metal
 
   const addSurface = (x1, x2, y1, y2, z1, z2, density, color) => {
@@ -98,13 +99,13 @@ function createGPUGeometry() {
 }
 
 // ── AI Energy Core Geometry ──────────────────────────────────────────
-function createAIEnergyGeometry() {
+function createAIEnergyGeometry(isLight) {
   const positions = [];
   const colors = [];
 
-  const cText = new THREE.Color("#00d4ff"); // Cyan
-  const cWave1 = new THREE.Color("#7c3aed"); // Violet
-  const cWave2 = new THREE.Color("#00d4ff"); // Cyan
+  const cText = new THREE.Color(isLight ? "#0284c7" : "#00d4ff"); // Cyan
+  const cWave1 = new THREE.Color(isLight ? "#6d28d9" : "#7c3aed"); // Violet
+  const cWave2 = new THREE.Color(isLight ? "#0284c7" : "#00d4ff"); // Cyan
 
   const addBlockLine = (x1, y1, x2, y2, density) => {
     const dx = x2 - x1;
@@ -208,11 +209,11 @@ function createAIEnergyGeometry() {
 }
 
 // ── DNA Helix Geometry ───────────────────────────────────────────────
-function createDNAHelixGeometry() {
+function createDNAHelixGeometry(isLight) {
   const positions = [];
   const colors = [];
-  const c1 = new THREE.Color("#00d4ff");
-  const c2 = new THREE.Color("#10b981");
+  const c1 = new THREE.Color(isLight ? "#0284c7" : "#00d4ff");
+  const c2 = new THREE.Color(isLight ? "#059669" : "#10b981");
   const cRung = new THREE.Color("#ffffff");
 
   const count = 400;
@@ -251,7 +252,7 @@ function createDNAHelixGeometry() {
 }
 
 // ── Morph Component ──────────────────────────────────────────────────
-function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef }) {
+function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef, isLight }) {
   const ref = useRef();
   const progressRef = useRef(0);
   const morphingRef = useRef(false);
@@ -264,12 +265,12 @@ function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef }) 
 
   const shapes = useMemo(
     () => ({
-      gpu: createGPUGeometry(),
-      aiCore: createAIEnergyGeometry(),
-      helix: createDNAHelixGeometry(),
+      gpu: createGPUGeometry(isLight),
+      aiCore: createAIEnergyGeometry(isLight),
+      helix: createDNAHelixGeometry(isLight),
       torusKnot: new THREE.TorusKnotGeometry(0.65, 0.22, 100, 16),
     }),
-    [],
+    [isLight],
   );
 
   const samplePointsAndColors = useCallback((geo, defaultColorStr) => {
@@ -301,10 +302,10 @@ function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef }) 
   }, [COUNT]);
 
   const defaultColorMap = {
-    gpu: "#FFD700",
-    aiCore: "#00d4ff",
-    helix: "#10b981",
-    torusKnot: "#7c3aed"
+    gpu: isLight ? "#d97706" : "#FFD700",
+    aiCore: isLight ? "#0284c7" : "#00d4ff",
+    helix: isLight ? "#059669" : "#10b981",
+    torusKnot: isLight ? "#6d28d9" : "#7c3aed"
   };
 
   const currentData = useRef(samplePointsAndColors(shapes.aiCore, defaultColorMap.aiCore));
@@ -381,9 +382,9 @@ function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef }) 
     const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
     // Neutral gradient so vertex colors can tint it perfectly
     gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-    gradient.addColorStop(0.2, "rgba(200, 200, 200, 0.8)");
-    gradient.addColorStop(0.5, "rgba(80, 80, 80, 0.4)");
-    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    gradient.addColorStop(0.2, "rgba(255, 255, 255, 0.8)");
+    gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.4)");
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 64, 64);
@@ -400,7 +401,7 @@ function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef }) 
         sizeAttenuation
         transparent
         opacity={0.9}
-        blending={THREE.AdditiveBlending}
+        blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
         depthWrite={false}
       />
     </points>
@@ -419,6 +420,10 @@ const SHAPE_CODE_LABELS = {
 
 // ── App ──────────────────────────────────────────────────────────────
 export default function HeroMorphScene() {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+  const cyanColor = isLight ? "#0284c7" : "#00d4ff";
+  const violetColor = isLight ? "#6d28d9" : "#7c3aed";
   const [shapeIndex, setShapeIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -481,11 +486,11 @@ export default function HeroMorphScene() {
   const labelStyle = {
     fontSize: "0.75rem",
     letterSpacing: "0.04em",
-    background: "rgba(0, 0, 0, 0.4)",
+    background: "rgba(var(--text-primary-rgb), 0.05)",
     backdropFilter: "blur(8px)",
     padding: "6px 14px",
     borderRadius: "8px",
-    border: "1px solid rgba(255, 255, 255, 0.06)",
+    border: "1px solid rgba(var(--text-primary-rgb), 0.5)",
     transition: "all 0.4s ease",
   };
 
@@ -513,6 +518,7 @@ export default function HeroMorphScene() {
     >
       <Canvas camera={{ position: [0, 0, 2.6] }}>
         <MorphingParticles
+          isLight={isLight}
           targetShape={currentShape}
           mouseRef={mouseRef}
           isDragging={isDragging}
@@ -523,12 +529,12 @@ export default function HeroMorphScene() {
       {/* Coding-style shape label overlay */}
       <div style={overlayStyle}>
         <div style={labelStyle}>
-          <span style={{ color: "#7c3aed" }}>new </span>
-          <span style={{ color: "#00d4ff" }}>{shapeLabel.class}</span>
-          <span style={{ color: "rgba(255,255,255,0.3)" }}>(</span>
-          <span style={{ color: "#10b981" }}>{shapeLabel.args}</span>
-          <span style={{ color: "rgba(255,255,255,0.3)" }}>)</span>
-          <span style={{ color: "rgba(255,255,255,0.15)" }}>;</span>
+          <span style={{ color: violetColor }}>new </span>
+          <span style={{ color: cyanColor }}>{shapeLabel.class}</span>
+          <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>(</span>
+          <span style={{ color: isLight ? "#059669" : "#10b981" }}>{shapeLabel.args}</span>
+          <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>)</span>
+          <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>;</span>
         </div>
 
         <div style={dotsStyle}>
@@ -540,8 +546,8 @@ export default function HeroMorphScene() {
                 width: "10px",
                 height: "10px",
                 borderRadius: "50%",
-                border: i === shapeIndex ? "2px solid #00d4ff" : "1px solid rgba(255,255,255,0.15)",
-                background: i === shapeIndex ? "#00d4ff" : "rgba(255,255,255,0.08)",
+                border: i === shapeIndex ? "2px solid #00d4ff" : "1px solid rgba(var(--text-primary-rgb), 0.5)",
+                background: i === shapeIndex ? "#00d4ff" : "rgba(var(--text-primary-rgb), 0.5)",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
                 padding: 0,
