@@ -8,6 +8,13 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(() => ({
   plugins: [react()],
   base: process.env.VITE_BASE ?? '/',
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
   build: {
     // Safely accommodate rich interactive libraries (Three.js, Framer Motion) without splitting React Three Fiber context
     chunkSizeWarningLimit: 2000,
