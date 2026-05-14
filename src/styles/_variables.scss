@@ -54,14 +54,14 @@
   --text-secondary: #475569;
   --text-muted: #64748b;
 
-  --accent-cyan: #0284c7; // A bit deeper blue for light mode contrast
-  --accent-cyan-rgb: 2, 132, 199;
+  --accent-cyan: #0369a1; // Sky 700 for guaranteed WCAG AA color contrast compliance
+  --accent-cyan-rgb: 3, 105, 161;
   --accent-violet: #6d28d9;
   --accent-violet-rgb: 109, 40, 217;
 
-  --accent-cyan-hover: #0369a1;
+  --accent-cyan-hover: #075985;
   --accent-violet-hover: #5b21b6;
-  --accent-cyan-hover-link: #0284c7;
+  --accent-cyan-hover-link: #0369a1;
 
   --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
   --accent-gradient-hover: linear-gradient(135deg, var(--accent-cyan-hover), var(--accent-violet-hover));

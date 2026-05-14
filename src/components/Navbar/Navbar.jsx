@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
@@ -17,6 +17,15 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   const handleLinkClick = () => setMenuOpen(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [menuOpen]);
 
   return (
     <nav className="navbar scrolled" id="navbar">
@@ -49,29 +58,19 @@ export default function Navbar() {
 
         <button 
           className="theme-toggle" 
+          type="button"
           onClick={toggleTheme} 
           aria-label="Toggle theme"
-          style={{
-            background: 'transparent',
-            border: 'none',
-            color: 'var(--text-primary)',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: '1rem',
-            padding: '0.5rem',
-            transition: 'color 0.3s ease'
-          }}
         >
           {theme === 'dark' ? <FaSun /> : <FaMoon />}
         </button>
 
         <button
+          type="button"
           className={`hamburger ${menuOpen ? 'open' : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
         >
           <span />
           <span />
@@ -92,6 +91,13 @@ export default function Navbar() {
             <NavLink to="/coding-notes" onClick={handleLinkClick} className="coding-notes-link">
               <span className="syntax-keyword">import </span>
               <span className="nav-label">Notes</span>
+            </NavLink>
+          </li>
+          <li className="code-nav-item mobile-menu-cta-wrap">
+            <NavLink to="/contact" className="mobile-menu-cta" onClick={handleLinkClick}>
+              <span className="syntax-prompt">{'>_'}</span>
+              <span>initContact</span>
+              <span className="syntax-parens">()</span>
             </NavLink>
           </li>
         </ul>

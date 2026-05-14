@@ -422,7 +422,7 @@ const SHAPE_CODE_LABELS = {
 export default function HeroMorphScene() {
   const { theme } = useTheme();
   const isLight = theme === "light";
-  const cyanColor = isLight ? "#0284c7" : "#00d4ff";
+  const cyanColor = isLight ? "#0369a1" : "#00d4ff";
   const violetColor = isLight ? "#6d28d9" : "#7c3aed";
   const [shapeIndex, setShapeIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -435,6 +435,8 @@ export default function HeroMorphScene() {
   const currentShape = SHAPES[shapeIndex];
   const shapeLabel = SHAPE_CODE_LABELS[currentShape];
 
+  const [dpr, setDpr] = useState(1.5);
+
   // ── Auto-cycle every 7 seconds ─────────────────────────────────────
   useEffect(() => {
     if (isPaused) return;
@@ -443,6 +445,17 @@ export default function HeroMorphScene() {
     }, 7000);
     return () => clearInterval(id);
   }, [isPaused]);
+
+  useEffect(() => {
+    const update = () => {
+      const w = typeof window !== "undefined" ? window.innerWidth : 1024;
+      const cap = w <= 768 ? 1.35 : 2;
+      setDpr(Math.min(window.devicePixelRatio || 1, cap));
+    };
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   // ── Mouse move: track normalized position ─────────────────────────
   const onMouseMove = useCallback((e) => {
@@ -459,10 +472,34 @@ export default function HeroMorphScene() {
     }
   }, []);
 
+  const onTouchMove = useCallback((e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    const nx = (t.clientX / window.innerWidth) * 2 - 1;
+    const ny = (t.clientY / window.innerHeight) * 2 - 1;
+    mouseRef.current = { x: nx, y: -ny };
+
+    if (isDragging.current) {
+      dragDeltaRef.current = {
+        x: t.clientX - lastMousePos.current.x,
+        y: t.clientY - lastMousePos.current.y,
+      };
+      lastMousePos.current = { x: t.clientX, y: t.clientY };
+    }
+  }, []);
+
   const onMouseDown = useCallback((e) => {
     isDragging.current = true;
     setIsPaused(true);
     lastMousePos.current = { x: e.clientX, y: e.clientY };
+  }, []);
+
+  const onTouchStart = useCallback((e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    isDragging.current = true;
+    setIsPaused(true);
+    lastMousePos.current = { x: t.clientX, y: t.clientY };
   }, []);
 
   const onMouseUp = useCallback(() => {
@@ -502,6 +539,7 @@ export default function HeroMorphScene() {
 
   return (
     <div
+      className="hero-morph-scene"
       style={{
         width: "100%",
         height: "100%",
@@ -515,8 +553,12 @@ export default function HeroMorphScene() {
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseUp}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onMouseUp}
+      onTouchCancel={onMouseUp}
     >
-      <Canvas camera={{ position: [0, 0, 2.6] }}>
+      <Canvas dpr={dpr} camera={{ position: [0, 0, 2.6] }}>
         <MorphingParticles
           isLight={isLight}
           targetShape={currentShape}
@@ -527,8 +569,8 @@ export default function HeroMorphScene() {
       </Canvas>
 
       {/* Coding-style shape label overlay */}
-      <div style={overlayStyle}>
-        <div style={labelStyle}>
+      <div className="hero-morph-overlay" style={overlayStyle}>
+        <div className="hero-morph-label" style={labelStyle}>
           <span style={{ color: violetColor }}>new </span>
           <span style={{ color: cyanColor }}>{shapeLabel.class}</span>
           <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>(</span>
@@ -537,23 +579,36 @@ export default function HeroMorphScene() {
           <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>;</span>
         </div>
 
-        <div style={dotsStyle}>
+        <div className="hero-morph-dots" style={dotsStyle}>
           {SHAPES.map((s, i) => (
             <button
               key={s}
               onClick={(e) => { e.stopPropagation(); setShapeIndex(i); setIsPaused(false); }}
               style={{
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                border: i === shapeIndex ? "2px solid #00d4ff" : "1px solid rgba(var(--text-primary-rgb), 0.5)",
-                background: i === shapeIndex ? "#00d4ff" : "rgba(var(--text-primary-rgb), 0.5)",
+                width: "28px",
+                height: "28px",
+                background: "transparent",
+                border: "none",
                 cursor: "pointer",
-                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 padding: 0,
               }}
               aria-label={`Switch to ${s}`}
-            />
+            >
+              <span
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  border: i === shapeIndex ? `2px solid ${cyanColor}` : "1px solid rgba(var(--text-primary-rgb), 0.5)",
+                  background: i === shapeIndex ? cyanColor : "rgba(var(--text-primary-rgb), 0.5)",
+                  transition: "all 0.3s ease",
+                  display: "block",
+                }}
+              />
+            </button>
           ))}
         </div>
       </div>

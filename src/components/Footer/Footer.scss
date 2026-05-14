@@ -5,7 +5,7 @@
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--border-color);
-  padding: $space-3xl 0 $space-2xl;
+  padding: $space-3xl 0 calc(#{$space-2xl} + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   background: linear-gradient(to bottom, transparent, rgba(var(--bg-card-rgb), 0.8));
 
@@ -143,7 +143,7 @@
   }
 
   @include respond(sm) {
-    padding: $space-2xl 0 $space-xl;
+    padding: $space-2xl 0 calc(#{$space-xl} + env(safe-area-inset-bottom, 0px));
 
     .footer-container {
       padding: 0 $space-md;

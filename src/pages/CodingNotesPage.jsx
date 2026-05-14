@@ -151,7 +151,10 @@ export default function CodingNotesPage() {
                 onChange={(event) => setSearchTerm(event.target.value)}
                 onKeyDown={handleSearchKeyDown}
                 onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setTimeout(() => setIsSearchFocused(false), 120)}
+                onBlur={() => {
+                  // Delay hides suggestions so touch / pointer can select an item before the menu closes
+                  window.setTimeout(() => setIsSearchFocused(false), 320);
+                }}
                 placeholder="'title | category | tags'"
                 aria-label="Search notes"
               />
@@ -176,7 +179,11 @@ export default function CodingNotesPage() {
                     type="button"
                     key={suggestion}
                     className={idx === activeSuggestionIdx ? 'is-active' : ''}
-                    onMouseDown={() => applySuggestion(suggestion)}
+                    onPointerDown={(event) => {
+                      event.preventDefault();
+                      applySuggestion(suggestion);
+                      setIsSearchFocused(false);
+                    }}
                   >
                     <span className="suggestion-prefix">&gt;</span>
                     <span>{suggestion}</span>

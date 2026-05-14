@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-export function useScrollAnimation(threshold = 0.1) {
+export function useScrollAnimation(threshold = 0) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -30,7 +30,7 @@ export function useScrollAnimation(threshold = 0.1) {
 }
 
 // Hook for staggered children animation
-export function useStaggerAnimation(threshold = 0.08) {
+export function useStaggerAnimation(threshold = 0) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 

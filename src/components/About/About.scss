@@ -67,7 +67,7 @@
       }
 
       .code-string {
-        color: var(--accent-cyan);
+        color: rgba(var(--text-primary-rgb), .95);
         opacity: 0.7;
         font-style: italic;
       }
@@ -84,7 +84,7 @@
     .about-education {
       background: rgba(var(--bg-card-rgb), 0.6);
       border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-card-hover);
+      box-shadow: var(--shadow-card-hover);
       border-radius: $radius-xl;
       padding: $space-xl;
       backdrop-filter: blur(8px);
@@ -205,7 +205,7 @@
     .lang-card {
       background: rgba(var(--bg-card-rgb), 0.5);
       border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-card-hover);
+      box-shadow: var(--shadow-card-hover);
       border-radius: $radius-lg;
       padding: $space-md $space-lg;
       flex: 1;
@@ -236,6 +236,20 @@
           color: var(--text-secondary);
         }
       }
+    }
+  }
+
+  @include respond(sm) {
+    .about-code-block {
+      padding: $space-md $space-lg;
+    }
+
+    .about-education {
+      padding: $space-lg;
+    }
+
+    .stat-card {
+      padding: $space-lg $space-md;
     }
   }
 }

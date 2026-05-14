@@ -1,6 +1,16 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { FiArrowLeft, FiCheck, FiClock, FiCopy, FiMaximize2, FiMinimize2 } from 'react-icons/fi';
+import {
+  FiArrowLeft,
+  FiCheck,
+  FiChevronDown,
+  FiClock,
+  FiCopy,
+  FiList,
+  FiMaximize2,
+  FiMinimize2,
+  FiX,
+} from 'react-icons/fi';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { codingNotes } from '../data/codingNotesData';
@@ -70,12 +80,16 @@ export default function CodingNoteArticlePage() {
   const [isFocusMode, setIsFocusMode] = useState(false);
   const [copiedCodeKey, setCopiedCodeKey] = useState('');
   const [clickedSectionId, setClickedSectionId] = useState('');
+  const [tocSheetOpen, setTocSheetOpen] = useState(false);
+  const tocSheetCloseRef = useRef(null);
   const clickPriorityUntilRef = useRef(0);
   const isCompleted = readProgress >= 100;
   const markdownContent = note?.markdown?.trim() || '';
   const hasMarkdown = markdownContent.length > 0;
 
   const sections = useMemo(() => {
+    if (!note) return [];
+
     if (hasMarkdown) {
       const headings = extractMarkdownHeadings(markdownContent, note.slug);
       if (headings.length) return headings;
@@ -103,9 +117,15 @@ export default function CodingNoteArticlePage() {
     ];
   }, [note, hasMarkdown, markdownContent]);
 
-  if (!note) {
-    return <Navigate to="/coding-notes" replace />;
-  }
+  const activeSectionTitle = useMemo(() => {
+    const hit = sections.find((s) => s.id === activeSectionId);
+    return hit?.title || sections[0]?.title || '';
+  }, [sections, activeSectionId]);
+
+  const tocCurrentPreview = useMemo(() => {
+    const t = activeSectionTitle || 'Sections';
+    return t.length > 42 ? `${t.slice(0, 39)}…` : t;
+  }, [activeSectionTitle]);
 
   useEffect(() => {
     const updateReadingUI = () => {
@@ -124,7 +144,7 @@ export default function CodingNoteArticlePage() {
       const headings = Array.from(articleBody.querySelectorAll('h1, h2, h3, h4, h5, h6'));
       if (!headings.length) return;
       if (Date.now() < clickPriorityUntilRef.current) return;
-      const threshold = 150;
+      const threshold = Math.min(150, Math.max(96, Math.round(window.innerHeight * 0.16)));
       const passed = headings.filter((heading) => heading.getBoundingClientRect().top <= threshold);
       const active = passed.length ? passed[passed.length - 1] : headings[0];
       const activeIdx = headings.indexOf(active);
@@ -173,6 +193,31 @@ export default function CodingNoteArticlePage() {
     }, 1200);
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  const handleTocNavClick = (event, targetIndex) => {
+    handleTocClick(event, targetIndex);
+    setTocSheetOpen(false);
+  };
+
+  useEffect(() => {
+    if (!tocSheetOpen) return undefined;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setTocSheetOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    window.setTimeout(() => tocSheetCloseRef.current?.focus(), 0);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [tocSheetOpen]);
+
+  if (!note) {
+    return <Navigate to="/coding-notes" replace />;
+  }
+
   const renderedHeadingCounts = {};
   const renderHeading = (level, children) => {
     const title = getNodeText(children).trim();
@@ -232,6 +277,69 @@ export default function CodingNoteArticlePage() {
             <FiMinimize2 />
             <span>Exit focus (Esc)</span>
           </button>
+        )}
+
+        {!isFocusMode && sections.length > 0 && (
+          <div className={`article-toc-mobile ${tocSheetOpen ? 'is-open' : ''}`}>
+            <button
+              type="button"
+              className="article-toc-mobile__trigger"
+              aria-expanded={tocSheetOpen}
+              aria-controls="article-toc-sheet-panel"
+              onClick={() => setTocSheetOpen((open) => !open)}
+            >
+              <FiList className="article-toc-mobile__icon" aria-hidden />
+              <span className="article-toc-mobile__label">On this page</span>
+              <span className="article-toc-mobile__current" title={activeSectionTitle}>
+                {tocCurrentPreview}
+              </span>
+              <FiChevronDown className="article-toc-mobile__chevron" aria-hidden />
+            </button>
+
+            <div
+              className={`article-toc-sheet ${tocSheetOpen ? 'is-open' : ''}`}
+              role="dialog"
+              aria-modal="true"
+              aria-hidden={!tocSheetOpen}
+              aria-labelledby="article-toc-sheet-title"
+            >
+              <div
+                className="article-toc-sheet__backdrop"
+                aria-hidden="true"
+                onClick={() => setTocSheetOpen(false)}
+              />
+              <div
+                id="article-toc-sheet-panel"
+                className="article-toc-sheet__panel"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <header className="article-toc-sheet__header">
+                  <h2 id="article-toc-sheet-title">On this page</h2>
+                  <button
+                    ref={tocSheetCloseRef}
+                    type="button"
+                    className="article-toc-sheet__close"
+                    aria-label="Close"
+                    onClick={() => setTocSheetOpen(false)}
+                  >
+                    <FiX />
+                  </button>
+                </header>
+                <nav className="article-toc-sheet__nav" aria-label="Article sections">
+                  {sections.map((section, idx) => (
+                    <a
+                      key={section.id}
+                      href={`#${section.id}`}
+                      className={`toc-level-${section.level || 2} ${activeSectionId === section.id ? 'active' : ''} ${clickedSectionId === section.id ? 'is-clicked' : ''}`}
+                      onClick={(event) => handleTocNavClick(event, idx)}
+                    >
+                      {section.title}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            </div>
+          </div>
         )}
 
         <div className="article-layout">

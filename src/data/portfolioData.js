@@ -2,6 +2,17 @@
 // PORTFOLIO DATA — Edit this file to update your entire website!
 // ============================================================
 
+import attendifyImg from '../assets/Screenshot from 2026-04-21 08-42-25.webp';
+import deepLearningImg from '../assets/certifications/DeepLearning_page-0001.webp';
+import machineLearningImg from '../assets/certifications/MachineLearning_page-0001.webp';
+import tensorflowImg from '../assets/certifications/TensorFlowDeveloper_page-0001.webp';
+import correlationOneImg from '../assets/trainings/Correlation One Data Science Training Program.webp';
+import ieltsImg from '../assets/trainings/IETLS British Council.webp';
+import tahalufImg from '../assets/trainings/Tahaluf Al Emarat Technical Solutions Machine Leaning Training.webp';
+import shaiImg from '../assets/trainings/ShAi.webp';
+import stemCenterImg from '../assets/awards/StemCenter.webp';
+import paradeImg from '../assets/awards/Parade.webp';
+
 export const portfolioData = {
   // ─── HERO SECTION ───────────────────────────────────────────
   hero: {
@@ -90,8 +101,7 @@ export const portfolioData = {
       github: "https://github.com/yazeedmshayekh2/Attendify",
       demo: "",
       caseStudyUrl: "https://github.com/yazeedmshayekh2/Attendify/blob/main/Paper/Attendify__Automated_Attendance_System_Using_Tri_Architecture_Fusion_for_Facial_Recognition_ARXIV.pdf",
-      image:
-        "src/assets/Screenshot from 2026-04-21 08-42-25.png",
+      image: attendifyImg,
       theme: "vision",
       icon: "camera",
     },
@@ -114,7 +124,7 @@ export const portfolioData = {
       subtitle: "Real-time American Sign Language Translation",
       description:
         "Built real-time ASL-to-text translation using Transformer and Conformer architectures, deployed via Gradio for live gesture recognition.",
-      longDescription: 
+      longDescription:
         "Since Our Problem is to translate videos (sequence of frames) into sentences (sequence of words and characters), which is a seq2seq problem, so we have to use a state-of-art models like Transformers which is much better than LSTM, CRNN, or RNN.",
       tech: ["Transformer", "Conformer", "Gradio", "MediaPipe"],
       github: "https://github.com/yazeedmshayekh2/Continuous-American-Sign-Language-Translation",
@@ -263,8 +273,7 @@ export const portfolioData = {
       issuer: "DeepLearning.AI & Stanford University",
       issuedOn: "2024",
       credentialUrl: "https://coursera.org/share/99018ab69b3a2fc2365d55f32e18c542",
-      image:
-        "src/assets/certifications/DeepLearning_page-0001.jpg",
+      image: deepLearningImg,
       highlights: ["Neural Networks", "CNNs", "Sequence Models", "Transfer Learning", "Natural Language Processing"],
       theme: "ai",
     },
@@ -273,8 +282,7 @@ export const portfolioData = {
       issuer: "DeepLearning.AI",
       issuedOn: "2024",
       credentialUrl: "https://coursera.org/share/5654efead2d7a35cd0b64a017ea30d56",
-      image:
-        "src/assets/certifications/MachineLearning_page-0001.jpg",
+      image: machineLearningImg,
       highlights: ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Predictive Modeling", "Feature Engineering"],
       theme: "ml",
     },
@@ -291,8 +299,7 @@ export const portfolioData = {
       issuer: "DeepLearning.AI",
       issuedOn: "2025",
       credentialUrl: "https://coursera.org/share/a3d7c3dfa5bcf2a76c25c44363de29a2",
-      image:
-        "src/assets/certifications/TensorFlowDeveloper_page-0001.jpg",
+      image: tensorflowImg,
       highlights: ["Model Evaluation", "Computer Vision", "Keras & Tensorflow", "Time Series & Forcasting"],
       theme: "engineering",
     },
@@ -317,7 +324,7 @@ export const portfolioData = {
       issuer: "Correlation One",
       issuedOn: "2025",
       highlights: ["Data Analysis", "Excel", "SQL", "Data Visualiztion", "Tableau"],
-      image: "src/assets/trainings/Correlation One Data Science Training Program.jpg",
+      image: correlationOneImg,
       theme: "engineering",
     },
     {
@@ -325,7 +332,7 @@ export const portfolioData = {
       issuer: "British Council",
       issuedOn: "2025",
       highlights: ["English"],
-      image: "src/assets/trainings/IETLS British Council.jpeg",
+      image: ieltsImg,
       theme: "engineering",
     },
     {
@@ -333,7 +340,7 @@ export const portfolioData = {
       issuer: "Tahaluf Al Emarat Technical Solutions",
       issuedOn: "2025",
       highlights: ["Linear Algebra", "Bagging & Boosting", "Data Proprocessing", "Statistics & Probabilities", "Machine Learning"],
-      image: "src/assets/trainings/Tahaluf Al Emarat Technical Solutions Machine Leaning Training.png",
+      image: tahalufImg,
       theme: "engineering",
     },
 
@@ -342,7 +349,7 @@ export const portfolioData = {
       issuer: "SHAI Club",
       issuedOn: "2023",
       highlights: ["Machine Learning Basics"],
-      image: "src/assets/trainings/ShAi.jpg",
+      image: shaiImg,
       theme: "engineering",
     },
   ],
@@ -355,8 +362,7 @@ export const portfolioData = {
       event: "Innovation Competition",
       date: "2024",
       awardUrl: "",
-      image:
-        "src/assets/awards/StemCenter.jpg",
+      image: stemCenterImg,
       theme: "gold",
     },
     {
@@ -365,7 +371,7 @@ export const portfolioData = {
       event: "National Technology Parade",
       date: "2024",
       awardUrl: "",
-      image: "src/assets/awards/Parade.jpeg",
+      image: paradeImg,
       theme: "winner",
     },
   ],

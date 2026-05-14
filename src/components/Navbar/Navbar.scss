@@ -9,11 +9,11 @@
   width: 100%;
   z-index: 1000;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding: $space-lg 0;
+  padding: calc(#{$space-lg} + env(safe-area-inset-top, 0px)) 0 $space-lg;
   pointer-events: none;
 
   &.scrolled {
-    padding: $space-sm 0;
+    padding: calc(#{$space-sm} + env(safe-area-inset-top, 0px)) 0 $space-sm;
 
     .nav-container {
       @include glass(rgba(var(--bg-card-rgb), 0.85), 24px);
@@ -248,6 +248,34 @@
     }
   }
 
+  .theme-toggle {
+    flex-shrink: 0;
+    margin-left: $space-md;
+    padding: $space-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    border-radius: $radius-md;
+
+    &:hover {
+      color: var(--accent-cyan);
+    }
+
+    &:active {
+      transform: scale(0.94);
+    }
+
+    @include respond(md) {
+      margin-left: $space-xs;
+    }
+  }
+
   // ─── Mobile Menu ────────────────────────────────────────
   .hamburger {
     display: none;
@@ -296,17 +324,22 @@
       left: 0;
       width: 100%;
       height: 100dvh;
+      min-height: 100vh;
+      padding: max(5rem, calc(2rem + env(safe-area-inset-top, 0px))) $space-xl max(2rem, env(safe-area-inset-bottom, 0px));
       background: rgba(var(--bg-primary-rgb), 0.97);
       backdrop-filter: blur(24px);
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: $space-2xl;
+      justify-content: flex-start;
+      gap: $space-xl;
       list-style: none;
       opacity: 0;
       visibility: hidden;
       transition: all $transition-base;
       z-index: 999;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
 
       &.open {
         opacity: 1;
@@ -350,6 +383,104 @@
       .coding-notes-link {
         font-size: $fs-lg;
         margin-top: $space-md;
+      }
+
+      .mobile-menu-cta-wrap {
+        margin-top: $space-lg;
+        width: min(320px, calc(100vw - 3rem));
+      }
+
+      // Higher specificity than `.code-nav-item a` so CTA text is not forced to `--text-secondary`
+      .mobile-menu-cta-wrap > a.mobile-menu-cta {
+        @include flex-center;
+        gap: 0.35rem;
+        width: 100%;
+        padding: 0.85rem 1.25rem;
+        font-size: $fs-md;
+        font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+        font-weight: $fw-bold;
+        letter-spacing: 0.04em;
+        color: #f8fafc;
+        text-shadow:
+          0 1px 2px rgba(0, 0, 0, 0.45),
+          0 0 12px rgba(0, 0, 0, 0.25);
+        background: linear-gradient(120deg, var(--accent-cyan), var(--accent-violet));
+        border-radius: $radius-full;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(var(--accent-cyan-rgb), 0.25);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+
+        .syntax-prompt {
+          color: #ecfeff;
+          font-weight: $fw-extrabold;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        span:not(.syntax-prompt):not(.syntax-parens) {
+          color: #ffffff;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+        }
+
+        .syntax-parens {
+          color: #f1f5f9;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        &:hover {
+          color: #ffffff;
+          box-shadow: 0 6px 20px rgba(var(--accent-cyan-rgb), 0.35);
+
+          .syntax-prompt {
+            color: #ffffff;
+          }
+
+          span:not(.syntax-prompt):not(.syntax-parens) {
+            color: #ffffff;
+          }
+
+          .syntax-parens {
+            color: #ffffff;
+          }
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+}
+
+// Light theme: deeper text shadow on the CTA gradient (accent stops are darker in light mode)
+@include respond(md) {
+  html[data-theme='light'] .navbar .mobile-menu .mobile-menu-cta-wrap > a.mobile-menu-cta {
+    color: #ffffff;
+    text-shadow:
+      0 1px 3px rgba(15, 23, 42, 0.55),
+      0 0 1px rgba(15, 23, 42, 0.35);
+
+    .syntax-prompt {
+      color: #f0fdf4;
+      text-shadow: 0 1px 2px rgba(15, 23, 42, 0.5);
+    }
+
+    span:not(.syntax-prompt):not(.syntax-parens) {
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(15, 23, 42, 0.55);
+    }
+
+    .syntax-parens {
+      color: #fafafa;
+      text-shadow: 0 1px 2px rgba(15, 23, 42, 0.45);
+    }
+
+    &:hover {
+      color: #ffffff;
+
+      .syntax-prompt,
+      span:not(.syntax-prompt):not(.syntax-parens),
+      .syntax-parens {
+        color: #ffffff;
       }
     }
   }

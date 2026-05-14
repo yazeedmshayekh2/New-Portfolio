@@ -1,18 +1,31 @@
 @use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .section-divider {
+  position: relative;
   max-width: 600px;
   margin: 0 auto;
   padding: $space-sm $space-xl;
   text-align: center;
 
+  @include respond(sm) {
+    padding-left: $space-md;
+    padding-right: $space-md;
+  }
+
   .divider-code {
     .divider-comment {
       font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
       font-size: 0.7rem;
-      color: rgba(var(--text-primary-rgb), 0.08);
+      font-weight: 500;
+      color: var(--text-secondary);
       letter-spacing: 0.1em;
       user-select: none;
+
+      @include respond(sm) {
+        font-size: 0.58rem;
+        letter-spacing: 0.06em;
+      }
     }
   }
 

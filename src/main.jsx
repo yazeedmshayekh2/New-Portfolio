@@ -4,9 +4,18 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 
+const routerBasename =
+  import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter
+      basename={routerBasename}
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <ThemeProvider>
         <App />
       </ThemeProvider>

@@ -197,4 +197,14 @@
       }
     }
   }
+
+  @include respond(md) {
+    .timeline-card {
+      padding: $space-lg;
+    }
+
+    .timeline-item {
+      padding-bottom: $space-2xl;
+    }
+  }
 }

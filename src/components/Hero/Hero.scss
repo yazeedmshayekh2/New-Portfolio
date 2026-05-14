@@ -3,6 +3,7 @@
 
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   position: relative;
@@ -38,7 +39,7 @@
     letter-spacing: 0.03em;
 
     .code-slashes {
-      color: rgba(var(--accent-cyan-rgb), 0.4);
+      color: var(--accent-cyan);
       margin-right: 6px;
     }
 
@@ -295,19 +296,17 @@
 
   .hero-avatar {
     position: relative;
-    width: 350px;
-    height: 350px;
+    width: min(350px, 88vw);
+    height: min(350px, 88vw);
 
     @include respond(md) {
-      .hero-avatar {
-        width: min(420px, 85vw);
-        height: min(420px, 85vw);
-        min-width: 260px;
-        min-height: 260px;
-      }
+      width: min(300px, 80vw);
+      height: min(300px, 80vw);
+    }
 
-      width: 260px;
-      height: 260px;
+    @include respond(sm) {
+      width: min(260px, 78vw);
+      height: min(260px, 78vw);
     }
 
     .avatar-ring {
@@ -404,14 +403,53 @@
   }
 
   @include respond(sm) {
+    padding-top: 72px;
+
     .hero-container {
       padding-top: $space-xl;
+      padding-left: $space-md;
+      padding-right: $space-md;
     }
 
     .hero-title-wrapper {
       font-size: $fs-lg;
       justify-content: center;
     }
+
+    .code-comment-block {
+      padding: $space-md $space-lg;
+    }
+  }
+}
+
+// 3D morph scene (root lives inside .hero-visual)
+.hero-morph-scene {
+  touch-action: pan-y pinch-zoom;
+}
+
+.hero-morph-overlay {
+  @include respond(sm) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: $space-sm;
+    bottom: $space-md;
+    left: $space-md;
+    right: $space-md;
+  }
+}
+
+.hero-morph-label {
+  @include respond(sm) {
+    font-size: 0.62rem !important;
+    padding: 5px 10px !important;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+}
+
+.hero-morph-dots {
+  @include respond(sm) {
+    align-self: flex-end;
   }
 }
 
