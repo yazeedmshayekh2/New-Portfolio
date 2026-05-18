@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   FiArrowLeft,
   FiCheck,
@@ -11,66 +11,13 @@ import {
   FiMinimize2,
   FiX,
 } from "react-icons/fi";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import CodingNoteMarkdown from "../components/CodingNoteMarkdown.jsx";
 import { codingNotes } from "../data/codingNotesData";
+import {
+  extractMarkdownHeadings,
+  slugify,
+} from "../utils/codingNoteMarkdown.js";
 import "./Pages.scss";
-
-function slugify(value) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
-
-function getNodeText(children) {
-  if (Array.isArray(children)) {
-    return children.map((child) => getNodeText(child)).join("");
-  }
-  if (typeof children === "string" || typeof children === "number") {
-    return String(children);
-  }
-  if (children?.props?.children) {
-    return getNodeText(children.props.children);
-  }
-  return "";
-}
-
-function buildHeadingId(noteSlug, level, title, occurrence) {
-  return `${noteSlug}-md-h${level}-${slugify(title)}-${occurrence}`;
-}
-
-function extractMarkdownHeadings(markdown, noteSlug) {
-  const lines = markdown.split("\n");
-  const headings = [];
-  let inCodeFence = false;
-  const seen = {};
-
-  lines.forEach((line) => {
-    const trimmed = line.trim();
-    if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) {
-      inCodeFence = !inCodeFence;
-      return;
-    }
-    if (inCodeFence) return;
-
-    const match = line.match(/^(#{1,6})\s+(.+?)\s*#*\s*$/);
-    if (!match) return;
-
-    const level = Math.min(Math.max(match[1].length, 1), 6);
-    const title = match[2].trim();
-    const key = `${level}:${slugify(title)}`;
-    const occurrence = (seen[key] || 0) + 1;
-    seen[key] = occurrence;
-    headings.push({
-      id: buildHeadingId(noteSlug, level, title, occurrence),
-      title,
-      level,
-    });
-  });
-
-  return headings;
-}
 
 export default function CodingNoteArticlePage() {
   const { slug } = useParams();
@@ -179,7 +126,7 @@ export default function CodingNoteArticlePage() {
     return () => document.body.classList.remove("reading-focus-mode");
   }, [isFocusMode]);
 
-  const handleCopyCode = async (code, codeKey) => {
+  const handleCopyCode = useCallback(async (code, codeKey) => {
     try {
       await navigator.clipboard.writeText(code);
       setCopiedCodeKey(codeKey);
@@ -187,7 +134,7 @@ export default function CodingNoteArticlePage() {
     } catch {
       setCopiedCodeKey("");
     }
-  };
+  }, []);
   const handleTocClick = (event, targetIndex) => {
     event.preventDefault();
     const articleBody = document.getElementById("article-reading-body");
@@ -229,21 +176,6 @@ export default function CodingNoteArticlePage() {
     };
   }, [tocSheetOpen]);
 
-  if (!note) {
-    return <Navigate to="/coding-notes" replace />;
-  }
-
-  const renderedHeadingCounts = {};
-  const renderHeading = (level, children) => {
-    const title = getNodeText(children).trim();
-    const key = `${level}:${slugify(title)}`;
-    const occurrence = (renderedHeadingCounts[key] || 0) + 1;
-    renderedHeadingCounts[key] = occurrence;
-    const id = buildHeadingId(note.slug, level, title, occurrence);
-    const Tag = `h${level}`;
-    return <Tag id={id}>{children}</Tag>;
-  };
-
   useEffect(() => {
     if (!isFocusMode) return undefined;
     const onKeyDown = (event) => {
@@ -254,6 +186,10 @@ export default function CodingNoteArticlePage() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isFocusMode]);
+
+  if (!note) {
+    return <Navigate to="/coding-notes" replace />;
+  }
 
   return (
     <section
@@ -471,48 +407,12 @@ export default function CodingNoteArticlePage() {
 
             <div className="article-body" id="article-reading-body">
               {hasMarkdown ? (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    h1: ({ children }) => renderHeading(1, children),
-                    h2: ({ children }) => renderHeading(2, children),
-                    h3: ({ children }) => renderHeading(3, children),
-                    h4: ({ children }) => renderHeading(4, children),
-                    h5: ({ children }) => renderHeading(5, children),
-                    h6: ({ children }) => renderHeading(6, children),
-                    img: ({ src, alt }) => (
-                      <img
-                        className="article-inline-image"
-                        src={src || ""}
-                        alt={alt || "Blog visual"}
-                        loading="lazy"
-                      />
-                    ),
-                    pre: ({ children }) => {
-                      const codeText = getNodeText(children).replace(/\n$/, "");
-                      const codeKey = `${note.slug}-${slugify(codeText.slice(0, 40) || "code")}`;
-                      const isCopied = copiedCodeKey === codeKey;
-                      return (
-                        <div className="article-code-wrap">
-                          <button
-                            type="button"
-                            className={`article-code-copy ${isCopied ? "is-copied" : ""}`}
-                            onClick={() => handleCopyCode(codeText, codeKey)}
-                          >
-                            {isCopied ? <FiCheck /> : <FiCopy />}
-                            <span>{isCopied ? "Copied" : "Copy"}</span>
-                          </button>
-                          <pre className="article-code-block">{children}</pre>
-                        </div>
-                      );
-                    },
-                    code: ({ className, children }) => (
-                      <code className={className}>{children}</code>
-                    ),
-                  }}
-                >
-                  {markdownContent}
-                </ReactMarkdown>
+                <CodingNoteMarkdown
+                  noteSlug={note.slug}
+                  markdownContent={markdownContent}
+                  copiedCodeKey={copiedCodeKey}
+                  onCopyCode={handleCopyCode}
+                />
               ) : (
                 sections.map((section) => (
                   <section key={section.id} className="article-section-block">
