@@ -1,5 +1,5 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, Navigate, useParams } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   FiArrowLeft,
   FiCheck,
@@ -10,30 +10,30 @@ import {
   FiMaximize2,
   FiMinimize2,
   FiX,
-} from 'react-icons/fi';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { codingNotes } from '../data/codingNotesData';
-import './Pages.scss';
+} from "react-icons/fi";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { codingNotes } from "../data/codingNotesData";
+import "./Pages.scss";
 
 function slugify(value) {
   return value
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 function getNodeText(children) {
   if (Array.isArray(children)) {
-    return children.map((child) => getNodeText(child)).join('');
+    return children.map((child) => getNodeText(child)).join("");
   }
-  if (typeof children === 'string' || typeof children === 'number') {
+  if (typeof children === "string" || typeof children === "number") {
     return String(children);
   }
   if (children?.props?.children) {
     return getNodeText(children.props.children);
   }
-  return '';
+  return "";
 }
 
 function buildHeadingId(noteSlug, level, title, occurrence) {
@@ -41,14 +41,14 @@ function buildHeadingId(noteSlug, level, title, occurrence) {
 }
 
 function extractMarkdownHeadings(markdown, noteSlug) {
-  const lines = markdown.split('\n');
+  const lines = markdown.split("\n");
   const headings = [];
   let inCodeFence = false;
   const seen = {};
 
   lines.forEach((line) => {
     const trimmed = line.trim();
-    if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
+    if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) {
       inCodeFence = !inCodeFence;
       return;
     }
@@ -76,15 +76,15 @@ export default function CodingNoteArticlePage() {
   const { slug } = useParams();
   const note = codingNotes.find((item) => item.slug === slug);
   const [readProgress, setReadProgress] = useState(0);
-  const [activeSectionId, setActiveSectionId] = useState('');
+  const [activeSectionId, setActiveSectionId] = useState("");
   const [isFocusMode, setIsFocusMode] = useState(false);
-  const [copiedCodeKey, setCopiedCodeKey] = useState('');
-  const [clickedSectionId, setClickedSectionId] = useState('');
+  const [copiedCodeKey, setCopiedCodeKey] = useState("");
+  const [clickedSectionId, setClickedSectionId] = useState("");
   const [tocSheetOpen, setTocSheetOpen] = useState(false);
   const tocSheetCloseRef = useRef(null);
   const clickPriorityUntilRef = useRef(0);
   const isCompleted = readProgress >= 100;
-  const markdownContent = note?.markdown?.trim() || '';
+  const markdownContent = note?.markdown?.trim() || "";
   const hasMarkdown = markdownContent.length > 0;
 
   const sections = useMemo(() => {
@@ -93,7 +93,7 @@ export default function CodingNoteArticlePage() {
     if (hasMarkdown) {
       const headings = extractMarkdownHeadings(markdownContent, note.slug);
       if (headings.length) return headings;
-      return [{ id: `${note.slug}-md-overview`, title: 'Overview', level: 1 }];
+      return [{ id: `${note.slug}-md-overview`, title: "Overview", level: 1 }];
     }
 
     if (note?.sections?.length) {
@@ -110,7 +110,7 @@ export default function CodingNoteArticlePage() {
     return [
       {
         id: `${note.slug}-section-overview`,
-        title: 'Overview',
+        title: "Overview",
         paragraphs: bodyParagraphs,
         level: 2,
       },
@@ -119,79 +119,94 @@ export default function CodingNoteArticlePage() {
 
   const activeSectionTitle = useMemo(() => {
     const hit = sections.find((s) => s.id === activeSectionId);
-    return hit?.title || sections[0]?.title || '';
+    return hit?.title || sections[0]?.title || "";
   }, [sections, activeSectionId]);
 
   const tocCurrentPreview = useMemo(() => {
-    const t = activeSectionTitle || 'Sections';
+    const t = activeSectionTitle || "Sections";
     return t.length > 42 ? `${t.slice(0, 39)}…` : t;
   }, [activeSectionTitle]);
 
   useEffect(() => {
     const updateReadingUI = () => {
-      const articleCard = document.querySelector('.article-card');
+      const articleCard = document.querySelector(".article-card");
       if (!articleCard) return;
 
       const rect = articleCard.getBoundingClientRect();
       const topOffset = 120;
-      const totalScrollable = Math.max(rect.height - (window.innerHeight - topOffset), 1);
-      const consumed = Math.min(Math.max(topOffset - rect.top, 0), totalScrollable);
+      const totalScrollable = Math.max(
+        rect.height - (window.innerHeight - topOffset),
+        1,
+      );
+      const consumed = Math.min(
+        Math.max(topOffset - rect.top, 0),
+        totalScrollable,
+      );
       const progress = Math.round((consumed / totalScrollable) * 100);
       setReadProgress(Math.min(100, Math.max(0, progress)));
 
-      const articleBody = document.getElementById('article-reading-body');
+      const articleBody = document.getElementById("article-reading-body");
       if (!articleBody) return;
-      const headings = Array.from(articleBody.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+      const headings = Array.from(
+        articleBody.querySelectorAll("h1, h2, h3, h4, h5, h6"),
+      );
       if (!headings.length) return;
       if (Date.now() < clickPriorityUntilRef.current) return;
-      const threshold = Math.min(150, Math.max(96, Math.round(window.innerHeight * 0.16)));
-      const passed = headings.filter((heading) => heading.getBoundingClientRect().top <= threshold);
+      const threshold = Math.min(
+        150,
+        Math.max(96, Math.round(window.innerHeight * 0.16)),
+      );
+      const passed = headings.filter(
+        (heading) => heading.getBoundingClientRect().top <= threshold,
+      );
       const active = passed.length ? passed[passed.length - 1] : headings[0];
       const activeIdx = headings.indexOf(active);
-      setActiveSectionId(sections[activeIdx]?.id || active.id || '');
+      setActiveSectionId(sections[activeIdx]?.id || active.id || "");
     };
 
     updateReadingUI();
-    window.addEventListener('scroll', updateReadingUI, { passive: true });
-    window.addEventListener('resize', updateReadingUI);
+    window.addEventListener("scroll", updateReadingUI, { passive: true });
+    window.addEventListener("resize", updateReadingUI);
 
     return () => {
-      window.removeEventListener('scroll', updateReadingUI);
-      window.removeEventListener('resize', updateReadingUI);
+      window.removeEventListener("scroll", updateReadingUI);
+      window.removeEventListener("resize", updateReadingUI);
     };
   }, [sections]);
 
   useEffect(() => {
-    document.body.classList.toggle('reading-focus-mode', isFocusMode);
-    return () => document.body.classList.remove('reading-focus-mode');
+    document.body.classList.toggle("reading-focus-mode", isFocusMode);
+    return () => document.body.classList.remove("reading-focus-mode");
   }, [isFocusMode]);
 
   const handleCopyCode = async (code, codeKey) => {
     try {
       await navigator.clipboard.writeText(code);
       setCopiedCodeKey(codeKey);
-      window.setTimeout(() => setCopiedCodeKey(''), 1400);
+      window.setTimeout(() => setCopiedCodeKey(""), 1400);
     } catch {
-      setCopiedCodeKey('');
+      setCopiedCodeKey("");
     }
   };
   const handleTocClick = (event, targetIndex) => {
     event.preventDefault();
-    const articleBody = document.getElementById('article-reading-body');
+    const articleBody = document.getElementById("article-reading-body");
     if (!articleBody) return;
-    const headings = Array.from(articleBody.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+    const headings = Array.from(
+      articleBody.querySelectorAll("h1, h2, h3, h4, h5, h6"),
+    );
     const element = headings[targetIndex];
     if (!element) return;
-    const clickedId = sections[targetIndex]?.id || '';
+    const clickedId = sections[targetIndex]?.id || "";
     clickPriorityUntilRef.current = Date.now() + 800;
     setActiveSectionId(clickedId);
     setClickedSectionId(clickedId);
-    element.classList.add('toc-target-highlight');
+    element.classList.add("toc-target-highlight");
     window.setTimeout(() => {
-      element.classList.remove('toc-target-highlight');
-      setClickedSectionId('');
+      element.classList.remove("toc-target-highlight");
+      setClickedSectionId("");
     }, 1200);
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const handleTocNavClick = (event, targetIndex) => {
@@ -202,15 +217,15 @@ export default function CodingNoteArticlePage() {
   useEffect(() => {
     if (!tocSheetOpen) return undefined;
     const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') setTocSheetOpen(false);
+      if (event.key === "Escape") setTocSheetOpen(false);
     };
-    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
     window.setTimeout(() => tocSheetCloseRef.current?.focus(), 0);
     return () => {
       document.body.style.overflow = prevOverflow;
-      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [tocSheetOpen]);
 
@@ -232,39 +247,64 @@ export default function CodingNoteArticlePage() {
   useEffect(() => {
     if (!isFocusMode) return undefined;
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsFocusMode(false);
       }
     };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [isFocusMode]);
 
   return (
-    <section className={`coding-note-article ${isFocusMode ? 'focus-mode' : ''}`}>
+    <section
+      className={`coding-note-article ${isFocusMode ? "focus-mode" : ""}`}
+    >
       {!isFocusMode && (
         <>
-          <div className={`article-read-progress ${isCompleted ? 'is-complete' : ''}`} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={readProgress}>
-            <div className="article-read-progress-fill" style={{ width: `${readProgress}%` }} />
+          <div
+            className={`article-read-progress ${isCompleted ? "is-complete" : ""}`}
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={readProgress}
+          >
+            <div
+              className="article-read-progress-fill"
+              style={{ width: `${readProgress}%` }}
+            />
           </div>
-          <div className={`article-read-pill ${isCompleted ? 'is-complete' : ''}`} aria-hidden="true">
+          <div
+            className={`article-read-pill ${isCompleted ? "is-complete" : ""}`}
+            aria-hidden="true"
+          >
             <span className="read-pill-label">&lt;read_progress /&gt;</span>
-            <span className="read-pill-value">{isCompleted ? '100% DONE' : `${readProgress}%`}</span>
+            <span className="read-pill-value">
+              {isCompleted ? "100% DONE" : `${readProgress}%`}
+            </span>
           </div>
         </>
       )}
       <div className="container">
         <div className="article-toolbar">
           {!isFocusMode && (
-            <Link to="/coding-notes" className="note-back-link" style={{ fontFamily: "'Fira Code', monospace" }}>
+            <Link
+              to="/coding-notes"
+              className="note-back-link"
+              style={{ fontFamily: "'Fira Code', monospace" }}
+            >
               <FiArrowLeft />
-              <span style={{ color: "#7c3aed", fontWeight: "bold" }}>cd</span> <span style={{ color: "rgba(var(--text-primary-rgb), 0.6)" }}>../coding-notes</span>
+              <span style={{ color: "#f5a623", fontWeight: "bold" }}>
+                cd
+              </span>{" "}
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.6)" }}>
+                ../coding-notes
+              </span>
             </Link>
           )}
           {!isFocusMode && (
             <button
               type="button"
-              className={`focus-mode-toggle ${isFocusMode ? 'is-active' : ''}`}
+              className={`focus-mode-toggle ${isFocusMode ? "is-active" : ""}`}
               onClick={() => setIsFocusMode((prev) => !prev)}
             >
               <FiMaximize2 />
@@ -273,14 +313,20 @@ export default function CodingNoteArticlePage() {
           )}
         </div>
         {isFocusMode && (
-          <button type="button" className="focus-mode-exit-floating" onClick={() => setIsFocusMode(false)}>
+          <button
+            type="button"
+            className="focus-mode-exit-floating"
+            onClick={() => setIsFocusMode(false)}
+          >
             <FiMinimize2 />
             <span>Exit focus (Esc)</span>
           </button>
         )}
 
         {!isFocusMode && sections.length > 0 && (
-          <div className={`article-toc-mobile ${tocSheetOpen ? 'is-open' : ''}`}>
+          <div
+            className={`article-toc-mobile ${tocSheetOpen ? "is-open" : ""}`}
+          >
             <button
               type="button"
               className="article-toc-mobile__trigger"
@@ -290,14 +336,20 @@ export default function CodingNoteArticlePage() {
             >
               <FiList className="article-toc-mobile__icon" aria-hidden />
               <span className="article-toc-mobile__label">On this page</span>
-              <span className="article-toc-mobile__current" title={activeSectionTitle}>
+              <span
+                className="article-toc-mobile__current"
+                title={activeSectionTitle}
+              >
                 {tocCurrentPreview}
               </span>
-              <FiChevronDown className="article-toc-mobile__chevron" aria-hidden />
+              <FiChevronDown
+                className="article-toc-mobile__chevron"
+                aria-hidden
+              />
             </button>
 
             <div
-              className={`article-toc-sheet ${tocSheetOpen ? 'is-open' : ''}`}
+              className={`article-toc-sheet ${tocSheetOpen ? "is-open" : ""}`}
               role="dialog"
               aria-modal="true"
               aria-hidden={!tocSheetOpen}
@@ -325,12 +377,15 @@ export default function CodingNoteArticlePage() {
                     <FiX />
                   </button>
                 </header>
-                <nav className="article-toc-sheet__nav" aria-label="Article sections">
+                <nav
+                  className="article-toc-sheet__nav"
+                  aria-label="Article sections"
+                >
                   {sections.map((section, idx) => (
                     <a
                       key={section.id}
                       href={`#${section.id}`}
-                      className={`toc-level-${section.level || 2} ${activeSectionId === section.id ? 'active' : ''} ${clickedSectionId === section.id ? 'is-clicked' : ''}`}
+                      className={`toc-level-${section.level || 2} ${activeSectionId === section.id ? "active" : ""} ${clickedSectionId === section.id ? "is-clicked" : ""}`}
                       onClick={(event) => handleTocNavClick(event, idx)}
                     >
                       {section.title}
@@ -345,27 +400,65 @@ export default function CodingNoteArticlePage() {
         <div className="article-layout">
           <article className="article-card">
             {note.image && (
-              <img className="article-cover" src={note.image} alt={note.title} loading="lazy" />
+              <img
+                className="article-cover"
+                src={note.image}
+                alt={note.title}
+                loading="lazy"
+              />
             )}
-            {!isFocusMode && <div className="article-top-meta">
-              <span>{note.category}</span>
-              <span>
-                <FiClock />
-                {note.readTime}
-              </span>
-              <span>{note.publishedAt}</span>
-              <span>{readProgress}% read</span>
-            </div>}
+            {!isFocusMode && (
+              <div className="article-top-meta">
+                <span>{note.category}</span>
+                <span>
+                  <FiClock />
+                  {note.readTime}
+                </span>
+                <span>{note.publishedAt}</span>
+                <span>{readProgress}% read</span>
+              </div>
+            )}
 
-            <h1 className="hero-name" style={{ marginBottom: "1.5rem", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", lineHeight: 1.2 }}>
-              <span className="code-punctuation" style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{'<'}</span>
+            <h1
+              className="hero-name"
+              style={{
+                marginBottom: "1.5rem",
+                fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
+                lineHeight: 1.2,
+              }}
+            >
+              <span
+                className="code-punctuation"
+                style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}
+              >
+                {"<"}
+              </span>
               <span className="gradient">{note.title}</span>
-              <span className="code-punctuation" style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{' />'}</span>
+              <span
+                className="code-punctuation"
+                style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}
+              >
+                {" />"}
+              </span>
             </h1>
-            <p className="article-excerpt" style={{ fontFamily: "'Fira Code', monospace", color: "rgba(0, 212, 255, 0.8)", fontSize: "0.95rem" }}>
-              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{'/*'}</span>
-              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{' '}</span>{note.excerpt}
-              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>{' */'}</span>
+            <p
+              className="article-excerpt"
+              style={{
+                fontFamily: "'Fira Code', monospace",
+                color: "rgba(0, 118, 76, 0.9)",
+                fontSize: "0.95rem",
+              }}
+            >
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>
+                {"/*"}
+              </span>
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>
+                {" "}
+              </span>
+              {note.excerpt}
+              <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>
+                {" */"}
+              </span>
             </p>
 
             {note.tags?.length > 0 && (
@@ -387,26 +480,35 @@ export default function CodingNoteArticlePage() {
                     h4: ({ children }) => renderHeading(4, children),
                     h5: ({ children }) => renderHeading(5, children),
                     h6: ({ children }) => renderHeading(6, children),
-                    img: ({ src, alt }) => <img className="article-inline-image" src={src || ''} alt={alt || 'Blog visual'} loading="lazy" />,
+                    img: ({ src, alt }) => (
+                      <img
+                        className="article-inline-image"
+                        src={src || ""}
+                        alt={alt || "Blog visual"}
+                        loading="lazy"
+                      />
+                    ),
                     pre: ({ children }) => {
-                      const codeText = getNodeText(children).replace(/\n$/, '');
-                      const codeKey = `${note.slug}-${slugify(codeText.slice(0, 40) || 'code')}`;
+                      const codeText = getNodeText(children).replace(/\n$/, "");
+                      const codeKey = `${note.slug}-${slugify(codeText.slice(0, 40) || "code")}`;
                       const isCopied = copiedCodeKey === codeKey;
                       return (
                         <div className="article-code-wrap">
                           <button
                             type="button"
-                            className={`article-code-copy ${isCopied ? 'is-copied' : ''}`}
+                            className={`article-code-copy ${isCopied ? "is-copied" : ""}`}
                             onClick={() => handleCopyCode(codeText, codeKey)}
                           >
                             {isCopied ? <FiCheck /> : <FiCopy />}
-                            <span>{isCopied ? 'Copied' : 'Copy'}</span>
+                            <span>{isCopied ? "Copied" : "Copy"}</span>
                           </button>
                           <pre className="article-code-block">{children}</pre>
                         </div>
                       );
                     },
-                    code: ({ className, children }) => <code className={className}>{children}</code>,
+                    code: ({ className, children }) => (
+                      <code className={className}>{children}</code>
+                    ),
                   }}
                 >
                   {markdownContent}
@@ -416,7 +518,12 @@ export default function CodingNoteArticlePage() {
                   <section key={section.id} className="article-section-block">
                     <h2 id={section.id}>{section.title}</h2>
                     {section.image && (
-                      <img className="article-inline-image" src={section.image} alt={section.imageAlt || section.title} loading="lazy" />
+                      <img
+                        className="article-inline-image"
+                        src={section.image}
+                        alt={section.imageAlt || section.title}
+                        loading="lazy"
+                      />
                     )}
                     {section.paragraphs?.map((paragraph, idx) => (
                       <p key={`${section.id}-${idx}`}>{paragraph}</p>
@@ -435,7 +542,7 @@ export default function CodingNoteArticlePage() {
                   <a
                     key={section.id}
                     href={`#${section.id}`}
-                    className={`toc-level-${section.level || 2} ${activeSectionId === section.id ? 'active' : ''} ${clickedSectionId === section.id ? 'is-clicked' : ''}`}
+                    className={`toc-level-${section.level || 2} ${activeSectionId === section.id ? "active" : ""} ${clickedSectionId === section.id ? "is-clicked" : ""}`}
                     onClick={(event) => handleTocClick(event, idx)}
                   >
                     {section.title}
@@ -449,4 +556,3 @@ export default function CodingNoteArticlePage() {
     </section>
   );
 }
-

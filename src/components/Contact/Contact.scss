@@ -98,7 +98,7 @@
     }
 
     &--location .contact-card-glow {
-      background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+      background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
     }
 
     &--phone:hover {
@@ -116,12 +116,12 @@
     }
 
     &--location:hover {
-      border-color: rgba(16, 185, 129, 0.3);
+      border-color: rgba(59, 130, 246, 0.3);
 
       .contact-card-icon {
-        background: rgba(16, 185, 129, 0.15);
-        color: #10b981;
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        background: rgba(59, 130, 246, 0.15);
+        color: #3b82f6;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
       }
     }
 
@@ -286,7 +286,7 @@
         border: 1px solid var(--border-color);
     box-shadow: var(--shadow-card-hover);
         border-radius: $radius-md;
-        color: rgba(16, 185, 129, 0.9);
+        color: rgba(var(--accent-cyan-rgb), 0.9);
         font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
         font-size: $fs-sm;
         transition: all $transition-base;

@@ -11,12 +11,16 @@ function createGPUGeometry(isLight) {
   const height = 1.1;
   const depth = 0.4;
 
-  const cGold = new THREE.Color(isLight ? "#d97706" : "#FFD700"); // Dhahab Gold
-  const cTurq = new THREE.Color(isLight ? "#0284c7" : "#40E0D0"); // Turquoise accents
+  const cGold = new THREE.Color(isLight ? "#b45309" : "#f5a623"); // Amber/Gold
+  const cTurq = new THREE.Color(isLight ? "#047857" : "#22d3a7"); // Emerald accents
   const cDark = new THREE.Color("#222222"); // Dark metal
 
   const addSurface = (x1, x2, y1, y2, z1, z2, density, color) => {
-    const area = Math.max(Math.abs((x2 - x1) * (y2 - y1)), Math.abs((x2 - x1) * (z2 - z1)), Math.abs((y2 - y1) * (z2 - z1)));
+    const area = Math.max(
+      Math.abs((x2 - x1) * (y2 - y1)),
+      Math.abs((x2 - x1) * (z2 - z1)),
+      Math.abs((y2 - y1) * (z2 - z1)),
+    );
     const points = Math.floor(area * density);
     for (let i = 0; i < points; i++) {
       const px = x1 + Math.random() * (x2 - x1);
@@ -30,21 +34,84 @@ function createGPUGeometry(isLight) {
   const d = 2000;
 
   // Backplate (Gold)
-  addSurface(-width / 2, width / 2, -height / 2, height / 2, -depth / 2, -depth / 2, d, cGold);
+  addSurface(
+    -width / 2,
+    width / 2,
+    -height / 2,
+    height / 2,
+    -depth / 2,
+    -depth / 2,
+    d,
+    cGold,
+  );
 
   // Top & Bottom edges (Gold with Turquoise accents)
-  addSurface(-width / 2, width / 2, height / 2, height / 2, -depth / 2, depth / 2, d * 0.5, cGold);
-  addSurface(-width / 2, width / 2, -height / 2, -height / 2, -depth / 2, depth / 2, d * 0.5, cGold);
+  addSurface(
+    -width / 2,
+    width / 2,
+    height / 2,
+    height / 2,
+    -depth / 2,
+    depth / 2,
+    d * 0.5,
+    cGold,
+  );
+  addSurface(
+    -width / 2,
+    width / 2,
+    -height / 2,
+    -height / 2,
+    -depth / 2,
+    depth / 2,
+    d * 0.5,
+    cGold,
+  );
 
   // Side edges (Turquoise accents)
-  addSurface(-width / 2, -width / 2, -height / 2, height / 2, -depth / 2, depth / 2, d * 0.5, cTurq);
-  addSurface(width / 2, width / 2, -height / 2, height / 2, -depth / 2, depth / 2, d * 0.5, cTurq);
+  addSurface(
+    -width / 2,
+    -width / 2,
+    -height / 2,
+    height / 2,
+    -depth / 2,
+    depth / 2,
+    d * 0.5,
+    cTurq,
+  );
+  addSurface(
+    width / 2,
+    width / 2,
+    -height / 2,
+    height / 2,
+    -depth / 2,
+    depth / 2,
+    d * 0.5,
+    cTurq,
+  );
 
   // PCIe connector
-  addSurface(-0.8, 0.2, -height / 2 - 0.15, -height / 2, -0.02, 0.02, d * 1.5, cGold);
+  addSurface(
+    -0.8,
+    0.2,
+    -height / 2 - 0.15,
+    -height / 2,
+    -0.02,
+    0.02,
+    d * 1.5,
+    cGold,
+  );
 
   // Front shroud frame (Gold)
-  addSurface(-width / 2, width / 2, -height / 2, height / 2, depth / 2, depth / 2, d * 0.4, cGold);
+  addSurface(
+    -width / 2,
+    width / 2,
+    -height / 2,
+    height / 2,
+    depth / 2,
+    depth / 2,
+    d * 0.4,
+    cGold,
+  );
 
   // Heatsink fins inside (Dark / Silver)
   for (let x = -width / 2 + 0.05; x < width / 2 - 0.05; x += 0.08) {
@@ -52,7 +119,7 @@ function createGPUGeometry(isLight) {
       positions.push(
         x,
         (Math.random() - 0.5) * height * 0.9,
-        (Math.random() - 0.5) * depth * 0.8
+        (Math.random() - 0.5) * depth * 0.8,
       );
       colors.push(0.5, 0.5, 0.5); // Silver
     }
@@ -67,7 +134,11 @@ function createGPUGeometry(isLight) {
     for (let i = 0; i < 300; i++) {
       const theta = Math.random() * Math.PI * 2;
       const r = fanRadius * (0.95 + Math.random() * 0.05);
-      positions.push(cx + Math.cos(theta) * r, Math.sin(theta) * r, depth / 2 + 0.02);
+      positions.push(
+        cx + Math.cos(theta) * r,
+        Math.sin(theta) * r,
+        depth / 2 + 0.02,
+      );
       colors.push(cTurq.r, cTurq.g, cTurq.b);
     }
 
@@ -78,7 +149,11 @@ function createGPUGeometry(isLight) {
       for (let i = 0; i < 120; i++) {
         const r = Math.random() * fanRadius * 0.9;
         const angle = baseAngle + r * 0.6 + (Math.random() - 0.5) * 0.1;
-        positions.push(cx + Math.cos(angle) * r, Math.sin(angle) * r, depth / 2 + 0.01 - r * 0.05);
+        positions.push(
+          cx + Math.cos(angle) * r,
+          Math.sin(angle) * r,
+          depth / 2 + 0.01 - r * 0.05,
+        );
         colors.push(cDark.r, cDark.g, cDark.b);
       }
     }
@@ -87,7 +162,11 @@ function createGPUGeometry(isLight) {
     for (let i = 0; i < 100; i++) {
       const theta = Math.random() * Math.PI * 2;
       const r = Math.random() * 0.12;
-      positions.push(cx + Math.cos(theta) * r, Math.sin(theta) * r, depth / 2 + 0.03);
+      positions.push(
+        cx + Math.cos(theta) * r,
+        Math.sin(theta) * r,
+        depth / 2 + 0.03,
+      );
       colors.push(cGold.r, cGold.g, cGold.b);
     }
   });
@@ -103,9 +182,9 @@ function createAIEnergyGeometry(isLight) {
   const positions = [];
   const colors = [];
 
-  const cText = new THREE.Color(isLight ? "#0284c7" : "#00d4ff"); // Cyan
-  const cWave1 = new THREE.Color(isLight ? "#6d28d9" : "#7c3aed"); // Violet
-  const cWave2 = new THREE.Color(isLight ? "#0284c7" : "#00d4ff"); // Cyan
+  const cText = new THREE.Color(isLight ? "#047857" : "#22d3a7"); // Cyan -> Emerald
+  const cWave1 = new THREE.Color(isLight ? "#b45309" : "#f5a623"); // Violet -> Amber
+  const cWave2 = new THREE.Color(isLight ? "#047857" : "#22d3a7"); // Cyan -> Emerald
 
   const addBlockLine = (x1, y1, x2, y2, density) => {
     const dx = x2 - x1;
@@ -121,7 +200,7 @@ function createAIEnergyGeometry(isLight) {
         positions.push(
           bx + (Math.random() - 0.5) * 0.08,
           by + (Math.random() - 0.5) * 0.08,
-          (Math.random() - 0.5) * 0.08
+          (Math.random() - 0.5) * 0.08,
         );
         colors.push(cText.r, cText.g, cText.b);
       }
@@ -150,7 +229,11 @@ function createAIEnergyGeometry(isLight) {
       if (Math.random() > 0.5) cx += (Math.random() > 0.5 ? 1 : -1) * 0.12;
       else cy += (Math.random() > 0.5 ? 1 : -1) * 0.12;
       for (let p = 0; p < 10; p++) {
-        positions.push(cx + (Math.random() - 0.5) * 0.02, cy + (Math.random() - 0.5) * 0.02, 0.05);
+        positions.push(
+          cx + (Math.random() - 0.5) * 0.02,
+          cy + (Math.random() - 0.5) * 0.02,
+          0.05,
+        );
         colors.push(cText.r, cText.g, cText.b);
       }
     }
@@ -175,7 +258,7 @@ function createAIEnergyGeometry(isLight) {
         positions.push(
           x + (Math.random() - 0.5) * 0.06,
           y + (Math.random() - 0.5) * 0.06,
-          z + (Math.random() - 0.5) * 0.06
+          z + (Math.random() - 0.5) * 0.06,
         );
         colors.push(strandColor.r, strandColor.g, strandColor.b);
       }
@@ -212,8 +295,8 @@ function createAIEnergyGeometry(isLight) {
 function createDNAHelixGeometry(isLight) {
   const positions = [];
   const colors = [];
-  const c1 = new THREE.Color(isLight ? "#0284c7" : "#00d4ff");
-  const c2 = new THREE.Color(isLight ? "#059669" : "#10b981");
+  const c1 = new THREE.Color(isLight ? "#047857" : "#22d3a7");
+  const c2 = new THREE.Color(isLight ? "#b45309" : "#f5a623");
   const cRung = new THREE.Color("#ffffff");
 
   const count = 400;
@@ -225,11 +308,19 @@ function createDNAHelixGeometry(isLight) {
     const z = Math.sin(t) * r;
 
     for (let p = 0; p < 6; p++) {
-      positions.push(x + (Math.random() - 0.5) * 0.08, y + (Math.random() - 0.5) * 0.08, z + (Math.random() - 0.5) * 0.08);
+      positions.push(
+        x + (Math.random() - 0.5) * 0.08,
+        y + (Math.random() - 0.5) * 0.08,
+        z + (Math.random() - 0.5) * 0.08,
+      );
       colors.push(c1.r, c1.g, c1.b);
     }
     for (let p = 0; p < 6; p++) {
-      positions.push(-x + (Math.random() - 0.5) * 0.08, y + (Math.random() - 0.5) * 0.08, -z + (Math.random() - 0.5) * 0.08);
+      positions.push(
+        -x + (Math.random() - 0.5) * 0.08,
+        y + (Math.random() - 0.5) * 0.08,
+        -z + (Math.random() - 0.5) * 0.08,
+      );
       colors.push(c2.r, c2.g, c2.b);
     }
 
@@ -239,7 +330,7 @@ function createDNAHelixGeometry(isLight) {
         positions.push(
           x + (-x - x) * tr + (Math.random() - 0.5) * 0.04,
           y + (Math.random() - 0.5) * 0.04,
-          z + (-z - z) * tr + (Math.random() - 0.5) * 0.04
+          z + (-z - z) * tr + (Math.random() - 0.5) * 0.04,
         );
         colors.push(cRung.r, cRung.g, cRung.b);
       }
@@ -252,7 +343,13 @@ function createDNAHelixGeometry(isLight) {
 }
 
 // ── Morph Component ──────────────────────────────────────────────────
-function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef, isLight }) {
+function MorphingParticles({
+  targetShape,
+  mouseRef,
+  isDragging,
+  dragDeltaRef,
+  isLight,
+}) {
   const ref = useRef();
   const progressRef = useRef(0);
   const morphingRef = useRef(false);
@@ -273,55 +370,74 @@ function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef, is
     [isLight],
   );
 
-  const samplePointsAndColors = useCallback((geo, defaultColorStr) => {
-    const pos = geo.attributes.position;
-    const col = geo.attributes.color;
+  const samplePointsAndColors = useCallback(
+    (geo, defaultColorStr) => {
+      const pos = geo.attributes.position;
+      const col = geo.attributes.color;
 
-    const defaultColor = new THREE.Color(defaultColorStr);
+      const defaultColor = new THREE.Color(defaultColorStr);
 
-    const posArr = new Float32Array(COUNT * 3);
-    const colArr = new Float32Array(COUNT * 3);
+      const posArr = new Float32Array(COUNT * 3);
+      const colArr = new Float32Array(COUNT * 3);
 
-    for (let i = 0; i < COUNT; i++) {
-      const idx = Math.floor(Math.random() * pos.count);
-      posArr[i * 3] = pos.getX(idx);
-      posArr[i * 3 + 1] = pos.getY(idx);
-      posArr[i * 3 + 2] = pos.getZ(idx);
+      for (let i = 0; i < COUNT; i++) {
+        const idx = Math.floor(Math.random() * pos.count);
+        posArr[i * 3] = pos.getX(idx);
+        posArr[i * 3 + 1] = pos.getY(idx);
+        posArr[i * 3 + 2] = pos.getZ(idx);
 
-      if (col) {
-        colArr[i * 3] = col.getX(idx);
-        colArr[i * 3 + 1] = col.getY(idx);
-        colArr[i * 3 + 2] = col.getZ(idx);
-      } else {
-        colArr[i * 3] = defaultColor.r;
-        colArr[i * 3 + 1] = defaultColor.g;
-        colArr[i * 3 + 2] = defaultColor.b;
+        if (col) {
+          colArr[i * 3] = col.getX(idx);
+          colArr[i * 3 + 1] = col.getY(idx);
+          colArr[i * 3 + 2] = col.getZ(idx);
+        } else {
+          colArr[i * 3] = defaultColor.r;
+          colArr[i * 3 + 1] = defaultColor.g;
+          colArr[i * 3 + 2] = defaultColor.b;
+        }
       }
-    }
-    return { positions: posArr, colors: colArr };
-  }, [COUNT]);
+      return { positions: posArr, colors: colArr };
+    },
+    [COUNT],
+  );
 
   const defaultColorMap = {
-    gpu: isLight ? "#d97706" : "#FFD700",
-    aiCore: isLight ? "#0284c7" : "#00d4ff",
-    helix: isLight ? "#059669" : "#10b981",
-    torusKnot: isLight ? "#6d28d9" : "#7c3aed"
+    gpu: isLight ? "#b45309" : "#f5a623",
+    aiCore: isLight ? "#047857" : "#22d3a7",
+    helix: isLight ? "#047857" : "#22d3a7",
+    torusKnot: isLight ? "#b45309" : "#f5a623",
   };
 
-  const currentData = useRef(samplePointsAndColors(shapes.aiCore, defaultColorMap.aiCore));
-  const targetData = useRef(samplePointsAndColors(shapes.aiCore, defaultColorMap.aiCore));
+  const currentData = useRef(
+    samplePointsAndColors(shapes.aiCore, defaultColorMap.aiCore),
+  );
+  const targetData = useRef(
+    samplePointsAndColors(shapes.aiCore, defaultColorMap.aiCore),
+  );
   const prevShape = useRef("aiCore");
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.Float32BufferAttribute(currentData.current.positions.slice(), 3));
-    geo.setAttribute("color", new THREE.Float32BufferAttribute(currentData.current.colors.slice(), 3));
+    geo.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(
+        currentData.current.positions.slice(),
+        3,
+      ),
+    );
+    geo.setAttribute(
+      "color",
+      new THREE.Float32BufferAttribute(currentData.current.colors.slice(), 3),
+    );
     return geo;
   }, []);
 
   useEffect(() => {
     if (targetShape === prevShape.current) return;
-    targetData.current = samplePointsAndColors(shapes[targetShape], defaultColorMap[targetShape]);
+    targetData.current = samplePointsAndColors(
+      shapes[targetShape],
+      defaultColorMap[targetShape],
+    );
     currentData.current.positions = geometry.attributes.position.array.slice();
     currentData.current.colors = geometry.attributes.color.array.slice();
     progressRef.current = 0;
@@ -349,9 +465,10 @@ function MorphingParticles({ targetShape, mouseRef, isDragging, dragDeltaRef, is
 
     if (morphingRef.current) {
       progressRef.current = Math.min(progressRef.current + delta * 0.8, 1);
-      const t = progressRef.current < 0.5
-        ? 4 * progressRef.current ** 3
-        : 1 - Math.pow(-2 * progressRef.current + 2, 3) / 2;
+      const t =
+        progressRef.current < 0.5
+          ? 4 * progressRef.current ** 3
+          : 1 - Math.pow(-2 * progressRef.current + 2, 3) / 2;
 
       const pos = geometry.attributes.position.array;
       const col = geometry.attributes.color.array;
@@ -422,8 +539,8 @@ const SHAPE_CODE_LABELS = {
 export default function HeroMorphScene() {
   const { theme } = useTheme();
   const isLight = theme === "light";
-  const cyanColor = isLight ? "#0369a1" : "#00d4ff";
-  const violetColor = isLight ? "#6d28d9" : "#7c3aed";
+  const cyanColor = isLight ? "#047857" : "#22d3a7";
+  const violetColor = isLight ? "#b45309" : "#f5a623";
   const [shapeIndex, setShapeIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -574,7 +691,9 @@ export default function HeroMorphScene() {
           <span style={{ color: violetColor }}>new </span>
           <span style={{ color: cyanColor }}>{shapeLabel.class}</span>
           <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>(</span>
-          <span style={{ color: isLight ? "#059669" : "#10b981" }}>{shapeLabel.args}</span>
+          <span style={{ color: isLight ? "#059669" : "#10b981" }}>
+            {shapeLabel.args}
+          </span>
           <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>)</span>
           <span style={{ color: "rgba(var(--text-primary-rgb), 0.5)" }}>;</span>
         </div>
@@ -583,7 +702,11 @@ export default function HeroMorphScene() {
           {SHAPES.map((s, i) => (
             <button
               key={s}
-              onClick={(e) => { e.stopPropagation(); setShapeIndex(i); setIsPaused(false); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShapeIndex(i);
+                setIsPaused(false);
+              }}
               style={{
                 width: "28px",
                 height: "28px",
@@ -602,8 +725,14 @@ export default function HeroMorphScene() {
                   width: "10px",
                   height: "10px",
                   borderRadius: "50%",
-                  border: i === shapeIndex ? `2px solid ${cyanColor}` : "1px solid rgba(var(--text-primary-rgb), 0.5)",
-                  background: i === shapeIndex ? cyanColor : "rgba(var(--text-primary-rgb), 0.5)",
+                  border:
+                    i === shapeIndex
+                      ? `2px solid ${cyanColor}`
+                      : "1px solid rgba(var(--text-primary-rgb), 0.5)",
+                  background:
+                    i === shapeIndex
+                      ? cyanColor
+                      : "rgba(var(--text-primary-rgb), 0.5)",
                   transition: "all 0.3s ease",
                   display: "block",
                 }}

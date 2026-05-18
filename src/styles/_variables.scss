@@ -3,75 +3,92 @@
 // ============================================================
 
 :root {
-  // ─── Dark Mode Colors (Default) ─────────────────────────────
-  --bg-primary: #06080d;
-  --bg-primary-rgb: 6, 8, 13;
-  --bg-secondary: #0d1117;
-  --bg-secondary-rgb: 13, 17, 23;
-  --bg-card: #111827;
-  --bg-card-rgb: 17, 24, 39;
-  --bg-card-hover: #1a2332;
-  --bg-glass: rgba(17, 24, 39, 0.6);
+  // ─── Dark Mode Colors (Default) — Emerald & Gold ────────────
+  --bg-primary: #07090e;
+  --bg-primary-rgb: 7, 9, 14;
+  --bg-secondary: #0e1218;
+  --bg-secondary-rgb: 14, 18, 24;
+  --bg-card: #151c26;
+  --bg-card-rgb: 21, 28, 38;
+  --bg-card-hover: #1d2636;
+  --bg-glass: rgba(21, 28, 38, 0.72);
 
-  --text-primary: #f0f6fc;
-  --text-primary-rgb: 240, 246, 252;
-  --text-secondary: #8b949e;
-  --text-muted: #6e7681;
+  --text-primary: #edf2f7;
+  --text-primary-rgb: 237, 242, 247;
+  --text-secondary: #aab5c4;
+  --text-muted: #828fa2;
 
-  --accent-cyan: #00d4ff;
-  --accent-cyan-rgb: 0, 212, 255;
-  --accent-violet: #7c3aed;
-  --accent-violet-rgb: 124, 58, 237;
+  --accent-cyan: #22d3a7;
+  --accent-cyan-rgb: 34, 211, 167;
+  --accent-violet: #f5a623;
+  --accent-violet-rgb: 245, 166, 35;
 
-  --accent-cyan-hover: #1ad9ff; // approx color.adjust 8% lightness
-  --accent-violet-hover: #8f53ef; // approx color.adjust 8% lightness
-  --accent-cyan-hover-link: #33e0ff; // approx color.adjust 15% lightness
+  --accent-cyan-hover: #4ae0be;
+  --accent-violet-hover: #fbb130;
+  --accent-cyan-hover-link: #6eecce;
 
-  --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
-  --accent-gradient-hover: linear-gradient(135deg, var(--accent-cyan-hover), var(--accent-violet-hover));
+  --accent-gradient: linear-gradient(
+    135deg,
+    var(--accent-cyan),
+    var(--accent-violet)
+  );
+  --accent-gradient-hover: linear-gradient(
+    135deg,
+    var(--accent-cyan-hover),
+    var(--accent-violet-hover)
+  );
 
-  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.1);
   --border-color-rgb: 255, 255, 255;
-  --border-glow: rgba(0, 212, 255, 0.15);
-  
-  --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.15);
-  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --border-glow: rgba(34, 211, 167, 0.22);
+
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.22);
+  --shadow-card-hover:
+    0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(34, 211, 167, 0.04);
 }
 
-[data-theme='light'] {
-  // ─── Light Mode Colors ──────────────────────────────────────
-  --bg-primary: #f1f5f9; // slightly darker background to make white cards pop
-  --bg-primary-rgb: 241, 245, 249;
-  --bg-secondary: #e2e8f0;
-  --bg-secondary-rgb: 226, 232, 240;
+[data-theme="light"] {
+  // ─── Light Mode Colors — Emerald & Gold ─────────────────────
+  --bg-primary: #f1f5f3;
+  --bg-primary-rgb: 241, 245, 243;
+  --bg-secondary: #e2ebe6;
+  --bg-secondary-rgb: 226, 235, 230;
   --bg-card: #ffffff;
   --bg-card-rgb: 255, 255, 255;
-  --bg-card-hover: #f8fafc;
+  --bg-card-hover: #f6faf8;
   --bg-glass: rgba(255, 255, 255, 0.7);
 
-  --text-primary: #0f172a;
-  --text-primary-rgb: 15, 23, 42;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  --text-primary: #0f1f17;
+  --text-primary-rgb: 15, 31, 23;
+  --text-secondary: #3d5549;
+  --text-muted: #5a7568;
 
-  --accent-cyan: #0369a1; // Sky 700 for guaranteed WCAG AA color contrast compliance
-  --accent-cyan-rgb: 3, 105, 161;
-  --accent-violet: #6d28d9;
-  --accent-violet-rgb: 109, 40, 217;
+  --accent-cyan: #047857; // Emerald 700 — WCAG AA on white
+  --accent-cyan-rgb: 4, 120, 87;
+  --accent-violet: #b45309; // Amber 700 — WCAG AA on white
+  --accent-violet-rgb: 180, 83, 9;
 
-  --accent-cyan-hover: #075985;
-  --accent-violet-hover: #5b21b6;
-  --accent-cyan-hover-link: #0369a1;
+  --accent-cyan-hover: #065f46;
+  --accent-violet-hover: #92400e;
+  --accent-cyan-hover-link: #047857;
 
-  --accent-gradient: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
-  --accent-gradient-hover: linear-gradient(135deg, var(--accent-cyan-hover), var(--accent-violet-hover));
+  --accent-gradient: linear-gradient(
+    135deg,
+    var(--accent-cyan),
+    var(--accent-violet)
+  );
+  --accent-gradient-hover: linear-gradient(
+    135deg,
+    var(--accent-cyan-hover),
+    var(--accent-violet-hover)
+  );
 
-  --border-color: rgba(15, 23, 42, 0.15); // increased contrast for borders
-  --border-color-rgb: 15, 23, 42;
-  --border-glow: rgba(2, 132, 199, 0.15);
-  
-  --shadow-card: 0 4px 15px rgba(15, 23, 42, 0.05); // soft visible shadow for light cards
-  --shadow-card-hover: 0 10px 30px rgba(15, 23, 42, 0.12);
+  --border-color: rgba(15, 31, 23, 0.14);
+  --border-color-rgb: 15, 31, 23;
+  --border-glow: rgba(4, 120, 87, 0.15);
+
+  --shadow-card: 0 4px 15px rgba(15, 31, 23, 0.05);
+  --shadow-card-hover: 0 10px 30px rgba(15, 31, 23, 0.12);
 }
 
 // ─── Typography ─────────────────────────────────────────────
@@ -113,9 +130,9 @@ $bp-lg: 1024px;
 $bp-xl: 1280px;
 
 // ─── Effects ────────────────────────────────────────────────
-$shadow-card: 0 4px 24px rgba(0, 0, 0, 0.1);
-$shadow-glow: 0 0 30px rgba(0, 212, 255, 0.1);
-$shadow-glow-strong: 0 0 60px rgba(0, 212, 255, 0.2);
+$shadow-card: 0 4px 24px rgba(0, 0, 0, 0.15);
+$shadow-glow: 0 0 30px rgba(34, 211, 167, 0.12);
+$shadow-glow-strong: 0 0 60px rgba(34, 211, 167, 0.22);
 
 $radius-sm: 8px;
 $radius-md: 12px;

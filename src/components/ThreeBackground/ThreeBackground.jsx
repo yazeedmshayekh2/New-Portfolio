@@ -51,8 +51,8 @@ function Stars({ color }) {
 
 export default function ThreeBackground() {
   const { theme } = useTheme();
-  const cyanColor = theme === 'light' ? '#0284c7' : '#00d4ff';
-  const violetColor = theme === 'light' ? '#6d28d9' : '#7c3aed';
+  const cyanColor = theme === 'light' ? '#047857' : '#22d3a7';
+  const violetColor = theme === 'light' ? '#b45309' : '#f5a623';
 
   return (
     <div className="three-background" aria-hidden="true">

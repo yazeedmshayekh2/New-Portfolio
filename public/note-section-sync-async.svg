@@ -1,0 +1,409 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a"/>
+      <stop offset="50%" style="stop-color:#0d1b2e"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <linearGradient id="syncGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#ff4444"/>
+    </linearGradient>
+    <linearGradient id="asyncGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7b61ff"/>
+    </linearGradient>
+    <linearGradient id="titleSyncGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#ff4444"/>
+    </linearGradient>
+    <linearGradient id="titleAsyncGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7b61ff"/>
+    </linearGradient>
+
+    <!-- Grid pattern -->
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1a2744" stroke-width="0.8"/>
+    </pattern>
+
+    <!-- Glow filters -->
+    <filter id="glowOrange" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowCyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowPurple" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowGreen" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="titleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ══ BACKGROUND ══ -->
+  <rect width="1600" height="1200" fill="url(#bgGrad)"/>
+  <rect width="1600" height="1200" fill="url(#grid)" opacity="0.4"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="300" cy="250" rx="380" ry="220" fill="#ff6b35" opacity="0.04"/>
+  <ellipse cx="1350" cy="950" rx="400" ry="240" fill="#00d4ff" opacity="0.05"/>
+  <ellipse cx="800" cy="600" rx="420" ry="220" fill="#7b61ff" opacity="0.04"/>
+
+  <!-- ══ CORNER ACCENTS ══ -->
+  <path d="M 45 45 L 45 95 M 45 45 L 95 45" stroke="#1e3a5f" stroke-width="2.5" fill="none"/>
+  <path d="M 1555 45 L 1505 45 M 1555 45 L 1555 95" stroke="#1e3a5f" stroke-width="2.5" fill="none"/>
+  <path d="M 45 1155 L 45 1105 M 45 1155 L 95 1155" stroke="#1e3a5f" stroke-width="2.5" fill="none"/>
+  <path d="M 1555 1155 L 1505 1155 M 1555 1155 L 1555 1105" stroke="#1e3a5f" stroke-width="2.5" fill="none"/>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--                  TITLE SECTION                        -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="480" y="55" width="640" height="115" rx="22" fill="#080c18" opacity="0.85"/>
+  <rect x="480" y="55" width="640" height="115" rx="22" fill="none" stroke="#1e3a5f" stroke-width="1.8"/>
+
+  <text x="620" y="140" font-family="'Courier New', monospace" font-size="58" font-weight="900"
+        fill="url(#titleSyncGrad)" filter="url(#titleGlow)">SYNC</text>
+  <text x="800" y="140" font-family="'Courier New', monospace" font-size="34" font-weight="300"
+        fill="#ffffff" text-anchor="middle" opacity="0.38">vs</text>
+  <text x="870" y="140" font-family="'Courier New', monospace" font-size="58" font-weight="900"
+        fill="url(#titleAsyncGrad)" filter="url(#titleGlow)">ASYNC</text>
+  <text x="800" y="162" font-family="'Courier New', monospace" font-size="14"
+        fill="#ffffff" text-anchor="middle" letter-spacing="4" opacity="0.32">EXECUTION MODELS EXPLAINED</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--              SYNCHRONOUS SECTION                      -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- Section header -->
+  <text x="80" y="240" font-family="'Courier New', monospace" font-size="24" font-weight="700"
+        fill="#ff6b35" letter-spacing="5" opacity="0.9">SYNCHRONOUS</text>
+
+  <!-- Concept note -->
+  <text x="80" y="268" font-family="'Courier New', monospace" font-size="13"
+        fill="#ff6b35" opacity="0.45" letter-spacing="1">Each task must complete before the next begins — thread is blocked while waiting</text>
+
+  <!-- Timeline base -->
+  <line x1="80" y1="320" x2="1520" y2="320" stroke="#1e2d4a" stroke-width="2"/>
+
+  <!-- Task A -->
+  <rect x="80" y="292" width="210" height="56" rx="9" fill="url(#syncGrad)" opacity="0.9" filter="url(#glowOrange)"/>
+  <text x="185" y="326" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#fff" text-anchor="middle">Task A</text>
+
+  <!-- Arrow A→B -->
+  <line x1="290" y1="320" x2="328" y2="320" stroke="#ff6b35" stroke-width="2.2"/>
+  <polygon points="328,313 342,320 328,327" fill="#ff6b35"/>
+
+  <!-- Task B -->
+  <rect x="342" y="292" width="210" height="56" rx="9" fill="url(#syncGrad)" opacity="0.9" filter="url(#glowOrange)"/>
+  <text x="447" y="326" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#fff" text-anchor="middle">Task B</text>
+
+  <!-- Arrow B→C -->
+  <line x1="552" y1="320" x2="590" y2="320" stroke="#ff6b35" stroke-width="2.2"/>
+  <polygon points="590,313 604,320 590,327" fill="#ff6b35"/>
+
+  <!-- Task C -->
+  <rect x="604" y="292" width="210" height="56" rx="9" fill="url(#syncGrad)" opacity="0.9" filter="url(#glowOrange)"/>
+  <text x="709" y="326" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#fff" text-anchor="middle">Task C</text>
+
+  <!-- Arrow C→D -->
+  <line x1="814" y1="320" x2="852" y2="320" stroke="#ff6b35" stroke-width="2.2"/>
+  <polygon points="852,313 866,320 852,327" fill="#ff6b35"/>
+
+  <!-- Task D -->
+  <rect x="866" y="292" width="210" height="56" rx="9" fill="url(#syncGrad)" opacity="0.9" filter="url(#glowOrange)"/>
+  <text x="971" y="326" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#fff" text-anchor="middle">Task D</text>
+
+  <!-- Arrow D→E -->
+  <line x1="1076" y1="320" x2="1114" y2="320" stroke="#ff6b35" stroke-width="2.2"/>
+  <polygon points="1114,313 1128,320 1114,327" fill="#ff6b35"/>
+
+  <!-- Task E -->
+  <rect x="1128" y="292" width="210" height="56" rx="9" fill="url(#syncGrad)" opacity="0.9" filter="url(#glowOrange)"/>
+  <text x="1233" y="326" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#fff" text-anchor="middle">Task E</text>
+
+  <!-- Arrow E→done -->
+  <line x1="1338" y1="320" x2="1374" y2="320" stroke="#ff6b35" stroke-width="2.2"/>
+  <polygon points="1374,313 1388,320 1374,327" fill="#ff6b35"/>
+
+  <!-- Done circle -->
+  <circle cx="1415" cy="320" r="22" fill="none" stroke="#ff6b35" stroke-width="2.5" opacity="0.75"/>
+  <text x="1415" y="326" font-family="'Courier New', monospace" font-size="15"
+        fill="#ff6b35" text-anchor="middle">✓</text>
+
+  <!-- Blocking annotation -->
+  <text x="80" y="375" font-family="'Courier New', monospace" font-size="13"
+        fill="#ff6b35" opacity="0.5">⏳ blocks → blocks → blocks → blocks → blocks → done</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--                  DIVIDER                              -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <line x1="60" y1="418" x2="1540" y2="418" stroke="#1e2d4a" stroke-width="1.5" stroke-dasharray="10,7"/>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--              ASYNCHRONOUS SECTION                     -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- Section header -->
+  <text x="80" y="466" font-family="'Courier New', monospace" font-size="24" font-weight="700"
+        fill="#00d4ff" letter-spacing="5" opacity="0.9">ASYNCHRONOUS</text>
+
+  <!-- Concept note -->
+  <text x="80" y="494" font-family="'Courier New', monospace" font-size="13"
+        fill="#00d4ff" opacity="0.45" letter-spacing="1">Tasks yield at await points — event loop runs other coroutines while waiting for I/O</text>
+
+  <!-- Event loop label -->
+  <text x="80" y="530" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.28" letter-spacing="3">EVENT LOOP  ─────────────────────────────────────────────────────────────</text>
+
+  <!-- Timeline base lines -->
+  <line x1="80" y1="580" x2="1520" y2="580" stroke="#1a2a40" stroke-width="1.5"/>
+  <line x1="80" y1="668" x2="1520" y2="668" stroke="#1a2a40" stroke-width="1.5"/>
+  <line x1="80" y1="756" x2="1520" y2="756" stroke="#1a2a40" stroke-width="1.5"/>
+
+  <!-- Track labels -->
+  <text x="58" y="584" font-family="'Courier New', monospace" font-size="13"
+        fill="#00d4ff" opacity="0.55" text-anchor="middle" font-weight="700">T1</text>
+  <text x="58" y="672" font-family="'Courier New', monospace" font-size="13"
+        fill="#7b61ff" opacity="0.55" text-anchor="middle" font-weight="700">T2</text>
+  <text x="58" y="760" font-family="'Courier New', monospace" font-size="13"
+        fill="#00ffaa" opacity="0.55" text-anchor="middle" font-weight="700">T3</text>
+
+  <!-- ─── T1: Task A ─── -->
+  <rect x="80" y="554" width="175" height="52" rx="9" fill="#00d4ff" opacity="0.88" filter="url(#glowCyan)"/>
+  <text x="167" y="585" font-family="'Courier New', monospace" font-size="15" font-weight="700"
+        fill="#001a2e" text-anchor="middle">Task A</text>
+
+  <!-- A await gap -->
+  <rect x="255" y="563" width="230" height="32" rx="6" fill="none" stroke="#00d4ff"
+        stroke-width="1.8" stroke-dasharray="7,5" opacity="0.45"/>
+  <text x="370" y="584" font-family="'Courier New', monospace" font-size="12"
+        fill="#00d4ff" text-anchor="middle" opacity="0.65">await I/O...</text>
+
+  <!-- A resumes -->
+  <rect x="485" y="554" width="160" height="52" rx="9" fill="#00d4ff" opacity="0.88" filter="url(#glowCyan)"/>
+  <text x="565" y="585" font-family="'Courier New', monospace" font-size="15" font-weight="700"
+        fill="#001a2e" text-anchor="middle">A resumes</text>
+
+  <!-- A done -->
+  <line x1="645" y1="580" x2="686" y2="580" stroke="#00d4ff" stroke-width="1.8" opacity="0.55"/>
+  <circle cx="704" cy="580" r="16" fill="none" stroke="#00d4ff" stroke-width="2.2" opacity="0.75"/>
+  <text x="704" y="585" font-family="'Courier New', monospace" font-size="12"
+        fill="#00d4ff" text-anchor="middle">✓</text>
+
+  <!-- ─── T2: Task B ─── -->
+  <rect x="255" y="642" width="175" height="52" rx="9" fill="#7b61ff" opacity="0.88" filter="url(#glowPurple)"/>
+  <text x="342" y="673" font-family="'Courier New', monospace" font-size="15" font-weight="700"
+        fill="#fff" text-anchor="middle">Task B</text>
+
+  <!-- B await gap -->
+  <rect x="430" y="651" width="210" height="32" rx="6" fill="none" stroke="#7b61ff"
+        stroke-width="1.8" stroke-dasharray="7,5" opacity="0.45"/>
+  <text x="535" y="672" font-family="'Courier New', monospace" font-size="12"
+        fill="#7b61ff" text-anchor="middle" opacity="0.65">await I/O...</text>
+
+  <!-- B resumes -->
+  <rect x="640" y="642" width="160" height="52" rx="9" fill="#7b61ff" opacity="0.88" filter="url(#glowPurple)"/>
+  <text x="720" y="673" font-family="'Courier New', monospace" font-size="15" font-weight="700"
+        fill="#fff" text-anchor="middle">B resumes</text>
+
+  <!-- B done -->
+  <line x1="800" y1="668" x2="840" y2="668" stroke="#7b61ff" stroke-width="1.8" opacity="0.55"/>
+  <circle cx="858" cy="668" r="16" fill="none" stroke="#7b61ff" stroke-width="2.2" opacity="0.75"/>
+  <text x="858" y="673" font-family="'Courier New', monospace" font-size="12"
+        fill="#7b61ff" text-anchor="middle">✓</text>
+
+  <!-- ─── T3: Task C ─── -->
+  <rect x="430" y="730" width="175" height="52" rx="9" fill="#00ffaa" opacity="0.82" filter="url(#glowGreen)"/>
+  <text x="517" y="761" font-family="'Courier New', monospace" font-size="15" font-weight="700"
+        fill="#001a2e" text-anchor="middle">Task C</text>
+
+  <!-- C await gap -->
+  <rect x="605" y="739" width="190" height="32" rx="6" fill="none" stroke="#00ffaa"
+        stroke-width="1.8" stroke-dasharray="7,5" opacity="0.4"/>
+  <text x="700" y="760" font-family="'Courier New', monospace" font-size="12"
+        fill="#00ffaa" text-anchor="middle" opacity="0.6">await I/O...</text>
+
+  <!-- C resumes -->
+  <rect x="795" y="730" width="160" height="52" rx="9" fill="#00ffaa" opacity="0.82" filter="url(#glowGreen)"/>
+  <text x="875" y="761" font-family="'Courier New', monospace" font-size="15" font-weight="700"
+        fill="#001a2e" text-anchor="middle">C resumes</text>
+
+  <!-- C done -->
+  <line x1="955" y1="756" x2="995" y2="756" stroke="#00ffaa" stroke-width="1.8" opacity="0.55"/>
+  <circle cx="1013" cy="756" r="16" fill="none" stroke="#00ffaa" stroke-width="2.2" opacity="0.75"/>
+  <text x="1013" y="761" font-family="'Courier New', monospace" font-size="12"
+        fill="#00ffaa" text-anchor="middle">✓</text>
+
+  <!-- Cooperative yield connectors -->
+  <line x1="255" y1="580" x2="255" y2="642" stroke="#ffffff" stroke-width="1.4"
+        stroke-dasharray="4,4" opacity="0.22"/>
+  <line x1="430" y1="668" x2="430" y2="730" stroke="#ffffff" stroke-width="1.4"
+        stroke-dasharray="4,4" opacity="0.22"/>
+
+  <text x="262" y="614" font-family="'Courier New', monospace" font-size="11"
+        fill="#ffffff" opacity="0.32">yield</text>
+  <text x="437" y="702" font-family="'Courier New', monospace" font-size="11"
+        fill="#ffffff" opacity="0.32">yield</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--            TIME COMPARISON BARS                       -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <text x="1080" y="570" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.35" letter-spacing="2">TOTAL TIME</text>
+
+  <!-- Sync bar (full width) -->
+  <rect x="1080" y="580" width="420" height="30" rx="7" fill="#ff6b35" opacity="0.18"/>
+  <rect x="1080" y="580" width="420" height="30" rx="7" fill="none" stroke="#ff6b35"
+        stroke-width="1.8" opacity="0.5"/>
+  <text x="1290" y="600" font-family="'Courier New', monospace" font-size="13"
+        fill="#ff6b35" text-anchor="middle" opacity="0.9" font-weight="600">Sync:  ~5T  ████████████</text>
+
+  <!-- Async bar (shorter) -->
+  <rect x="1080" y="622" width="260" height="30" rx="7" fill="#00d4ff" opacity="0.18"/>
+  <rect x="1080" y="622" width="260" height="30" rx="7" fill="none" stroke="#00d4ff"
+        stroke-width="1.8" opacity="0.5"/>
+  <text x="1210" y="642" font-family="'Courier New', monospace" font-size="13"
+        fill="#00d4ff" text-anchor="middle" opacity="0.9" font-weight="600">Async: ~T  ███████</text>
+
+  <text x="1080" y="676" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.3">Same 3 tasks — fraction of the wall time</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--                   LEGEND BOX                          -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="1080" y="710" width="420" height="160" rx="14" fill="#080c18" opacity="0.85"/>
+  <rect x="1080" y="710" width="420" height="160" rx="14" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+
+  <text x="1105" y="740" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.42" letter-spacing="3">LEGEND</text>
+
+  <!-- Active block -->
+  <rect x="1105" y="752" width="36" height="22" rx="5" fill="#00d4ff" opacity="0.88"/>
+  <text x="1153" y="768" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.75">Active execution</text>
+
+  <!-- Await block -->
+  <rect x="1105" y="786" width="36" height="22" rx="5" fill="none"
+        stroke="#00d4ff" stroke-width="1.8" stroke-dasharray="5,3" opacity="0.75"/>
+  <text x="1153" y="802" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.75">Awaiting I/O (thread free)</text>
+
+  <!-- Yield line -->
+  <line x1="1105" y1="830" x2="1141" y2="830" stroke="#ffffff"
+        stroke-width="1.8" stroke-dasharray="4,3" opacity="0.5"/>
+  <text x="1153" y="835" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.75">Cooperative yield to event loop</text>
+
+  <!-- Done marker -->
+  <circle cx="1123" cy="864" r="14" fill="none" stroke="#00ffaa" stroke-width="2" opacity="0.7"/>
+  <text x="1123" y="869" font-family="'Courier New', monospace" font-size="11"
+        fill="#00ffaa" text-anchor="middle">✓</text>
+  <text x="1153" y="869" font-family="'Courier New', monospace" font-size="13"
+        fill="#ffffff" opacity="0.75">Task completed</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--             LANGUAGE TAGS                             -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <text x="80" y="908" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.28" letter-spacing="3">LANGUAGES</text>
+
+  <!-- Python -->
+  <rect x="80" y="920" width="105" height="30" rx="6" fill="#3776ab" opacity="0.25"/>
+  <rect x="80" y="920" width="105" height="30" rx="6" fill="none" stroke="#3776ab" stroke-width="1.2" opacity="0.65"/>
+  <text x="132" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#3776ab" text-anchor="middle" font-weight="700">Python</text>
+
+  <!-- JavaScript -->
+  <rect x="198" y="920" width="125" height="30" rx="6" fill="#f7df1e" opacity="0.18"/>
+  <rect x="198" y="920" width="125" height="30" rx="6" fill="none" stroke="#f7df1e" stroke-width="1.2" opacity="0.55"/>
+  <text x="260" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#f7df1e" text-anchor="middle" font-weight="700">JavaScript</text>
+
+  <!-- Go -->
+  <rect x="336" y="920" width="80" height="30" rx="6" fill="#00add8" opacity="0.22"/>
+  <rect x="336" y="920" width="80" height="30" rx="6" fill="none" stroke="#00add8" stroke-width="1.2" opacity="0.65"/>
+  <text x="376" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#00add8" text-anchor="middle" font-weight="700">Go</text>
+
+  <!-- Rust -->
+  <rect x="430" y="920" width="80" height="30" rx="6" fill="#ff4500" opacity="0.22"/>
+  <rect x="430" y="920" width="80" height="30" rx="6" fill="none" stroke="#ff4500" stroke-width="1.2" opacity="0.65"/>
+  <text x="470" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#ff4500" text-anchor="middle" font-weight="700">Rust</text>
+
+  <!-- C# -->
+  <rect x="524" y="920" width="72" height="30" rx="6" fill="#9b59b6" opacity="0.22"/>
+  <rect x="524" y="920" width="72" height="30" rx="6" fill="none" stroke="#9b59b6" stroke-width="1.2" opacity="0.65"/>
+  <text x="560" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#9b59b6" text-anchor="middle" font-weight="700">C#</text>
+
+  <!-- Java -->
+  <rect x="610" y="920" width="80" height="30" rx="6" fill="#f89820" opacity="0.22"/>
+  <rect x="610" y="920" width="80" height="30" rx="6" fill="none" stroke="#f89820" stroke-width="1.2" opacity="0.65"/>
+  <text x="650" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#f89820" text-anchor="middle" font-weight="700">Java</text>
+
+  <!-- Node.js -->
+  <rect x="704" y="920" width="90" height="30" rx="6" fill="#68a063" opacity="0.22"/>
+  <rect x="704" y="920" width="90" height="30" rx="6" fill="none" stroke="#68a063" stroke-width="1.2" opacity="0.65"/>
+  <text x="749" y="940" font-family="'Courier New', monospace" font-size="13"
+        fill="#68a063" text-anchor="middle" font-weight="700">Node.js</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--        CODE SNIPPET DECORATIONS                       -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- Left code snippet box -->
+  <rect x="80" y="975" width="440" height="110" rx="10" fill="#080c18" opacity="0.7"/>
+  <rect x="80" y="975" width="440" height="110" rx="10" fill="none" stroke="#1e3a5f" stroke-width="1.2"/>
+  <text x="100" y="998" font-family="'Courier New', monospace" font-size="12"
+        fill="#ff6b35" opacity="0.7">// sync</text>
+  <text x="100" y="1018" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.55">result1 <tspan fill="#ff6b35">=</tspan> fetchData()<tspan fill="#ff6b35">;</tspan>  <tspan fill="#444d66">// waits...</tspan></text>
+  <text x="100" y="1038" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.55">result2 <tspan fill="#ff6b35">=</tspan> fetchMore()<tspan fill="#ff6b35">;</tspan> <tspan fill="#444d66">// waits...</tspan></text>
+  <text x="100" y="1058" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.55">result3 <tspan fill="#ff6b35">=</tspan> fetchOther()<tspan fill="#ff6b35">;</tspan><tspan fill="#444d66">// waits...</tspan></text>
+  <text x="100" y="1078" font-family="'Courier New', monospace" font-size="12"
+        fill="#ff4444" opacity="0.55">// total: ~3x latency</text>
+
+  <!-- Right code snippet box -->
+  <rect x="560" y="975" width="480" height="110" rx="10" fill="#080c18" opacity="0.7"/>
+  <rect x="560" y="975" width="480" height="110" rx="10" fill="none" stroke="#1e3a5f" stroke-width="1.2"/>
+  <text x="580" y="998" font-family="'Courier New', monospace" font-size="12"
+        fill="#00d4ff" opacity="0.7">// async (Python asyncio)</text>
+  <text x="580" y="1018" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.55">r1, r2, r3 <tspan fill="#7b61ff">=</tspan> <tspan fill="#00d4ff">await</tspan> asyncio.gather(</text>
+  <text x="580" y="1038" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.55">    fetchData(), fetchMore(), fetchOther()</text>
+  <text x="580" y="1058" font-family="'Courier New', monospace" font-size="12"
+        fill="#ffffff" opacity="0.55">)</text>
+  <text x="580" y="1078" font-family="'Courier New', monospace" font-size="12"
+        fill="#00ffaa" opacity="0.55">// total: ~1x latency  ← all run concurrently</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--                BOTTOM TAGLINE                         -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="800" y="1155" font-family="'Courier New', monospace" font-size="16"
+        fill="#ffffff" text-anchor="middle" opacity="0.18" letter-spacing="6">
+    CONCURRENCY IS NOT PARALLELISM
+  </text>
+</svg>
