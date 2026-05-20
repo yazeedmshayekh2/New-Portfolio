@@ -14,27 +14,31 @@ import stemCenterImg from "../assets/awards/StemCenter.webp";
 import paradeImg from "../assets/awards/Parade.webp";
 
 // TensorFlow Professional Certificate sub-courses certificate image imports
-import tfIntroImg from "../assets/certifications/tensorflowDeveloper/Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning.png";
-import tfCnnImg from "../assets/certifications/tensorflowDeveloper/Convolutional Neural Networks in TensorFlow.png";
-import tfNlpImg from "../assets/certifications/tensorflowDeveloper/Natural Language Processing in TensorFlow.png";
-import tfTimeImg from "../assets/certifications/tensorflowDeveloper/Sequences, Time Series and Prediction.png";
+import tfIntroImg from "../assets/certifications/tensorflowDeveloper/tf-course-1.webp";
+import tfCnnImg from "../assets/certifications/tensorflowDeveloper/tf-course-2.webp";
+import tfNlpImg from "../assets/certifications/tensorflowDeveloper/tf-course-3.webp";
+import tfTimeImg from "../assets/certifications/tensorflowDeveloper/tf-course-4.webp";
 
 // Deep Learning Specialization sub-courses certificate image imports
-import dlNeuralImg from "../assets/certifications/DeepLearning/Neural Networks and Deep Learning.png";
-import dlHyperImg from "../assets/certifications/DeepLearning/Improving Deep Neural Networks_ Hyperparameter Tuning, Regularization and Optimization.png";
-import dlStructImg from "../assets/certifications/DeepLearning/Structuring Machine Learning Projects.png";
-import dlCnnImg from "../assets/certifications/DeepLearning/Convolutional Neural Networks.png";
-import dlSeqImg from "../assets/certifications/DeepLearning/Sequence Models.png";
+import dlNeuralImg from "../assets/certifications/DeepLearning/dl-course-1.webp";
+import dlHyperImg from "../assets/certifications/DeepLearning/dl-course-2.webp";
+import dlStructImg from "../assets/certifications/DeepLearning/dl-course-3.webp";
+import dlCnnImg from "../assets/certifications/DeepLearning/dl-course-4.webp";
+import dlSeqImg from "../assets/certifications/DeepLearning/dl-course-5.webp";
 
 // Machine Learning Specialization sub-courses certificate image imports
-import mlSupervisedImg from "../assets/certifications/machineLearning/Supervised Machine Learning: Regression and Classification-1.png";
-import mlAdvancedImg from "../assets/certifications/machineLearning/Advanced Learning Algorithms-1.png";
-import mlUnsupervisedImg from "../assets/certifications/machineLearning/Unsupervised Learning, Recommenders, Reinforcement Learning-1.png";
+import mlSupervisedImg from "../assets/certifications/machineLearning/ml-course-1.webp";
+import mlAdvancedImg from "../assets/certifications/machineLearning/ml-course-2.webp";
+import mlUnsupervisedImg from "../assets/certifications/machineLearning/ml-course-3.webp";
 
 import azureAI900Img from "../assets/certifications/microsoft/Azure AI Engineer Associate.jpg";
 
 // Mathematics for Machine Learning and Data Science sub-courses certificate image imports
-import linearAlgebraCertImg from "../assets/certifications/DeepLearning/Neural Networks and Deep Learning.png";
+import linearAlgebraCertImg from "../assets/certifications/DeepLearning/dl-course-1.webp";
+
+import deeplearningLogo from "../assets/issuers/deeplearning.ai.png";
+import tensorflowLogo from "../assets/issuers/Tensorflow_logo.png";
+import stanfordLogo from "../assets/issuers/stanford.png";
 
 export const portfolioData = {
   // ─── HERO SECTION ───────────────────────────────────────────
@@ -386,6 +390,7 @@ export const portfolioData = {
     {
       name: "Machine Learning Specialization",
       issuer: "DeepLearning.AI & Stanford University",
+      logoUrls: [deeplearningLogo, stanfordLogo],
       issuerShort: "DEEPLEARNING.AI",
       type: "SPECIALIZATION",
       description: "Master fundamental machine learning concepts and build practical skills using Python, TensorFlow, and scikit-learn.",
@@ -440,7 +445,7 @@ export const portfolioData = {
     {
       name: "TensorFlow Professional Certification",
       issuer: "DeepLearning.AI & Tensorflow",
-      logoUrls: ["src/assets/issuers/deeplearning.ai.png", "src/assets/issuers/Tensorflow_logo.svg.png"],
+      logoUrls: [deeplearningLogo, tensorflowLogo],
       issuerShort: "DEEPLEARNING.AI",
       type: "PROFESSIONAL CERTIFICATE",
       description: "Hands-on training in building and deploying deep learning models using TensorFlow, Keras, and computer vision techniques.",
