@@ -110,16 +110,16 @@ export default function Navbar() {
                   transition={{ duration: 0.2 }}
                 >
                   <ul className="dropdown-list">
-                    <li>
+                    {/* <li>
                       <NavLink to="/volunteering" className="dropdown-item" onClick={handleLinkClick}>
                         VOLUNTEERING
                       </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <NavLink to="/recommendations" className="dropdown-item" onClick={handleLinkClick}>
                         RECOMMENDATIONS
                       </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                       <NavLink to="/skills" className="dropdown-item" onClick={handleLinkClick}>
                         SKILLS
@@ -219,12 +219,12 @@ export default function Navbar() {
 
             {mobileMoreOpen && (
               <ul className="mobile-sub-menu">
-                <li>
+                {/* <li>
                   <NavLink to="/volunteering" onClick={handleLinkClick}>VOLUNTEERING</NavLink>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <NavLink to="/recommendations" onClick={handleLinkClick}>RECOMMENDATIONS</NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="/skills" onClick={handleLinkClick}>SKILLS</NavLink>
                 </li>
