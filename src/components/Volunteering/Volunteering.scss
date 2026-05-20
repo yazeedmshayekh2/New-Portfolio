@@ -1,0 +1,652 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.volunteering {
+  position: relative;
+  z-index: 1;
+
+  .volunteering-container {
+    @include section;
+  }
+
+  .vol-section-header {
+    margin-bottom: $space-3xl;
+    text-align: left;
+
+    .title-wrapper {
+      max-width: 700px;
+    }
+
+    .section-title {
+      @include section-title;
+      text-align: left;
+      margin-bottom: $space-sm;
+
+      .title-counter {
+        font-family: "Fira Code", monospace;
+        font-size: 0.6em;
+        opacity: 0.5;
+        font-weight: 300;
+        vertical-align: super;
+      }
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: $fs-md;
+      line-height: 1.6;
+    }
+  }
+
+  // ─── Floating Sidebar Trigger ─────────────────────────────────
+  .vol-floating-trigger {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    background: rgba(var(--bg-card-rgb), 0.85);
+    border: 1px solid var(--border-color);
+    border-left: none;
+    border-radius: 0 30px 30px 0;
+    padding: $space-sm $space-lg $space-sm $space-md;
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(var(--accent-cyan-rgb), 0.15);
+    backdrop-filter: blur(12px);
+    transition: all $transition-spring;
+
+    &:hover {
+      padding-left: $space-lg;
+      background: rgba(var(--bg-card-rgb), 0.95);
+      border-color: rgba(var(--accent-cyan-rgb), 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(var(--accent-cyan-rgb), 0.3);
+      
+      .trigger-handle span {
+        background: var(--accent-cyan);
+      }
+    }
+
+    &.active {
+      transform: translateY(-50%) translateX(-100%);
+      opacity: 0;
+    }
+
+    .trigger-handle {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      span {
+        display: block;
+        width: 4px;
+        height: 4px;
+        background: var(--text-muted);
+        border-radius: 50%;
+        transition: background $transition-fast;
+      }
+    }
+
+    .trigger-status-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .trigger-text {
+      font-family: "Fira Code", monospace;
+      font-size: $fs-xs;
+      font-weight: $fw-bold;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+  }
+
+  // ─── Sidebar Panel ──────────────────────────────────────────
+  .vol-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .vol-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+    max-width: 85vw;
+    z-index: 1002;
+    background: rgba(var(--bg-secondary-rgb), 0.85);
+    border-right: 1px solid var(--border-color);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    padding: $space-xl;
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: $space-xl;
+      padding-bottom: $space-md;
+      border-bottom: 1px solid var(--border-color);
+
+      .header-title-sec {
+        flex: 1;
+        padding-right: $space-md;
+
+        .nav-subtitle {
+          font-family: "Space Grotesk", sans-serif;
+          font-size: $fs-xs;
+          font-weight: $fw-bold;
+          letter-spacing: 0.1em;
+          color: var(--accent-cyan);
+        }
+
+        .nav-title {
+          font-size: $fs-sm;
+          color: var(--text-muted);
+          font-weight: $fw-regular;
+          margin-top: 4px;
+          line-height: 1.4;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 260px;
+        }
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all $transition-fast;
+
+        &:hover {
+          color: var(--accent-cyan);
+          background: rgba(255, 255, 255, 0.05);
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    .sidebar-list {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: $space-xs;
+
+      // Custom Scrollbar
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: rgba(var(--accent-cyan-rgb), 0.2);
+        border-radius: 2px;
+        
+        &:hover {
+          background: var(--accent-cyan);
+        }
+      }
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: $space-sm $space-md;
+      border-radius: $radius-md;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all $transition-base;
+      position: relative;
+      gap: $space-md;
+
+      .item-logo-wrapper {
+        width: 32px;
+        height: 32px;
+        border-radius: $radius-sm;
+        @include flex-center;
+        background: rgba(var(--text-primary-rgb), 0.05);
+        color: var(--text-secondary);
+        transition: all $transition-base;
+
+        .item-issuer-logo {
+          width: 18px;
+          height: 18px;
+          color: inherit;
+        }
+      }
+
+      .item-status-dot {
+        width: 6px;
+        height: 6px;
+        background: transparent;
+        border-radius: 50%;
+        transition: all $transition-base;
+      }
+
+      .item-name {
+        flex: 1;
+        font-size: $fs-sm;
+        color: var(--text-secondary);
+        font-weight: $fw-medium;
+        line-height: 1.4;
+        transition: all $transition-base;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .item-arrow {
+        color: var(--text-muted);
+        opacity: 0;
+        transform: translateX(-5px);
+        transition: all $transition-base;
+      }
+
+      &:hover {
+        background: rgba(var(--text-primary-rgb), 0.03);
+        border-color: var(--border-color);
+
+        .item-logo-wrapper {
+          color: var(--accent-cyan);
+          background: rgba(var(--accent-cyan-rgb), 0.08);
+        }
+
+        .item-name {
+          color: var(--text-primary);
+        }
+
+        .item-arrow {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      &.active {
+        background: rgba(var(--accent-cyan-rgb), 0.06);
+        border-color: rgba(var(--accent-cyan-rgb), 0.15);
+
+        .item-logo-wrapper {
+          color: var(--accent-cyan);
+          background: rgba(var(--accent-cyan-rgb), 0.1);
+        }
+
+        .item-status-dot {
+          background: #22c55e;
+          box-shadow: 0 0 6px #22c55e;
+        }
+
+        .item-name {
+          color: var(--text-primary);
+          font-weight: $fw-bold;
+        }
+      }
+    }
+  }
+
+  // ─── Dashboard Card & Details ────────────────────────────────
+  .vol-dashboard-card {
+    @include glass;
+    background: rgba(var(--bg-card-rgb), 0.6);
+    border-radius: $radius-xl;
+    padding: $space-3xl;
+    margin-bottom: $space-4xl;
+    border: 1px solid var(--border-color);
+
+    @include respond(md) {
+      padding: $space-xl;
+    }
+  }
+
+  .vol-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: $space-4xl;
+    align-items: center;
+
+    @include respond(lg) {
+      grid-template-columns: 1fr;
+      gap: $space-2xl;
+    }
+  }
+
+  .vol-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+
+    .vol-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-sm;
+
+      .org-badge {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: $fs-xs;
+        font-weight: $fw-bold;
+        letter-spacing: 0.08em;
+        color: var(--accent-cyan);
+        background: rgba(var(--accent-cyan-rgb), 0.08);
+        padding: 0.35rem 0.85rem;
+        border-radius: $radius-full;
+        border: 1px solid rgba(var(--accent-cyan-rgb), 0.15);
+      }
+
+      .period-badge {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: $fs-xs;
+        font-weight: $fw-bold;
+        letter-spacing: 0.08em;
+        color: var(--accent-violet);
+        background: rgba(var(--accent-violet-rgb), 0.08);
+        padding: 0.35rem 0.85rem;
+        border-radius: $radius-full;
+        border: 1px solid rgba(var(--accent-violet-rgb), 0.15);
+      }
+    }
+
+    .vol-main-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp($fs-xl, 3vw, $fs-3xl);
+      font-weight: $fw-bold;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .vol-description {
+      color: var(--text-secondary);
+      font-size: $fs-base;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .vol-skills-group {
+      display: flex;
+      flex-direction: column;
+      gap: $space-sm;
+
+      h4 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: $fs-xs;
+        font-weight: $fw-bold;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+        margin: 0;
+      }
+
+      .vol-skills-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-sm;
+      }
+
+      .skill-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(var(--text-primary-rgb), 0.03);
+        border: 1px solid var(--border-color);
+        padding: 0.4rem 0.8rem;
+        border-radius: $radius-md;
+        font-size: $fs-xs;
+        color: var(--text-secondary);
+        font-weight: $fw-medium;
+
+        .tag-check {
+          color: var(--accent-cyan);
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+
+  .vol-visual-column {
+    width: 100%;
+
+    .vol-display-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: $radius-lg;
+      overflow: hidden;
+      @include glass;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+      &:hover {
+        transform: translateY(-4px) scale(1.01);
+        border-color: rgba(var(--accent-cyan-rgb), 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(var(--accent-cyan-rgb), 0.1);
+      }
+    }
+
+    .vol-glass-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .vol-render-wrapper {
+      width: 100%;
+      height: 100%;
+      @include flex-center;
+      
+      .vol-image-view {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: zoom-in;
+      }
+    }
+
+    .frame-glow-effect {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(var(--accent-cyan-rgb), 0.08), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+
+  // ─── Dynamic CSS Recognition Card Design ───────────────────────────
+  .dynamic-vol-canvas {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4/3;
+    background: #0d131f; // Cyber dark template
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-primary);
+
+    .vol-border-outer {
+      width: 100%;
+      height: 100%;
+      border: 2px solid rgba(var(--accent-cyan-rgb), 0.2);
+      border-radius: $radius-md;
+      padding: 10px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vol-border-inner {
+      width: 100%;
+      height: 100%;
+      border: 1px dashed rgba(var(--accent-cyan-rgb), 0.4);
+      border-radius: $radius-sm;
+      padding: $space-md;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .vol-watermark {
+      position: absolute;
+      inset: 0;
+      @include flex-center;
+      pointer-events: none;
+      color: var(--accent-cyan);
+      opacity: 0.05;
+      font-size: 8rem;
+      z-index: 1;
+    }
+
+    .vol-header, .vol-body, .vol-footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    .vol-header {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: $space-sm;
+
+      .vol-doc-type {
+        font-size: 10px;
+        font-weight: $fw-bold;
+        letter-spacing: 0.15em;
+        color: var(--accent-cyan);
+      }
+    }
+
+    .vol-body {
+      text-align: center;
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .vol-award-text {
+        font-family: "Fira Code", monospace;
+        font-size: 10px;
+        color: var(--text-muted);
+        margin: 0;
+      }
+
+      .vol-recipient-name {
+        font-size: clamp($fs-md, 2.5vw, $fs-xl);
+        font-weight: $fw-bold;
+        color: var(--text-primary);
+        margin: 2px 0;
+      }
+
+      .vol-sub-text {
+        font-family: "Fira Code", monospace;
+        font-size: 9px;
+        color: var(--text-muted);
+        margin: 0;
+      }
+
+      .vol-role-title {
+        font-size: clamp($fs-sm, 2vw, $fs-md);
+        font-weight: $fw-bold;
+        color: var(--accent-violet);
+        margin: 2px 0;
+      }
+
+      .vol-org-text {
+        font-size: $fs-xs;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+    }
+
+    .vol-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: $space-sm;
+
+      .vol-period-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+
+        span {
+          font-family: "Fira Code", monospace;
+          font-size: 8px;
+          color: var(--text-muted);
+          text-transform: uppercase;
+        }
+
+        .vol-date-val {
+          font-size: 10px;
+          color: var(--text-primary);
+          font-weight: $fw-bold;
+        }
+      }
+
+      .vol-seal {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(var(--accent-cyan-rgb), 0.1);
+        border: 1px solid rgba(var(--accent-cyan-rgb), 0.3);
+        @include flex-center;
+        color: var(--accent-cyan);
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // Responsive Styles
+  @include respond(md) {
+    .vol-section-header {
+      text-align: center;
+      .section-title {
+        text-align: center;
+      }
+    }
+
+    .vol-floating-trigger {
+      top: 90px;
+      transform: none;
+      left: 10px;
+      border-radius: 30px;
+      padding: $space-sm $space-md;
+      
+      &.active {
+        transform: scale(0.9);
+        opacity: 0.5;
+      }
+    }
+  }
+}

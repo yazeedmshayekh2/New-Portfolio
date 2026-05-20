@@ -1,0 +1,136 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.recommendations-section {
+  position: relative;
+  z-index: 1;
+
+  .recommendations-container {
+    @include section;
+  }
+
+  .rec-header {
+    margin-bottom: $space-3xl;
+    text-align: left;
+
+    .section-title {
+      @include section-title;
+      text-align: left;
+      margin-bottom: $space-sm;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: $fs-md;
+      line-height: 1.6;
+      max-width: 700px;
+    }
+  }
+
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: $space-2xl;
+    align-items: stretch;
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .recommendation-card {
+    @include glass;
+    background: rgba(var(--bg-card-rgb), 0.6);
+    border-radius: $radius-xl;
+    padding: $space-2xl;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all $transition-base;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--accent-cyan-rgb), 0.3);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(var(--accent-cyan-rgb), 0.05);
+    }
+
+    .quote-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(var(--accent-cyan-rgb), 0.1);
+      @include flex-center;
+      color: var(--accent-cyan);
+      margin-bottom: $space-lg;
+
+      .quote-icon {
+        font-size: 1.25rem;
+      }
+    }
+
+    .recommendation-text {
+      color: var(--text-secondary);
+      font-size: $fs-md;
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: $space-2xl;
+      flex-grow: 1;
+    }
+
+    .recommendation-author {
+      display: flex;
+      gap: $space-md;
+      align-items: center;
+      padding-top: $space-md;
+      border-top: 1px solid var(--border-color);
+
+      .author-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(var(--text-primary-rgb), 0.05);
+        border: 1px solid var(--border-color);
+        @include flex-center;
+        color: var(--text-secondary);
+
+        .avatar-icon {
+          font-size: 1.5rem;
+        }
+      }
+
+      .author-meta {
+        display: flex;
+        flex-direction: column;
+
+        .author-name {
+          font-family: "Space Grotesk", sans-serif;
+          font-size: $fs-md;
+          font-weight: $fw-bold;
+          color: var(--text-primary);
+          margin: 0 0 2px 0;
+        }
+
+        .author-role {
+          font-size: $fs-xs;
+          color: var(--text-muted);
+          font-weight: $fw-medium;
+        }
+
+        .author-institution {
+          font-size: 11px;
+          color: var(--accent-cyan);
+          font-weight: $fw-semibold;
+          margin-top: 1px;
+        }
+
+        .recommendation-date {
+          font-size: 10px;
+          color: var(--text-muted);
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}

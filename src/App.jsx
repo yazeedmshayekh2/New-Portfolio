@@ -11,6 +11,9 @@ import SkillsPage from "./pages/SkillsPage";
 import ContactPage from "./pages/ContactPage";
 import CodingNotesPage from "./pages/CodingNotesPage";
 import CodingNoteArticlePage from "./pages/CodingNoteArticlePage";
+import SystemsPage from "./pages/SystemsPage";
+import VolunteeringPage from "./pages/VolunteeringPage";
+import RecommendationsPage from "./pages/RecommendationsPage";
 
 import "./styles/_base.scss";
 
@@ -31,7 +34,10 @@ function AnimatedRoutes() {
           <Route path="/certificates" element={<CertificatesPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/volunteering" element={<VolunteeringPage />} />
+          <Route path="/recommendations" element={<RecommendationsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/systems" element={<SystemsPage />} />
           <Route path="/coding-notes" element={<CodingNotesPage />} />
           <Route
             path="/coding-notes/:slug"

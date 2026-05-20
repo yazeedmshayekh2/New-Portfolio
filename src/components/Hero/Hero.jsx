@@ -48,13 +48,14 @@ export default function Hero() {
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-code-comment">
-            <span className="code-slashes">{'//'}</span> introducing the developer
+            <span className="code-slashes">{"//"}</span> introducing the
+            developer
           </div>
 
           <span className="hero-greeting">
-            <span className="code-keyword">const</span>{' '}
-            <span className="code-var">greeting</span>{' '}
-            <span className="code-operator">=</span>{' '}
+            <span className="code-keyword">const</span>{" "}
+            <span className="code-var">greeting</span>{" "}
+            <span className="code-operator">=</span>{" "}
             <span className="code-string">"Hello, I'm"</span>
             <span className="code-semi">;</span>
           </span>
@@ -78,20 +79,27 @@ export default function Hero() {
 
           <div className="hero-description-block">
             <div className="code-comment-block">
-              <span className="code-comment-open">{'/**'}</span>
+              <span className="code-comment-open">{"/**"}</span>
               <p className="hero-description">
-                <span className="code-star">{' * '}</span>{hero.summary}
+                <span className="code-star">{" * "}</span>
+                {hero.summary}
               </p>
-              <span className="code-comment-close">{' */'}</span>
+              <span className="code-comment-close">{" */"}</span>
             </div>
           </div>
 
           <div className="hero-actions">
             <Link to="/contact" className="btn-primary">
-              <FiArrowRight /> <span className="btn-code">startCollab<span className="btn-parens">()</span></span>
+              <FiArrowRight />{" "}
+              <span className="btn-code">
+                startCollab<span className="btn-parens">()</span>
+              </span>
             </Link>
             <a href={hero.cvLink} className="btn-outline" download>
-              <FiDownload /> <span className="btn-code">downloadCV<span className="btn-parens">()</span></span>
+              <FiDownload />{" "}
+              <span className="btn-code">
+                downloadCV<span className="btn-parens">()</span>
+              </span>
             </a>
           </div>
 
@@ -122,7 +130,6 @@ export default function Hero() {
           <HeroMorphScene />
         </div>
       </div>
-
     </section>
   );
 }

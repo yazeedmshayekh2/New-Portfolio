@@ -31,7 +31,7 @@
 
   // ─── Code Comment Line ─────────────────────────────────────
   .hero-code-comment {
-    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
     font-size: $fs-sm;
     color: rgba(var(--text-primary-rgb), 0.8);
     font-style: italic;
@@ -51,7 +51,7 @@
 
   // ─── Greeting as const declaration ─────────────────────────
   .hero-greeting {
-    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
     font-size: $fs-md;
     margin-bottom: $space-md;
     letter-spacing: 0.03em;
@@ -89,7 +89,7 @@
 
   // ─── Name ──────────────────────────────────────────────────
   .hero-name {
-    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
     font-size: $fs-hero;
     font-weight: $fw-extrabold;
     line-height: 1.05;
@@ -128,7 +128,7 @@
     flex-wrap: wrap;
     gap: $space-sm;
     margin-bottom: $space-xl;
-    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
     font-size: $fs-xl;
 
     @include respond(lg) {
@@ -169,7 +169,7 @@
   }
 
   .code-comment-block {
-    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
     padding: $space-lg $space-xl;
     background: rgba(var(--text-primary-rgb), 0.05);
     border-left: 3px solid rgba(var(--accent-cyan-rgb), 0.3);
@@ -218,7 +218,7 @@
 
   .btn-primary,
   .btn-outline {
-    font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+    font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
     letter-spacing: 0.03em;
 
     .btn-code {
@@ -264,7 +264,7 @@
       height: 44px;
       border-radius: $radius-md;
       border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-card-hover);
+      box-shadow: var(--shadow-card-hover);
       background: rgba(var(--bg-card-rgb), 0.4);
       color: var(--text-secondary);
       font-size: $fs-lg;
@@ -274,7 +274,9 @@
         border-color: rgba(var(--accent-cyan-rgb), 0.4);
         color: var(--accent-cyan);
         transform: translateY(-3px);
-        box-shadow: var(--shadow-card), 0 0 15px rgba(var(--accent-cyan-rgb), 0.15);
+        box-shadow:
+          var(--shadow-card),
+          0 0 15px rgba(var(--accent-cyan-rgb), 0.15);
       }
     }
   }
@@ -376,7 +378,7 @@
     animation: float 3s ease-in-out infinite;
 
     .scroll-code {
-      font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+      font-family: "Fira Code", "Roboto Mono", "Courier New", monospace;
       font-size: $fs-xs;
       color: var(--text-muted);
       letter-spacing: 0.06em;
@@ -454,7 +456,6 @@
 }
 
 @keyframes cursorBlink {
-
   0%,
   100% {
     opacity: 1;
