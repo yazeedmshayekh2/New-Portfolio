@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Architecture note section image">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <g fill="none" stroke="url(#line)" stroke-width="4" opacity="0.65">
+    <rect x="170" y="180" width="340" height="180" rx="14" />
+    <rect x="630" y="180" width="340" height="180" rx="14" />
+    <rect x="1090" y="180" width="340" height="180" rx="14" />
+    <rect x="400" y="500" width="340" height="180" rx="14" />
+    <rect x="860" y="500" width="340" height="180" rx="14" />
+    <path d="M510 270h120M970 270h120M800 360v140M570 500h290M1030 500h-230" />
+  </g>
+  <text x="120" y="815" fill="#e2e8f0" font-family="Fira Code, monospace" font-size="58">System Design</text>
+</svg>
